@@ -1,0 +1,16 @@
+{
+  "name": "noahs-daily-dispatch",
+  "private": true,
+  "type": "module",
+  "description": "Noah's Daily Dispatch: a personal daily newspaper, printed every morning by Claude.",
+  "scripts": {
+    "generate": "node scripts/generate.mjs",
+    "preview": "npx --yes serve@14.2.4 site"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "1.3.0"
+  }
+}

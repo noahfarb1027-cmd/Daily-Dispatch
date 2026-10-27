@@ -1,0 +1,54 @@
+name: Print daily edition
+
+on:
+  schedule:
+    # GitHub cron runs in UTC. These two times cover 6:47 a.m. New York time
+    # in both daylight time (10:47 UTC) and standard time (11:47 UTC). The
+    # script skips the run that falls before 6 a.m. or after today's paper exists.
+    - cron: "47 10 * * *"
+    - cron: "47 11 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Reprint today's edition even if it already exists"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-edition
+  cancel-in-progress: false
+
+jobs:
+  print:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Print the edition
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          FORCE: ${{ inputs.force && 'true' || 'false' }}
+        run: npm run generate
+
+      - name: Commit and push
+        run: |
+          if [ -z "$(git status --porcelain site/editions)" ]; then
+            echo "No new edition to publish."
+            exit 0
+          fi
+          git config user.name "Daily Dispatch Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/editions
+          git commit -m "Print edition for $(TZ=America/New_York date +%F)"
+          git push

@@ -1,0 +1,218 @@
+// Prints the day's edition of Noah's Daily Dispatch.
+//
+// Asks Claude (with web search) to report the last day's biggest stories,
+// keeps only stories whose links actually came back from a search, and writes
+// site/editions/<date>.json plus the site/editions/index.json listing.
+//
+// Env: ANTHROPIC_API_KEY (required), FORCE=true to reprint today's edition.
+
+import Anthropic from "@anthropic-ai/sdk";
+import fs from "node:fs/promises";
+import { fileURLToPath } from "node:url";
+import path from "node:path";
+
+const EDITIONS_DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "site", "editions");
+const INDEX_PATH = path.join(EDITIONS_DIR, "index.json");
+const TIME_ZONE = "America/New_York";
+const EARLIEST_HOUR = 6; // don't print before 6 a.m. Eastern
+const MODEL = "claude-opus-5-5";
+const MAX_CONTINUATIONS = 8;
+const SECTION_KEYS = ["tech", "business", "world", "opinion", "sports"];
+
+const FORCE = process.env.FORCE === "true";
+
+function easternNow() {
+  const parts = Object.fromEntries(
+    new Intl.DateTimeFormat("en-CA", {
+      timeZone: TIME_ZONE, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", hourCycle: "h23",
+    }).formatToParts(new Date()).map((p) => [p.type, p.value]),
+  );
+  return { date: `${parts.year}-${parts.month}-${parts.day}`, hour: Number(parts.hour) };
+}
+
+async function readJSON(file, fallback) {
+  try {
+    return JSON.parse(await fs.readFile(file, "utf8"));
+  } catch (err) {
+    if (err.code === "ENOENT") return fallback;
+    throw err;
+  }
+}
+
+function normalizeUrl(u) {
+  try {
+    const url = new URL(u);
+    url.hash = "";
+    for (const key of [...url.searchParams.keys()]) {
+      if (/^(utm_|mod$|ref$|rref$|smid$|smtyp$)/i.test(key)) url.searchParams.delete(key);
+    }
+    return `${url.protocol}//${url.host.toLowerCase().replace(/^www\./, "")}${url.pathname.replace(/\/+$/, "")}${url.search}`;
+  } catch {
+    return null;
+  }
+}
+
+function buildPrompt(today, previous) {
+  const avoid = previous
+    ? `\nYesterday's edition (${previous.date}) ran these headlines. Don't repeat them unless there is a major new development:\n${[
+        previous.lead?.headline,
+        ...SECTION_KEYS.flatMap((k) => (previous.sections?.[k] || []).map((s) => s.headline)),
+      ].filter(Boolean).map((h) => `- ${h}`).join("\n")}\n`
+    : "";
+
+  return `Today is ${today} (U.S. Eastern time). You are the editor of "Noah's Daily Dispatch", a personal morning newspaper. Use web search to report the biggest news of roughly the last 24 hours.
+
+Sections:
+- tech: technology and A.I.
+- business: business, companies and markets
+- world: world affairs and geopolitics
+- opinion: 3-4 notable opinion pieces from the last 1-2 days, from top opinion sections such as The Atlantic (Ideas), New York Times Opinion, Wall Street Journal Opinion, Washington Post Opinions, Bloomberg Opinion, Financial Times, The Economist, and The Free Press. Use at most one piece per outlet, and prefer pieces about the day's big stories.
+- sports: the biggest results and stories in U.S. and global sports
+
+News must come from reputable outlets such as Reuters, AP, Bloomberg, WSJ, NYT, Washington Post, FT, The Economist, BBC, NPR, CNBC, Axios, The Verge, TechCrunch, Wired, Ars Technica, ESPN, The Athletic, CBS, NBC, ABC, CNN, Al Jazeera, The Guardian, or official league sites.
+
+Rules:
+- Every url must be a specific article page that appeared in your search results. Never guess or construct a URL. Links without a matching search result are removed before printing.
+- For game results, give only final scores you confirmed in a search result. If a game was still in progress, say so rather than guessing.
+- The lead is the single biggest news story of the day, from any section, and must not also appear in a section.
+- Use 3 stories in each news section (2-4 is fine). Use 3-4 opinion pieces.
+- Write headlines in newspaper title case.
+- News summaries are 2-3 plain, neutral, factual sentences. The lead summary is 4-6 sentences. The lead deck is a one-sentence subheading.
+- Opinion summaries describe the author's argument neutrally ("Smith argues that..."). Base them only on what you actually read. Never invent claims, quotes or authors.
+${avoid}
+When you are done researching, reply with only the edition as JSON inside <edition></edition> tags, in exactly this shape:
+<edition>
+{"lead": {"kicker": "Section name", "headline": "...", "deck": "...", "summary": "...", "source": "Outlet", "url": "https://..."},
+ "sections": {
+   "tech": [{"headline": "...", "summary": "...", "source": "Outlet", "url": "https://..."}],
+   "business": [...], "world": [...],
+   "opinion": [{"headline": "...", "author": "Name or The Editorial Board", "summary": "...", "source": "Outlet", "url": "https://..."}],
+   "sports": [...]
+ }}
+</edition>`;
+}
+
+async function research(client, prompt) {
+  const messages = [{ role: "user", content: prompt }];
+  const seenUrls = new Set();
+  let response;
+
+  for (let turn = 0; turn <= MAX_CONTINUATIONS; turn++) {
+    response = await client.beta.messages
+      .stream({
+        model: MODEL,
+        max_tokens: 64000,
+        betas: ["server-side-fallback-2026-07-01"],
+        fallbacks: "default",
+        output_config: { effort: "high" },
+        tools: [{ type: "web_search_20260209", name: "web_search", max_uses: 40 }],
+        messages,
+      })
+      .finalMessage();
+
+    for (const block of response.content) {
+      if (block.type === "web_search_tool_result" && Array.isArray(block.content)) {
+        for (const result of block.content) {
+          const n = result.url && normalizeUrl(result.url);
+          if (n) seenUrls.add(n);
+        }
+      }
+    }
+    console.log(`turn ${turn + 1}: stop_reason=${response.stop_reason}, model=${response.model}, searched URLs so far=${seenUrls.size}`);
+
+    if (response.stop_reason === "refusal") {
+      throw new Error(`Request was declined: ${JSON.stringify(response.stop_details)}`);
+    }
+    if (response.stop_reason !== "pause_turn") break;
+    // Resume the paused server-side search loop: send the partial turn back as-is.
+    messages.push({ role: "assistant", content: response.content });
+  }
+
+  if (response.stop_reason === "pause_turn") throw new Error("Research did not finish within the continuation limit.");
+  if (response.stop_reason === "max_tokens") throw new Error("Response hit max_tokens before the edition was finished.");
+
+  const text = response.content.filter((b) => b.type === "text").map((b) => b.text).join("");
+  const match = text.match(/<edition>([\s\S]*?)<\/edition>/);
+  if (!match) throw new Error(`No <edition> block in the response:\n${text.slice(-2000)}`);
+  return { draft: JSON.parse(match[1]), seenUrls };
+}
+
+function cleanStory(story, seenUrls, { withAuthor = false, label }) {
+  const str = (v) => (typeof v === "string" ? v.trim() : "");
+  const out = { headline: str(story?.headline), summary: str(story?.summary), source: str(story?.source), url: str(story?.url) };
+  if (withAuthor) out.author = str(story?.author);
+  if (!out.headline || !out.summary || !out.source || !/^https:\/\//.test(out.url)) {
+    console.warn(`dropped ${label}: missing fields`);
+    return null;
+  }
+  if (!seenUrls.has(normalizeUrl(out.url))) {
+    console.warn(`dropped ${label}: link never appeared in a search result (${out.url})`);
+    return null;
+  }
+  return out;
+}
+
+function assemble(draft, seenUrls, today, number) {
+  const lead = cleanStory(draft.lead, seenUrls, { label: "lead" });
+  if (!lead) throw new Error("The lead story failed validation; not printing a front page without a lead.");
+  const str = (v) => (typeof v === "string" ? v.trim() : "");
+  const edition = {
+    date: today,
+    number,
+    lead: { kicker: str(draft.lead.kicker) || "Top Story", ...lead, ...(str(draft.lead.deck) ? { deck: str(draft.lead.deck) } : {}) },
+    sections: {},
+  };
+  for (const key of SECTION_KEYS) {
+    const stories = (Array.isArray(draft.sections?.[key]) ? draft.sections[key] : [])
+      .map((s, i) => cleanStory(s, seenUrls, { withAuthor: key === "opinion", label: `${key}[${i}]` }))
+      .filter(Boolean)
+      .slice(0, 4);
+    if (stories.length) edition.sections[key] = stories;
+    else console.warn(`section "${key}" is empty`);
+  }
+  const total = Object.values(edition.sections).reduce((a, s) => a + s.length, 0);
+  if (total < 6) throw new Error(`Only ${total} section stories survived validation; not printing.`);
+  return edition;
+}
+
+async function main() {
+  const { date: today, hour } = easternNow();
+  const index = await readJSON(INDEX_PATH, []);
+  const existing = index.find((e) => e.date === today);
+
+  if (!FORCE && hour < EARLIEST_HOUR) {
+    console.log(`It's ${hour}:00 in New York; the paper prints at ${EARLIEST_HOUR} a.m. Skipping.`);
+    return;
+  }
+  if (!FORCE && existing) {
+    console.log(`Edition for ${today} already printed. Skipping (run with FORCE=true to reprint).`);
+    return;
+  }
+
+  const previousEntry = index.filter((e) => e.date < today).sort((a, b) => b.date.localeCompare(a.date))[0];
+  const previous = previousEntry ? await readJSON(path.join(EDITIONS_DIR, `${previousEntry.date}.json`), null) : null;
+  const number = existing?.number ?? (previousEntry ? previousEntry.number + 1 : 1);
+
+  const client = new Anthropic();
+  const { draft, seenUrls } = await research(client, buildPrompt(today, previous));
+  const edition = assemble(draft, seenUrls, today, number);
+
+  await fs.mkdir(EDITIONS_DIR, { recursive: true });
+  await fs.writeFile(path.join(EDITIONS_DIR, `${today}.json`), JSON.stringify(edition, null, 2) + "\n");
+
+  const entry = {
+    date: today,
+    number,
+    headline: edition.lead.headline,
+    stories: 1 + Object.values(edition.sections).reduce((a, s) => a + s.length, 0),
+  };
+  const nextIndex = [entry, ...index.filter((e) => e.date !== today)].sort((a, b) => b.date.localeCompare(a.date));
+  await fs.writeFile(INDEX_PATH, JSON.stringify(nextIndex, null, 2) + "\n");
+
+  console.log(`Printed No. ${number} for ${today}: ${edition.lead.headline}`);
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

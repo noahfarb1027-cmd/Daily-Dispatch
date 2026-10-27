@@ -1,0 +1,118 @@
+{
+  "date": "2026-10-27",
+  "number": 1,
+  "lead": {
+    "deck": "The Claude maker’s S-1 shows explosive growth, a huge paper loss and hundreds of billions in compute commitments ahead of a planned Nasdaq debut.",
+    "headline": "Anthropic Files to Go Public, Revealing $16.3 Billion in Revenue",
+    "kicker": "Technology & Markets",
+    "source": "Fortune",
+    "summary": "Anthropic made its IPO prospectus public on Monday, planning to list on the Nasdaq under the ticker ANT. First-half 2026 revenue reached $16.3 billion, up from $1.1 billion a year earlier. It also posted an $80.7 billion net loss, driven mostly by a $72.4 billion non-cash charge on convertible notes. The filing details very large compute obligations, including a SpaceX computing deal worth up to $120.5 billion through 2029. The founders will keep majority voting control through a separate share class. Price and share count are not yet set.",
+    "url": "https://fortune.com/2026/10/26/anthropics-s-1/"
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "SpaceX’s A.I. Business Now Outsells Starlink",
+        "source": "TechCrunch",
+        "summary": "SpaceX reported third-quarter revenue of about $14.6 billion, up 161% from a year earlier and ahead of estimates. Its A.I. segment, which mostly rents computing capacity to outside model developers, brought in $7.56 billion, up from $813 million, and turned a profit. Capital spending is set to climb to $35–40 billion next quarter.",
+        "url": "https://techcrunch.com/2026/10/20/spacexs-ai-business-is-beating-expectations/"
+      },
+      {
+        "headline": "The Bull and Bear Case Hidden in Anthropic’s Filing",
+        "source": "Axios",
+        "summary": "Anthropic’s prospectus offers good news for investors: no single customer accounted for more than 10% of revenue. It also flags risks, including about a quarter of revenue coming from five customers, steep compute payments, and tighter A.I. regulation listed as a business threat.",
+        "url": "https://www.axios.com/2026/10/26/anthropic-ipo-biggest-surprises"
+      }
+    ],
+    "business": [
+      {
+        "headline": "Anthropic Buzz Lifts Wall Street; Chip Stocks Jump",
+        "source": "Bloomberg",
+        "summary": "The S&P 500 rose 0.7% and the Nasdaq 100 gained 1.1% on Monday as Anthropic’s IPO filing revived the A.I. trade. The Philadelphia Semiconductor Index jumped 2.8%, its best day since September. Investors now turn to a packed week of big tech earnings and a Fed decision.",
+        "url": "https://www.bloomberg.com/news/articles/2026-10-26/stock-market-today-dow-s-p-live-updates"
+      },
+      {
+        "headline": "Fed Expected to Hold Rates Wednesday, With December Hike in View",
+        "source": "CNBC",
+        "summary": "The Federal Reserve is widely expected to leave rates unchanged when its meeting ends Wednesday, following September’s hike, its first in about three years. Futures markets still price a strong chance of another increase in December, as inflation stays above the 2% target.",
+        "url": "https://www.cnbc.com/2026/10/26/fed-decision-expectations-october-meeting.html"
+      },
+      {
+        "headline": "Nvidia to Invest $3 Billion in Meta Share Offering as A.I. Ties Deepen",
+        "source": "Reuters",
+        "summary": "Nvidia said it will put $3 billion into Meta’s equity offering as the two companies expand their partnership on Meta’s Muse A.I. models. Meta also plans to widen its use of Nvidia infrastructure, including Vera Rubin systems. Reported offering totals vary by source.",
+        "url": "https://www.marketscreener.com/news/nvidia-meta-partner-on-muse-agent-as-nvidia-invests-3-billion-ce785cdcd081f120"
+      }
+    ],
+    "world": [
+      {
+        "headline": "Israelis Vote as Netanyahu Faces Tight Race Against Eisenkot",
+        "source": "AP",
+        "summary": "Israelis voted Tuesday in their first national election since the Oct. 7, 2023 Hamas attack. Polls show Prime Minister Benjamin Netanyahu in a close race with former military chief Gadi Eisenkot, and neither bloc may win a majority, which could mean weeks of coalition talks.",
+        "url": "https://www.newsnationnow.com/world/ap-voters-in-israel-will-decide-whether-to-oust-netanyahu-after-3-years-of-war/"
+      },
+      {
+        "headline": "Lula Wins Fourth Term in Brazil; Bolsonaro Refuses to Concede",
+        "source": "NPR",
+        "summary": "Luiz Inácio Lula da Silva beat Flávio Bolsonaro in Sunday’s runoff with about 51.8% of valid votes, a margin of roughly 4.4 million. Most polls had shown Bolsonaro narrowly ahead. Bolsonaro says he will ask the courts to annul the result, raising the prospect of a tense transition.",
+        "url": "https://www.npr.org/2026/10/25/nx-s1-6016299/brazil-lula-bolsonaro-election"
+      },
+      {
+        "headline": "Saudi, Pakistani and Turkish Envoys Press Iran to Avert New War",
+        "source": "CNN",
+        "summary": "Senior officials from the three countries met Iran’s president and foreign minister in Tehran on Monday, hoping to head off renewed fighting with Israel and the U.S. after an eight-month war. The talks ended without announcements, though both sides agreed to keep talking.",
+        "url": "https://www.cnn.com/2026/10/26/middleeast/iran-meeting-regional-powers-intl"
+      }
+    ],
+    "opinion": [
+      {
+        "author": "Vanessa Barbara",
+        "headline": "This Is Bigger Than Brazil",
+        "source": "The New York Times",
+        "summary": "In a guest essay, Barbara argues that Lula's narrow runoff win is a victory for democratic forces beyond Brazil, and says it is well worth celebrating at a time when strongman politics is gaining ground in many countries.",
+        "url": "https://www.nytimes.com/2026/10/26/opinion/brazil-election-lula-bolsonaro.html"
+      },
+      {
+        "author": "The Editorial Board",
+        "headline": "Democrats Are Coming for the CEOs",
+        "source": "The Wall Street Journal",
+        "summary": "The Journal's editorial board warns that if Democrats win Congress, executives who did business with the Trump administration or donated to Trump should expect investigations. It tells corporate America to “lawyer up.”",
+        "url": "https://www.wsj.com/opinion/democrats-are-coming-for-the-ceos-investigate-business-trump-administration-24b0a75c"
+      },
+      {
+        "author": "Graeme Wood",
+        "headline": "Netanyahu Goes Into Full Panic Mode",
+        "source": "The Atlantic",
+        "summary": "On the eve of Israel's election, Wood describes a prime minister growing desperate as the polls tighten, and a country voting anxiously about its future whichever candidate wins.",
+        "url": "https://www.theatlantic.com/ideas/2026/10/israeli-election-benjamin-netanyahu/689143/"
+      },
+      {
+        "author": "Chris Hughes",
+        "headline": "Anthropic, Please Get On With Your IPO to Soothe the A.I. Trade",
+        "source": "Bloomberg Opinion",
+        "summary": "Hughes writes that high oil prices, rising rates and geopolitical tension have made A.I. stocks jittery. He argues that Anthropic's listing will be the real test of investor sentiment, and that the sooner it happens, the sooner the uncertainty clears.",
+        "url": "https://www.bloomberg.com/opinion/articles/2026-10-23/anthropic-please-get-on-with-your-ipo-to-soothe-the-ai-trade"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Brewers Rout Rays 10-1 to Take 3-0 World Series Lead",
+        "source": "ESPN",
+        "summary": "Milwaukee beat Tampa Bay 10-1 in Game 3 on Monday at Tropicana Field, scoring eight two-out runs in the fifth inning on seven straight hits, both World Series records. The Brewers finished with 16 hits, and the Rays’ only run came in the ninth. Game 4 is Tuesday night, with Milwaukee one win from its first title.",
+        "url": "https://www.espn.com/mlb/game/_/gameId/401908044/brewers-rays"
+      },
+      {
+        "headline": "Prescott Throws Three TDs as Cowboys Roll in Philadelphia",
+        "source": "CBS Sports",
+        "summary": "Dak Prescott threw three touchdown passes on Monday Night Football as Dallas beat an Eagles team without Jalen Hurts, who is on injured reserve with blood clots. Philadelphia’s losing streak continues as both clubs sit near the bottom of the NFC East.",
+        "url": "https://www.cbssports.com/nfl/news/cowboys-vs-eagles-score-takeaways-dak-prescott-tosses-three-tds-as-dallas-rolls-on-monday-night-football/live"
+      },
+      {
+        "headline": "Valkyries and Dream Fight for WNBA Finals Edge",
+        "source": "ESPN",
+        "summary": "Golden State hosted Atlanta in a pivotal Game 5 at Chase Center with the series tied 2-2, after the Valkyries’ defense evened it with a 67-62 win in Game 4. Game 6 is Thursday in Atlanta.",
+        "url": "https://www.espn.com/wnba/story/_/id/50284500/finals-game-5-golden-state-valkyries-atlanta-dream"
+      }
+    ]
+  }
+}
