@@ -51,4 +51,11 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add site/editions
           git commit -m "Print edition for $(TZ=America/New_York date +%F)"
-          git push
+          # Someone may have pushed while the edition was being researched.
+          # Replay the edition commit on top of the latest main, then push.
+          for attempt in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            echo "Push attempt $attempt failed; retrying in 10 seconds."
+            sleep 10
+          done
+          exit 1
