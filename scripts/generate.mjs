@@ -66,7 +66,7 @@ Sections:
 - tech: technology and A.I.
 - business: business, companies and markets
 - world: world affairs and geopolitics
-- opinion: 3-4 notable opinion pieces from the last 1-2 days, from top opinion sections such as The Atlantic (Ideas), New York Times Opinion, Wall Street Journal Opinion, Washington Post Opinions, Bloomberg Opinion, Financial Times, The Economist, and The Free Press. Use at most one piece per outlet, and prefer pieces about the day's big stories.
+- opinion: 3-4 notable opinion pieces from the last 1-2 days, from respected opinion sections. Use at most one piece per outlet, and prefer pieces about the day's big stories. Your search tool usually can't return pages from nytimes.com, wsj.com or theatlantic.com, so don't spend searches on them. Search outlets it can reach instead: Bloomberg Opinion, Washington Post Opinions, The Guardian (Opinion), The Free Press, Foreign Affairs, Foreign Policy, Politico Magazine, The Hill (Opinion), Fortune, Reuters Breakingviews, CNN Opinion, and Fox News Opinion. Run separate searches such as "Bloomberg Opinion" plus a topic of the day, or "op-ed" plus a topic, until you have 3-4 pieces with real links. The opinion section must not be empty.
 - sports: the biggest results and stories in U.S. and global sports
 
 News must come from reputable outlets such as Reuters, AP, Bloomberg, WSJ, NYT, Washington Post, FT, The Economist, BBC, NPR, CNBC, Axios, The Verge, TechCrunch, Wired, Ars Technica, ESPN, The Athletic, CBS, NBC, ABC, CNN, Al Jazeera, The Guardian, or official league sites.
@@ -167,8 +167,9 @@ function assemble(draft, seenUrls, today, number) {
       .map((s, i) => cleanStory(s, seenUrls, { withAuthor: key === "opinion", label: `${key}[${i}]` }))
       .filter(Boolean)
       .slice(0, 4);
+    const drafted = Array.isArray(draft.sections?.[key]) ? draft.sections[key].length : 0;
+    console.log(`section "${key}": ${stories.length} of ${drafted} drafted stories kept`);
     if (stories.length) edition.sections[key] = stories;
-    else console.warn(`section "${key}" is empty`);
   }
   const total = Object.values(edition.sections).reduce((a, s) => a + s.length, 0);
   if (total < 6) throw new Error(`Only ${total} section stories survived validation; not printing.`);
