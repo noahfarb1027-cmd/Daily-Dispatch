@@ -193,6 +193,9 @@ async function main() {
   const previous = previousEntry ? await readJSON(path.join(EDITIONS_DIR, `${previousEntry.date}.json`), null) : null;
   const number = existing?.number ?? (previousEntry ? previousEntry.number + 1 : 1);
 
+  if (!process.env.ANTHROPIC_API_KEY) {
+    throw new Error("ANTHROPIC_API_KEY is not set. Add it under the repo's Settings → Secrets and variables → Actions.");
+  }
   const client = new Anthropic();
   const { draft, seenUrls } = await research(client, buildPrompt(today, previous));
   const edition = assemble(draft, seenUrls, today, number);
@@ -213,6 +216,8 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error(err);
+  // API errors carry the status code and server message; print them plainly so the Actions log shows the cause.
+  if (err instanceof Anthropic.APIError) console.error(`Claude API error ${err.status}: ${err.message}`);
+  else console.error(err);
   process.exit(1);
 });
