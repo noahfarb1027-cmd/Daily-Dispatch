@@ -1,0 +1,100 @@
+{
+  "date": "2026-10-28",
+  "number": 2,
+  "lead": {
+    "kicker": "World",
+    "headline": "Netanyahu Edges Ahead in Israel's Election, but Neither Bloc Wins a Majority",
+    "summary": "Israeli Prime Minister Benjamin Netanyahu's right-wing and religious alliance was projected to win 53 seats in the 120-member Knesset with almost 93% of votes counted, ahead of 48 for opposition leader Gadi Eisenkot's bloc. Both camps fell short of the 61 seats needed to form a government. The two Arab-led parties were on track for about 19 seats, nearly double their projected total, which could make them kingmakers in coalition talks. Turnout reached 77.7%, the highest in a Knesset election since 1999. Eisenkot had claimed victory early on, when exit polls showed his bloc slightly ahead, but his alliance did worse than pre-election polls predicted. Israeli bonds and the shekel fell on the inconclusive result.",
+    "source": "Bloomberg",
+    "url": "https://www.bloomberg.com/news/articles/2026-10-28/israeli-vote-too-close-to-call-between-netanyahu-and-eisenkot",
+    "deck": "Arab parties nearly doubled their seats and could decide who governs, and Netanyahu looks likely to stay on at least as caretaker."
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "OpenAI Says Its A.I. Made Discoveries in Math, Computer Science and Physics",
+        "summary": "OpenAI announced three new results it says its models produced, in harmonic analysis, complexity theory and quantum field theory. The company says it is changing how it releases A.I.-generated research, with academic groups checking the work and raw data made public.",
+        "source": "Al Jazeera",
+        "url": "https://www.aljazeera.com/economy/2026/10/27/ai-makes-discoveries-in-mathematics-computer-science-physics-openai-says"
+      },
+      {
+        "headline": "Startup Says Its A.I. Agents Broke Into Anthropic's Internal Systems",
+        "summary": "Cathedral, a startup founded this year by former DOGE staff, says it breached Anthropic's internal systems through a bug bounty program, exposing Slack messages, meeting transcripts and salary data. The Washington Post first reported the breach. Anthropic confirmed the startup reached a limited set of sales, HR and IT systems, but said Claude user conversations and source code were not accessed and that it shut off the access the same day.",
+        "source": "Yahoo Tech",
+        "url": "https://tech.yahoo.com/ai/claude/articles/anthropic-hacked-ai-startup-less-140959373.html"
+      },
+      {
+        "headline": "SpaceX Locks In $40 Billion GPU Financing Deal With Apollo",
+        "summary": "SpaceX disclosed a binding commitment for about $40 billion in financing for A.I. chips and data-center equipment. Under the deal, an entity managed by Apollo will buy the hardware and lease it to SpaceX for about five years. The company expects to spend $35 billion to $40 billion on capital projects in the fourth quarter alone.",
+        "source": "TechCrunch",
+        "url": "https://techcrunch.com/2026/10/26/spacex-locks-in-40b-gpu-financing-deal-with-apollo/"
+      }
+    ],
+    "business": [
+      {
+        "headline": "SK Hynix Shares Jump 11% After Record Profit and $75 Billion Payout Plan",
+        "summary": "The South Korean memory chipmaker reported record third-quarter revenue of 104.62 trillion won, its first quarter above 100 trillion. Operating profit rose 632% from a year earlier to 83.33 trillion won, well above estimates. It plans to return about 100 trillion won to shareholders through dividends and buybacks.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/10/28/sk-hynix-third-quarter-profit.html"
+      },
+      {
+        "headline": "Boeing Narrows Its Loss but Delays Big 737 Max Production Increase to Late 2027",
+        "summary": "Boeing posted a third-quarter net loss of $116 million, down from $5.34 billion a year earlier, as defense revenue rose 15%. Revenue of $24.19 billion beat forecasts, but the adjusted loss of 34 cents a share was wider than expected. The company said it won't significantly raise 737 Max production until late 2027.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/10/27/-boeing-ba-q3-2026-earnings.html"
+      },
+      {
+        "headline": "Oil Tops $115 as Investors Await the Fed and Big Tech Earnings",
+        "summary": "U.S. stock futures were little changed as Brent crude rose above $115 a barrel after a report that the U.S. may resume strikes on Iran after next week's midterm elections. Nasdaq 100 futures pointed to a third straight gain, helped by SK Hynix's results. The Federal Reserve announces its rate decision on Wednesday, and Microsoft and Alphabet report earnings after the close.",
+        "source": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/articles/2026-10-27/stock-market-today-dow-s-p-live-updates?srnd=good-business"
+      }
+    ],
+    "world": [
+      {
+        "headline": "Flávio Bolsonaro Flees to the U.S. After Losing Brazil's Election",
+        "summary": "Defeated Brazilian presidential candidate Flávio Bolsonaro arrived in Florida after leaving Brazil, according to reports, in defiance of a court order barring him from leaving the country. He had first refused to concede to President Luiz Inácio Lula da Silva and said his team would seek to have the results annulled.",
+        "source": "CNN",
+        "url": "https://www.cnn.com/2026/10/27/americas/flavio-bolsonaro-brazil-passports-latam-intl"
+      },
+      {
+        "headline": "Russian Missiles Hit Kyiv University Campus and Major Bridge",
+        "summary": "A Russian attack on Kyiv killed at least one person and injured 15, including five students or university staff, Ukrainian officials said. Russia fired 16 ballistic missiles, two of which were shot down, along with at least 255 drones. The strikes hit a university campus and the city's South Bridge.",
+        "source": "ABC News",
+        "url": "https://abcnews.com/International/1-dead-15-injured-russian-strikes-university-surrounding/story?id=137597114"
+      },
+      {
+        "headline": "Trump Weighs a Deal With Iran Against a Return to War",
+        "summary": "President Trump said he must decide whether to 'finish it off' against Iran or make a deal, fueling speculation that U.S. strikes could resume after next Tuesday's midterm elections. Iran's talks with senior Saudi, Turkish and Pakistani officials were described as 'very good.' Brent crude has stayed near $115 a barrel.",
+        "source": "CBS News",
+        "url": "https://www.cbsnews.com/live-updates/iran-war-trump-us-diplomacy-oil-prices-strait-of-hormuz/"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Rays Beat Brewers 4-3 in Extra Innings to Avoid World Series Sweep",
+        "summary": "Ben Williamson's walk-off hit capped a 12th-inning rally as Tampa Bay beat Milwaukee 4-3 in Game 4. The Brewers lead the series 3-1, and Game 5 is Wednesday night.",
+        "source": "ESPN",
+        "url": "https://www.espn.com/mlb/story/_/id/50304403/rays-steal-game-4-extras-stay-alive-world-series"
+      },
+      {
+        "headline": "Towns Leads Knicks Past Unbeaten Pistons for First Win",
+        "summary": "Karl-Anthony Towns had 27 points and 20 rebounds as the defending champion Knicks beat Detroit 111-97 to avoid an 0-4 start. Cade Cunningham had 19 points, nine rebounds and eight assists for the Pistons, who fell to 3-1.",
+        "source": "ESPN",
+        "url": "https://www.espn.com/nba/recap?gameId=401909878"
+      },
+      {
+        "headline": "Tatum's Buzzer-Beater in Overtime Lifts Celtics Over Nets",
+        "summary": "Jayson Tatum hit a jumper at the buzzer in overtime to give Boston a 125-124 win over Brooklyn. The Celtics improved to 3-1, and the Nets fell to 0-4.",
+        "source": "ESPN",
+        "url": "https://www.espn.com/nba/recap?gameId=401909877"
+      },
+      {
+        "headline": "Valkyries Beat Dream in Game 5, Move One Win From WNBA Title",
+        "summary": "Kiah Stokes had 13 points, eight rebounds and three blocks as the Golden State Valkyries beat the Atlanta Dream 64-55 in Game 5. Golden State leads the WNBA Finals 3-2 and needs one more win for its first championship.",
+        "source": "CNN",
+        "url": "https://www.cnn.com/2026/10/26/sport/wnba-finals-valkyries-dream-game-five"
+      }
+    ]
+  }
+}
