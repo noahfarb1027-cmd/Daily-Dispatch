@@ -17,7 +17,7 @@ const TIME_ZONE = "America/New_York";
 const EARLIEST_HOUR = 6; // don't print before 6 a.m. Eastern
 const MODEL = "claude-sonnet-5-5";
 const EFFORT = "medium";
-const MAX_SEARCHES = 20;
+const MAX_SEARCHES = 30;
 // Sonnet 5.5 list prices, for the cost estimate in the log (USD).
 const PRICE = { input: 2 / 1e6, output: 10 / 1e6, cacheRead: 0.2 / 1e6, cacheWrite: 2.5 / 1e6, search: 10 / 1000 };
 const MAX_CONTINUATIONS = 8;

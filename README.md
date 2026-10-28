@@ -51,6 +51,6 @@ npm run preview                                            # view the site at ht
 
 ## Notes
 
-- **Cost.** Each edition is one Claude Sonnet 5.5 run at medium effort with up to 20 web searches. The Action log prints each run's token usage and estimated cost on a line starting with `usage:`.
+- **Cost.** Each edition is one Claude Sonnet 5.5 run at medium effort with up to 30 web searches. The Action log prints each run's token usage and estimated cost on a line starting with `usage:`.
 - **Timing.** GitHub's scheduled runs can start several minutes to an hour late at busy times.
 - **Link checking.** A story is dropped if its link never appeared in Claude's search results. If the lead story fails this check, or fewer than 6 stories pass, the run fails and nothing is published.
