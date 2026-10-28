@@ -15,7 +15,11 @@ const EDITIONS_DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), "..
 const INDEX_PATH = path.join(EDITIONS_DIR, "index.json");
 const TIME_ZONE = "America/New_York";
 const EARLIEST_HOUR = 6; // don't print before 6 a.m. Eastern
-const MODEL = "claude-opus-5-5";
+const MODEL = "claude-sonnet-5-5";
+const EFFORT = "medium";
+const MAX_SEARCHES = 20;
+// Sonnet 5.5 list prices, for the cost estimate in the log (USD).
+const PRICE = { input: 2 / 1e6, output: 10 / 1e6, cacheRead: 0.2 / 1e6, cacheWrite: 2.5 / 1e6, search: 10 / 1000 };
 const MAX_CONTINUATIONS = 8;
 const SECTION_KEYS = ["tech", "business", "world", "opinion", "sports"];
 
@@ -96,6 +100,7 @@ async function research(client, prompt) {
   const messages = [{ role: "user", content: prompt }];
   const seenUrls = new Set();
   let response;
+  const usage = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, searches: 0 };
 
   for (let turn = 0; turn <= MAX_CONTINUATIONS; turn++) {
     response = await client.beta.messages
@@ -104,8 +109,8 @@ async function research(client, prompt) {
         max_tokens: 64000,
         betas: ["server-side-fallback-2026-07-01"],
         fallbacks: "default",
-        output_config: { effort: "high" },
-        tools: [{ type: "web_search_20260209", name: "web_search", max_uses: 40 }],
+        output_config: { effort: EFFORT },
+        tools: [{ type: "web_search_20260209", name: "web_search", max_uses: MAX_SEARCHES }],
         messages,
       })
       .finalMessage();
@@ -118,6 +123,12 @@ async function research(client, prompt) {
         }
       }
     }
+    const u = response.usage ?? {};
+    usage.input += u.input_tokens ?? 0;
+    usage.output += u.output_tokens ?? 0;
+    usage.cacheRead += u.cache_read_input_tokens ?? 0;
+    usage.cacheWrite += u.cache_creation_input_tokens ?? 0;
+    usage.searches += u.server_tool_use?.web_search_requests ?? 0;
     console.log(`turn ${turn + 1}: stop_reason=${response.stop_reason}, model=${response.model}, searched URLs so far=${seenUrls.size}`);
 
     if (response.stop_reason === "refusal") {
@@ -134,6 +145,9 @@ async function research(client, prompt) {
   const text = response.content.filter((b) => b.type === "text").map((b) => b.text).join("");
   const match = text.match(/<edition>([\s\S]*?)<\/edition>/);
   if (!match) throw new Error(`No <edition> block in the response:\n${text.slice(-2000)}`);
+  const cost = usage.input * PRICE.input + usage.output * PRICE.output + usage.cacheRead * PRICE.cacheRead
+    + usage.cacheWrite * PRICE.cacheWrite + usage.searches * PRICE.search;
+  console.log(`usage: ${usage.input} input, ${usage.cacheRead} cache-read, ${usage.cacheWrite} cache-write, ${usage.output} output tokens, ${usage.searches} searches; estimated cost $${cost.toFixed(2)}`);
   return { draft: JSON.parse(match[1]), seenUrls };
 }
 

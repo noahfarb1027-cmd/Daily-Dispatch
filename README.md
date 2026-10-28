@@ -1,6 +1,6 @@
 # Noah's Daily Dispatch
 
-A personal morning newspaper. Every day at about 6:47 a.m. New York time, a GitHub Action asks Claude (with web search) for the biggest stories in tech, business, world affairs, opinion and sports. It keeps only stories whose links actually came back from a search, then commits the edition to this repo. Cloudflare Pages redeploys the site on every commit.
+A personal morning newspaper. Every day at about 6:47 a.m. New York time, a GitHub Action asks Claude Sonnet 5.5 (with web search) for the biggest stories in tech, business, world affairs, opinion and sports. It keeps only stories whose links actually came back from a search, then commits the edition to this repo. Cloudflare Pages redeploys the site on every commit.
 
 ```
 site/                    ← the website (Cloudflare serves this folder)
@@ -51,6 +51,6 @@ npm run preview                                            # view the site at ht
 
 ## Notes
 
-- **Cost.** Each edition is one Claude Opus 5.5 run with up to 40 web searches. Web search is billed per search on top of tokens. Check actual spend in the Claude Console after the first few runs.
+- **Cost.** Each edition is one Claude Sonnet 5.5 run at medium effort with up to 20 web searches. The Action log prints each run's token usage and estimated cost on a line starting with `usage:`.
 - **Timing.** GitHub's scheduled runs can start several minutes to an hour late at busy times.
 - **Link checking.** A story is dropped if its link never appeared in Claude's search results. If the lead story fails this check, or fewer than 6 stories pass, the run fails and nothing is published.
