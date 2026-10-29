@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "daily-dispatch",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./site",
+    "binding": "ASSETS"
+  },
+  // Cron times are UTC. 10:47 is 6:47 a.m. New York daylight time and 11:47 is
+  // 6:47 a.m. standard time. Both start the workflow; the print script skips
+  // the one that falls before 6 a.m. or after today's paper exists.
+  "triggers": {
+    "crons": ["47 10 * * *", "47 11 * * *"]
+  },
+  "observability": {
+    "enabled": true
+  }
+}

@@ -1,16 +1,8 @@
 name: Print daily edition
 
 on:
-  schedule:
-    # GitHub cron runs in UTC. The first two times cover 6:47 a.m. New York
-    # time in daylight time (10:47 UTC) and standard time (11:47 UTC). GitHub
-    # sometimes skips scheduled runs, so the later times are backups. The
-    # script exits before calling Claude when it's before 6 a.m. in New York
-    # or today's paper already exists, so the extra runs cost nothing.
-    - cron: "47 10 * * *"
-    - cron: "47 11 * * *"
-    - cron: "17 13 * * *"
-    - cron: "17 15 * * *"
+  # Started every morning by the Cloudflare Worker's cron trigger
+  # (see wrangler.jsonc), or by hand from the Actions tab.
   workflow_dispatch:
     inputs:
       force:
