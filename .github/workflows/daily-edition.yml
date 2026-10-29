@@ -2,11 +2,15 @@ name: Print daily edition
 
 on:
   schedule:
-    # GitHub cron runs in UTC. These two times cover 6:47 a.m. New York time
-    # in both daylight time (10:47 UTC) and standard time (11:47 UTC). The
-    # script skips the run that falls before 6 a.m. or after today's paper exists.
+    # GitHub cron runs in UTC. The first two times cover 6:47 a.m. New York
+    # time in daylight time (10:47 UTC) and standard time (11:47 UTC). GitHub
+    # sometimes skips scheduled runs, so the later times are backups. The
+    # script exits before calling Claude when it's before 6 a.m. in New York
+    # or today's paper already exists, so the extra runs cost nothing.
     - cron: "47 10 * * *"
     - cron: "47 11 * * *"
+    - cron: "17 13 * * *"
+    - cron: "17 15 * * *"
   workflow_dispatch:
     inputs:
       force:
