@@ -70,16 +70,20 @@ Sections:
 - tech: technology and A.I.
 - business: business, companies and markets
 - world: world affairs and geopolitics
-- opinion: 3-4 notable opinion pieces from the last 1-2 days, from respected opinion sections. Use at most one piece per outlet, and prefer pieces about the day's big stories. Your search tool usually can't return pages from nytimes.com, wsj.com or theatlantic.com, so don't spend searches on them. Search outlets it can reach instead: Bloomberg Opinion, Washington Post Opinions, The Guardian (Opinion), The Free Press, Foreign Affairs, Foreign Policy, Politico Magazine, The Hill (Opinion), Fortune, Reuters Breakingviews, CNN Opinion, and Fox News Opinion. Run separate searches such as "Bloomberg Opinion" plus a topic of the day, or "op-ed" plus a topic, until you have 3-4 pieces with real links. The opinion section must not be empty.
+- opinion: 3-4 notable opinion pieces from the last 1-2 days, from respected opinion sections. Use at most one piece per outlet and one per author. Columns are often republished under different headlines, so make sure the pieces are by different people and make different arguments. Prefer pieces about the day's big stories. Your search tool usually can't return pages from nytimes.com, wsj.com or theatlantic.com, so don't spend searches on them. Search outlets it can reach instead: Bloomberg Opinion, Washington Post Opinions, The Guardian (Opinion), The Free Press, Foreign Affairs, Foreign Policy, Politico Magazine, The Hill (Opinion), Fortune, Reuters Breakingviews, CNN Opinion, and Fox News Opinion. Run separate searches such as "Bloomberg Opinion" plus a topic of the day, or "op-ed" plus a topic, until you have 3-4 pieces with real links. The opinion section must not be empty.
 - sports: the biggest results and stories in U.S. and global sports
 
-News must come from reputable outlets such as Reuters, AP, Bloomberg, WSJ, NYT, Washington Post, FT, The Economist, BBC, NPR, CNBC, Axios, The Verge, TechCrunch, Wired, Ars Technica, ESPN, The Athletic, CBS, NBC, ABC, CNN, Al Jazeera, The Guardian, or official league sites.
+News must come from reputable news organizations such as Reuters, AP, Bloomberg, WSJ, NYT, Washington Post, FT, The Economist, BBC, NPR, CNBC, Axios, The Verge, TechCrunch, Wired, Ars Technica, ESPN, The Athletic, CBS, NBC, ABC, CNN, Al Jazeera, The Guardian, or official league sites.
+Never use these as a source: company press releases or company newsrooms (cite a news outlet's report instead), wire-release sites (PR Newswire, Business Wire, GlobeNewswire), investing blogs and stock-tip sites (Motley Fool, Seeking Alpha, Benzinga, InvestorPlace, Zacks, Yahoo Finance contributor posts), aggregators, Wikipedia, Substack newsletters, or social media. Stories from these are removed before printing.
+
+Search plan: you have about 30 searches. Spend roughly 4-5 on each news section and 6-8 on opinion. Before you write the edition, count the stories in every section. If any news section has fewer than 3 stories, search again for that section first.
 
 Rules:
 - Every url must be a specific article page that appeared in your search results. Never guess or construct a URL. Links without a matching search result are removed before printing.
 - For game results, give only final scores you confirmed in a search result. If a game was still in progress, say so rather than guessing.
 - The lead is the single biggest news story of the day, from any section, and must not also appear in a section.
-- Use 3 stories in each news section (2-4 is fine). Use 3-4 opinion pieces.
+- Every news section (tech, business, world, sports) must have exactly 3 stories, on 3 different events. Use 3-4 opinion pieces.
+- Don't use the same story or link twice anywhere in the edition, including the lead.
 - Write headlines in newspaper title case.
 - News summaries are 2-3 plain, neutral, factual sentences. The lead summary is 4-6 sentences. The lead deck is a one-sentence subheading.
 - Opinion summaries describe the author's argument neutrally ("Smith argues that..."). Base them only on what you actually read. Never invent claims, quotes or authors.
@@ -151,12 +155,40 @@ async function research(client, prompt) {
   return { draft: JSON.parse(match[1]), seenUrls };
 }
 
+// Sources the paper never prints: press-release wires, investing blogs, aggregators.
+const BLOCKED_HOSTS = [
+  "prnewswire.com", "businesswire.com", "globenewswire.com", "accesswire.com", "newsfilecorp.com",
+  "fool.com", "seekingalpha.com", "benzinga.com", "investorplace.com", "zacks.com", "247wallst.com",
+  "wikipedia.org", "substack.com", "medium.com", "x.com", "twitter.com", "reddit.com", "msn.com",
+  // Company newsrooms and blogs: cite a news outlet's report of the announcement instead.
+  "news.microsoft.com", "blogs.microsoft.com", "blog.google", "abc.xyz", "openai.com", "anthropic.com",
+  "nvidianews.nvidia.com", "aboutamazon.com", "about.fb.com", "tesla.com", "x.ai",
+];
+// Hosts like newsroom.example.com, investor.example.com or ir.example.com are company press pages.
+const BLOCKED_PREFIXES = ["newsroom.", "investor.", "investors.", "ir.", "press.", "pressroom.", "corporate."];
+
+function isBlocked(url) {
+  try {
+    const { hostname, pathname } = new URL(url);
+    const host = hostname.toLowerCase().replace(/^www\./, "");
+    if (BLOCKED_PREFIXES.some((p) => host.startsWith(p))) return true;
+    if (/^\/(newsroom|press-releases?|investor-relations)(\/|$)/i.test(pathname)) return true;
+    return BLOCKED_HOSTS.some((b) => host === b || host.endsWith(`.${b}`));
+  } catch {
+    return true;
+  }
+}
+
 function cleanStory(story, seenUrls, { withAuthor = false, label }) {
   const str = (v) => (typeof v === "string" ? v.trim() : "");
   const out = { headline: str(story?.headline), summary: str(story?.summary), source: str(story?.source), url: str(story?.url) };
   if (withAuthor) out.author = str(story?.author);
   if (!out.headline || !out.summary || !out.source || !/^https:\/\//.test(out.url)) {
     console.warn(`dropped ${label}: missing fields`);
+    return null;
+  }
+  if (isBlocked(out.url)) {
+    console.warn(`dropped ${label}: source isn't allowed (${out.url})`);
     return null;
   }
   if (!seenUrls.has(normalizeUrl(out.url))) {
@@ -176,10 +208,27 @@ function assemble(draft, seenUrls, today, number) {
     lead: { kicker: str(draft.lead.kicker) || "Top Story", ...lead, ...(str(draft.lead.deck) ? { deck: str(draft.lead.deck) } : {}) },
     sections: {},
   };
+  const usedUrls = new Set([normalizeUrl(lead.url)]);
+  const usedAuthors = new Set();
   for (const key of SECTION_KEYS) {
     const stories = (Array.isArray(draft.sections?.[key]) ? draft.sections[key] : [])
       .map((s, i) => cleanStory(s, seenUrls, { withAuthor: key === "opinion", label: `${key}[${i}]` }))
-      .filter(Boolean)
+      .filter((s, i) => {
+        if (!s) return false;
+        const url = normalizeUrl(s.url);
+        if (usedUrls.has(url)) {
+          console.warn(`dropped ${key}[${i}]: same link already in this edition`);
+          return false;
+        }
+        const author = key === "opinion" && s.author ? s.author.toLowerCase() : null;
+        if (author && author !== "the editorial board" && usedAuthors.has(author)) {
+          console.warn(`dropped ${key}[${i}]: second piece by ${s.author}`);
+          return false;
+        }
+        usedUrls.add(url);
+        if (author) usedAuthors.add(author);
+        return true;
+      })
       .slice(0, 4);
     const drafted = Array.isArray(draft.sections?.[key]) ? draft.sections[key].length : 0;
     console.log(`section "${key}": ${stories.length} of ${drafted} drafted stories kept`);
