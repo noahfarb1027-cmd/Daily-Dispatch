@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-29",
+  "number": 3,
+  "lead": {
+    "kicker": "Business",
+    "headline": "Fed Holds Rates Steady as Two Officials Dissent in Favor of a Hike",
+    "summary": "The Federal Reserve voted Wednesday to keep its overnight funds rate in a range of 3.75% to 4%. Two of the 12 voting members dissented, and both wanted a quarter-point increase. The hold follows a rate increase in September, the first since 2023. The war with Iran continues to push up energy prices, and those higher costs are starting to spread to other goods and services. Markets now expect a hike in December. The decision came less than a week before the November 3 midterm elections.",
+    "source": "CNBC",
+    "url": "https://www.cnbc.com/2026/10/28/fed-interest-rate-decision-october-2026.html",
+    "deck": "The central bank kept its benchmark rate unchanged days before the midterm elections, but a push for tightening is growing inside the committee."
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "Alphabet Shares Sink After Earnings Miss and Surge in A.I. Spending",
+        "summary": "Alphabet's stock fell about 7% in after-hours trading Wednesday after the company missed profit projections. Its A.I. spending rose past $50 billion in the third quarter. The resulting cash burn stoked investor fears about the returns on hyperscaler spending.",
+        "source": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/google-stock-falls-earnings-miss-221324300.html"
+      },
+      {
+        "headline": "Microsoft Reports Quarterly Revenue of $92.3 Billion, Up 19%",
+        "summary": "Microsoft said revenue for the quarter ended September 30 was $92.3 billion, an increase of 19% from a year earlier. The results were released Wednesday as part of a heavy week of Big Tech earnings.",
+        "source": "Microsoft",
+        "url": "https://news.microsoft.com/source/2026/10/28/microsoft-announces-first-quarter-results-2/"
+      },
+      {
+        "headline": "Anthropic's Public Filing Details Its Finances and Risks Ahead of IPO",
+        "summary": "Anthropic filed its S-1 with the SEC on October 26 for a proposed initial public offering. The filing includes the company's financial results and discusses risks, including a clash with the Pentagon. The company has not given a date for the listing.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/10/26/anthropic-ipo-live-updates-ai-s-1-filing.html"
+      }
+    ],
+    "business": [
+      {
+        "headline": "Bank of Canada Raises Rates for First Time in More Than Three Years",
+        "summary": "The Bank of Canada raised its key interest rate by a quarter point as soaring energy prices push up inflation. It warned that further increases might be needed.",
+        "source": "Al Jazeera",
+        "url": "https://www.aljazeera.com/economy/2026/10/28/bank-of-canada-raises-interest-rates-for-the-first-time-in-three-years"
+      },
+      {
+        "headline": "Stocks Edge Higher as Fed Holds Rates Steady",
+        "summary": "The S&P 500 gained 0.28% to 7,744 on Wednesday, with energy stocks leading sector gains. The 10-year Treasury yield rose to 5.02%. Alphabet's drop came after the close.",
+        "source": "Motley Fool",
+        "url": "https://www.fool.com/coverage/stock-market-today/2026/10/28/stock-market-today-oct-28-markets-edge-higher-as-fed-holds-rates-steady/"
+      }
+    ],
+    "world": [
+      {
+        "headline": "Trump Says Putin-Zelenskyy Meeting Will Be Arranged Soon",
+        "summary": "President Trump said a meeting involving Russian President Vladimir Putin and Ukrainian President Volodymyr Zelenskyy would be arranged soon. He said he sees progress toward ending the war, now in its fifth year.",
+        "source": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/articles/2026-10-28/trump-says-meeting-with-zelenskyy-and-putin-will-be-set-up-soon"
+      },
+      {
+        "headline": "Washington Warns Allies of Possible Iran Strikes and Retaliation After Elections",
+        "summary": "AP sources say U.S. officials have warned Middle East allies to prepare for potential renewed military action against Iran after the midterms. The conflict has spread, with Iran-backed Houthi rebels attacking Saudi oil infrastructure and airports.",
+        "source": "The Washington Post (AP)",
+        "url": "https://www.washingtonpost.com/politics/2026/10/28/trump-iran-strikes-midterm-elections/30f401a6-d321-11f1-9931-2a41b76fc976_story.html"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "The U.S. Is Winning the A.I. Race but Missing an Important Strategy",
+        "summary": "Ignatius argues that A.I. safety should be treated as a race against time. He says that by the time the U.S. and China talk seriously about guardrails, it may be too late to prevent a catastrophic accident. He contrasts China's strategy for overseeing A.I. with America's voluntary pledge.",
+        "source": "Washington Post Opinions",
+        "url": "https://www.washingtonpost.com/opinions/2026/10/28/us-is-winning-ai-race-losing-ai-safety-race/",
+        "author": "David Ignatius"
+      },
+      {
+        "headline": "The Oil Market Should Brace for a Forever Stalemate in Iran",
+        "summary": "Blas argues that the U.S.-Iran stalemate may last longer than the oil market expects. He says the market sees a binary choice between a quick deal and a worsening conflict. With few signs of peace, he notes it is anticipating another round of hostilities, perhaps soon after the midterms.",
+        "source": "Bloomberg Opinion",
+        "url": "https://bloomberg.com/opinion/articles/2026-10-28/the-oil-market-should-brace-for-a-forever-stalemate-in-iran",
+        "author": "Javier Blas"
+      },
+      {
+        "headline": "The U.S. Is Winning the A.I. Race but Losing on Safety",
+        "summary": "In a version republished by Foreign Policy, Ignatius says the U.S. lacks a clear A.I. safety strategy as a summit in Shenzhen approaches. He says America leads in the technology but trails China in thinking about government oversight. He describes the U.S. debate as far more unruly.",
+        "source": "Foreign Policy",
+        "url": "https://foreignpolicy.com/2026/10/28/ai-safety-race-china-united-states/",
+        "author": "David Ignatius"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Brewers Beat Rays 4-1 in Game 5 for First World Series Title",
+        "summary": "Milwaukee beat Tampa Bay 4-1 on Wednesday at Tropicana Field to win the World Series 4-1. It is the first championship in the franchise's history. Tampa Bay had forced Game 5 with a 12-inning win in Game 4 after trailing 3-0.",
+        "source": "CNN",
+        "url": "https://www.cnn.com/2026/10/28/sport/live-news/game-5-world-series"
+      }
+    ]
+  }
+}
