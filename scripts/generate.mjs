@@ -70,11 +70,12 @@ Sections:
 - tech: technology and A.I.
 - business: business, companies and markets
 - world: world affairs and geopolitics
-- opinion: 3-4 notable opinion pieces from the last 1-2 days, from respected opinion sections. Use at most one piece per outlet and one per author. Columns are often republished under different headlines, so make sure the pieces are by different people and make different arguments. Prefer pieces about the day's big stories. Your search tool usually can't return pages from nytimes.com, wsj.com or theatlantic.com, so don't spend searches on them. Search outlets it can reach instead: Bloomberg Opinion, Washington Post Opinions, The Guardian (Opinion), The Free Press, Foreign Affairs, Foreign Policy, Politico Magazine, The Hill (Opinion), Fortune, Reuters Breakingviews, CNN Opinion, and Fox News Opinion. Run separate searches such as "Bloomberg Opinion" plus a topic of the day, or "op-ed" plus a topic, until you have 3-4 pieces with real links. The opinion section must not be empty.
+- opinion: 3-4 notable opinion pieces from the last 1-2 days, from respected opinion sections. Use at most one piece per outlet and one per author. Every piece needs the author's real name (or "The Editorial Board" for an unsigned editorial). If you can't find the name, pick a different piece; placeholders like "contributor" are removed. Columns are often republished under different headlines, so make sure the pieces are by different people and make different arguments. Prefer pieces about the day's big stories. Your search tool usually can't return pages from nytimes.com, wsj.com or theatlantic.com, so don't spend searches on them. Search outlets it can reach instead: Bloomberg Opinion, Washington Post Opinions, The Guardian (Opinion), The Free Press, Foreign Affairs, Foreign Policy, Politico Magazine, The Hill (Opinion), Fortune, Reuters Breakingviews, CNN Opinion, and Fox News Opinion. Run separate searches such as "Bloomberg Opinion" plus a topic of the day, or "op-ed" plus a topic, until you have 3-4 pieces with real links. The opinion section must not be empty.
 - sports: the biggest results and stories in U.S. and global sports
 
-News must come from reputable news organizations such as Reuters, AP, Bloomberg, WSJ, NYT, Washington Post, FT, The Economist, BBC, NPR, CNBC, Axios, The Verge, TechCrunch, Wired, Ars Technica, ESPN, The Athletic, CBS, NBC, ABC, CNN, Al Jazeera, The Guardian, or official league sites.
-Never use these as a source: company press releases or company newsrooms (cite a news outlet's report instead), wire-release sites (PR Newswire, Business Wire, GlobeNewswire), investing blogs and stock-tip sites (Motley Fool, Seeking Alpha, Benzinga, InvestorPlace, Zacks, Yahoo Finance contributor posts), aggregators, Wikipedia, Substack newsletters, or social media. Stories from these are removed before printing.
+Only these sites count as sources, and stories linking anywhere else are removed before printing: ${Object.keys(ALLOWED_SOURCES).join(", ")}.
+Link to the outlet's own page. A local station or portal republishing a Reuters or AP story doesn't count; find the story on reuters.com or apnews.com instead. Never cite company press releases or company blogs; cite a news outlet's report of the announcement.
+Use only articles published in the last 2 days (opinion: last 3 days). Older links are removed.
 
 Search plan: you have about 30 searches. Spend roughly 4-5 on each news section and 6-8 on opinion. Before you write the edition, count the stories in every section. If any news section has fewer than 3 stories, search again for that section first.
 
@@ -82,7 +83,7 @@ Rules:
 - Every url must be a specific article page that appeared in your search results. Never guess or construct a URL. Links without a matching search result are removed before printing.
 - For game results, give only final scores you confirmed in a search result. If a game was still in progress, say so rather than guessing.
 - The lead is the single biggest news story of the day, from any section, and must not also appear in a section.
-- Every news section (tech, business, world, sports) must have exactly 3 stories, on 3 different events. Use 3-4 opinion pieces.
+- Every news section (tech, business, world, sports) must have exactly 3 stories, each about a different event. Two outlets covering the same deal, announcement or game count as one story: pick the best one and find a different story. Use 3-4 opinion pieces.
 - Don't use the same story or link twice anywhere in the edition, including the lead.
 - Write headlines in newspaper title case.
 - News summaries are 2-3 plain, neutral, factual sentences. The lead summary is 4-6 sentences. The lead deck is a one-sentence subheading.
@@ -105,19 +106,38 @@ async function research(client, prompt) {
   const seenUrls = new Set();
   let response;
   const usage = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, searches: 0 };
+  // Search only approved outlets, so no search is spent on results that would be dropped.
+  const searchTool = {
+    type: "web_search_20260209",
+    name: "web_search",
+    max_uses: MAX_SEARCHES,
+    allowed_domains: Object.keys(ALLOWED_SOURCES).filter((d) => !UNSEARCHABLE.has(d)),
+  };
 
   for (let turn = 0; turn <= MAX_CONTINUATIONS; turn++) {
-    response = await client.beta.messages
-      .stream({
-        model: MODEL,
-        max_tokens: 64000,
-        betas: ["server-side-fallback-2026-07-01"],
-        fallbacks: "default",
-        output_config: { effort: EFFORT },
-        tools: [{ type: "web_search_20260209", name: "web_search", max_uses: MAX_SEARCHES }],
-        messages,
-      })
-      .finalMessage();
+    try {
+      response = await client.beta.messages
+        .stream({
+          model: MODEL,
+          max_tokens: 64000,
+          betas: ["server-side-fallback-2026-07-01"],
+          fallbacks: "default",
+          output_config: { effort: EFFORT },
+          tools: [searchTool],
+          messages,
+        })
+        .finalMessage();
+    } catch (err) {
+      // If the search filter itself is rejected, print the paper with unrestricted search
+      // rather than skip the day; the approved-outlet check below still applies.
+      if (turn === 0 && searchTool.allowed_domains && err instanceof Anthropic.BadRequestError) {
+        console.warn(`Search filter rejected (${err.message}); retrying without it.`);
+        delete searchTool.allowed_domains;
+        turn--;
+        continue;
+      }
+      throw err;
+    }
 
     for (const block of response.content) {
       if (block.type === "web_search_tool_result" && Array.isArray(block.content)) {
@@ -155,40 +175,87 @@ async function research(client, prompt) {
   return { draft: JSON.parse(match[1]), seenUrls };
 }
 
-// Sources the paper never prints: press-release wires, investing blogs, aggregators.
-const BLOCKED_HOSTS = [
-  "prnewswire.com", "businesswire.com", "globenewswire.com", "accesswire.com", "newsfilecorp.com",
-  "fool.com", "seekingalpha.com", "benzinga.com", "investorplace.com", "zacks.com", "247wallst.com",
-  "wikipedia.org", "substack.com", "medium.com", "x.com", "twitter.com", "reddit.com", "msn.com",
-  // Company newsrooms and blogs: cite a news outlet's report of the announcement instead.
-  "news.microsoft.com", "blogs.microsoft.com", "blog.google", "abc.xyz", "openai.com", "anthropic.com",
-  "nvidianews.nvidia.com", "aboutamazon.com", "about.fb.com", "tesla.com", "x.ai",
-];
-// Hosts like newsroom.example.com, investor.example.com or ir.example.com are company press pages.
-const BLOCKED_PREFIXES = ["newsroom.", "investor.", "investors.", "ir.", "press.", "pressroom.", "corporate."];
+// The only sites the paper prints from, with the name to credit. Subdomains
+// count (edition.cnn.com matches "cnn.com"). Anything else is dropped, which
+// also keeps out press releases, investing blogs and sites that merely
+// republish wire copy.
+const ALLOWED_SOURCES = {
+  // Wires and national news
+  "reuters.com": "Reuters", "apnews.com": "AP", "bloomberg.com": "Bloomberg", "wsj.com": "The Wall Street Journal",
+  "nytimes.com": "The New York Times", "washingtonpost.com": "The Washington Post", "ft.com": "Financial Times",
+  "economist.com": "The Economist", "bbc.com": "BBC", "bbc.co.uk": "BBC", "npr.org": "NPR", "pbs.org": "PBS",
+  "cnbc.com": "CNBC", "axios.com": "Axios", "politico.com": "Politico", "politico.eu": "Politico Europe",
+  "semafor.com": "Semafor", "cnn.com": "CNN", "cbsnews.com": "CBS News", "nbcnews.com": "NBC News",
+  "abcnews.go.com": "ABC News", "abcnews.com": "ABC News", "foxnews.com": "Fox News", "foxbusiness.com": "Fox Business",
+  "usatoday.com": "USA Today", "latimes.com": "Los Angeles Times", "time.com": "Time", "theguardian.com": "The Guardian",
+  "aljazeera.com": "Al Jazeera", "dw.com": "DW", "france24.com": "France 24", "asia.nikkei.com": "Nikkei Asia",
+  "scmp.com": "South China Morning Post", "marketwatch.com": "MarketWatch", "barrons.com": "Barron's",
+  "fortune.com": "Fortune", "businessinsider.com": "Business Insider",
+  // Tech
+  "theverge.com": "The Verge", "techcrunch.com": "TechCrunch", "wired.com": "Wired", "arstechnica.com": "Ars Technica",
+  "theinformation.com": "The Information", "technologyreview.com": "MIT Technology Review", "statnews.com": "STAT",
+  // Opinion and analysis
+  "theatlantic.com": "The Atlantic", "newyorker.com": "The New Yorker", "foreignaffairs.com": "Foreign Affairs",
+  "foreignpolicy.com": "Foreign Policy", "thefp.com": "The Free Press", "thehill.com": "The Hill",
+  // Sports
+  "espn.com": "ESPN", "theathletic.com": "The Athletic", "cbssports.com": "CBS Sports", "nbcsports.com": "NBC Sports",
+  "si.com": "Sports Illustrated", "sports.yahoo.com": "Yahoo Sports", "mlb.com": "MLB.com", "nba.com": "NBA.com",
+  "nfl.com": "NFL.com", "nhl.com": "NHL.com", "wnba.com": "WNBA.com",
+};
 
-function isBlocked(url) {
+// Sites that block Anthropic's search crawler. Naming them in the search filter
+// makes the request fail, and searches can't return their pages anyway.
+const UNSEARCHABLE = new Set(["nytimes.com", "wsj.com", "theatlantic.com", "ft.com", "economist.com", "theguardian.com"]);
+
+// Links older than this many days (going by the date in the link) are dropped.
+const MAX_AGE_DAYS = { news: 2, opinion: 3 };
+
+function allowedSourceName(url) {
   try {
-    const { hostname, pathname } = new URL(url);
-    const host = hostname.toLowerCase().replace(/^www\./, "");
-    if (BLOCKED_PREFIXES.some((p) => host.startsWith(p))) return true;
-    if (/^\/(newsroom|press-releases?|investor-relations)(\/|$)/i.test(pathname)) return true;
-    return BLOCKED_HOSTS.some((b) => host === b || host.endsWith(`.${b}`));
+    const host = new URL(url).hostname.toLowerCase().replace(/^www\./, "");
+    const match = Object.keys(ALLOWED_SOURCES).find((d) => host === d || host.endsWith(`.${d}`));
+    return match ? ALLOWED_SOURCES[match] : null;
   } catch {
-    return true;
+    return null;
   }
 }
 
-function cleanStory(story, seenUrls, { withAuthor = false, label }) {
+// Most news links carry their publication date, as /2026/10/30/ or 2026-10-30.
+function daysOld(url, today) {
+  const m = url.match(/(20\d{2})[\/-](\d{2})[\/-](\d{2})(?:\D|$)/);
+  if (!m) return null;
+  const published = Date.UTC(+m[1], +m[2] - 1, +m[3]);
+  const [y, mo, d] = today.split("-").map(Number);
+  return Math.round((Date.UTC(y, mo - 1, d) - published) / 86400000);
+}
+
+// A placeholder like "Fox News contributor (name not confirmed)" isn't a byline.
+function isRealAuthor(name) {
+  return Boolean(name) && !/not confirmed|unknown|contributor|staff|n\/a|unnamed|anonymous/i.test(name);
+}
+
+function cleanStory(story, seenUrls, { withAuthor = false, label, today, maxAgeDays }) {
   const str = (v) => (typeof v === "string" ? v.trim() : "");
   const out = { headline: str(story?.headline), summary: str(story?.summary), source: str(story?.source), url: str(story?.url) };
   if (withAuthor) out.author = str(story?.author);
-  if (!out.headline || !out.summary || !out.source || !/^https:\/\//.test(out.url)) {
+  if (!out.headline || !out.summary || !/^https:\/\//.test(out.url)) {
     console.warn(`dropped ${label}: missing fields`);
     return null;
   }
-  if (isBlocked(out.url)) {
-    console.warn(`dropped ${label}: source isn't allowed (${out.url})`);
+  const outlet = allowedSourceName(out.url);
+  if (!outlet) {
+    console.warn(`dropped ${label}: not an approved outlet (${out.url})`);
+    return null;
+  }
+  // Credit the site the link actually goes to, keeping a more specific label like "Bloomberg Opinion".
+  if (!out.source.toLowerCase().includes(outlet.toLowerCase().replace(/^the /, ""))) out.source = outlet;
+  if (withAuthor && !isRealAuthor(out.author)) {
+    console.warn(`dropped ${label}: no real author name ("${out.author}")`);
+    return null;
+  }
+  const age = daysOld(out.url, today);
+  if (age !== null && age > maxAgeDays) {
+    console.warn(`dropped ${label}: ${age} days old (${out.url})`);
     return null;
   }
   if (!seenUrls.has(normalizeUrl(out.url))) {
@@ -199,7 +266,7 @@ function cleanStory(story, seenUrls, { withAuthor = false, label }) {
 }
 
 function assemble(draft, seenUrls, today, number) {
-  const lead = cleanStory(draft.lead, seenUrls, { label: "lead" });
+  const lead = cleanStory(draft.lead, seenUrls, { label: "lead", today, maxAgeDays: MAX_AGE_DAYS.news });
   if (!lead) throw new Error("The lead story failed validation; not printing a front page without a lead.");
   const str = (v) => (typeof v === "string" ? v.trim() : "");
   const edition = {
@@ -212,7 +279,10 @@ function assemble(draft, seenUrls, today, number) {
   const usedAuthors = new Set();
   for (const key of SECTION_KEYS) {
     const stories = (Array.isArray(draft.sections?.[key]) ? draft.sections[key] : [])
-      .map((s, i) => cleanStory(s, seenUrls, { withAuthor: key === "opinion", label: `${key}[${i}]` }))
+      .map((s, i) => cleanStory(s, seenUrls, {
+        withAuthor: key === "opinion", label: `${key}[${i}]`, today,
+        maxAgeDays: key === "opinion" ? MAX_AGE_DAYS.opinion : MAX_AGE_DAYS.news,
+      }))
       .filter((s, i) => {
         if (!s) return false;
         const url = normalizeUrl(s.url);

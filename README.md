@@ -64,4 +64,4 @@ npm run preview                                            # view the site at ht
 ## Notes
 
 - **Cost.** Each edition is one Claude Sonnet 5.5 run at medium effort with up to 30 web searches. The Action log prints each run's token usage and estimated cost on a line starting with `usage:`.
-- **Link checking.** A story is dropped if its link never appeared in Claude's search results. If the lead story fails this check, or fewer than 6 stories pass, the run fails and nothing is published.
+- **Source rules.** Searches are limited to the approved outlets in `ALLOWED_SOURCES` (`scripts/generate.mjs`); edit that list to add or remove sites. Before printing, a story is dropped if its link isn't on an approved outlet, never appeared in Claude's search results, is older than 2 days (opinion: 3), repeats a link already in the edition, or is an opinion piece with no real author or a second piece by the same author. If the lead story fails, or fewer than 6 stories pass, the run fails and nothing is published.
