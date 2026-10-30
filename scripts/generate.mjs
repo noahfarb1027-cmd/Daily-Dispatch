@@ -190,7 +190,7 @@ const ALLOWED_SOURCES = {
   "usatoday.com": "USA Today", "latimes.com": "Los Angeles Times", "time.com": "Time", "theguardian.com": "The Guardian",
   "aljazeera.com": "Al Jazeera", "dw.com": "DW", "france24.com": "France 24", "asia.nikkei.com": "Nikkei Asia",
   "scmp.com": "South China Morning Post", "marketwatch.com": "MarketWatch", "barrons.com": "Barron's",
-  "fortune.com": "Fortune", "businessinsider.com": "Business Insider",
+  "fortune.com": "Fortune", "businessinsider.com": "Business Insider", "finance.yahoo.com": "Yahoo Finance",
   // Tech
   "theverge.com": "The Verge", "techcrunch.com": "TechCrunch", "wired.com": "Wired", "arstechnica.com": "Ars Technica",
   "theinformation.com": "The Information", "technologyreview.com": "MIT Technology Review", "statnews.com": "STAT",
