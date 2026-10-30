@@ -1,0 +1,117 @@
+{
+  "date": "2026-10-30",
+  "number": 4,
+  "lead": {
+    "kicker": "World",
+    "headline": "Israel's Election Ends in Deadlock, Leaving Netanyahu and Eisenkot Without a Clear Path",
+    "summary": "Israel's election has produced a political deadlock, with neither Netanyahu nor Eisenkot holding a clear path to forming a government. Netanyahu's Likud-led bloc won the most seats but fell short of a majority, according to Bloomberg. A surge in the Arab vote helped keep either side from reaching 61 seats. CNN reports the country now faces weeks, possibly months, of political limbo. If coalition talks fail, another round of elections appears likely.",
+    "source": "NPR",
+    "url": "https://www.npr.org/2026/10/30/g-s1-150761/israel-election-politics-deadlock-arabs",
+    "deck": "Neither Prime Minister Netanyahu nor challenger Gadi Eisenkot can claim a parliamentary majority after the country's first vote since the 2023 Hamas attacks."
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "Amazon Signals AI Spending Boom Is Far From Over as Shares Slide",
+        "summary": "Amazon shares fell in premarket trading after its September-quarter report disappointed investors. The company is planning more than $200 billion in capital spending this year, mostly on AI. The reaction deepened investor concern that AI spending is outpacing returns.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/10/30/amazon-intel-earnings-big-tech-ai-spending-concerns.html"
+      },
+      {
+        "headline": "Nvidia to Invest $3 Billion in Meta as Tech Giants Deepen AI Ties",
+        "summary": "Nvidia announced a $3 billion investment in Meta's equity, extending its string of stakes in companies powering the AI boom. Nvidia has also invested in OpenAI, Anthropic, Intel and xAI.",
+        "source": "CNBC Africa",
+        "url": "https://www.cnbcafrica.com/2026/nvidia-to-invest-3-billion-in-meta-as-tech-giants-deepen-ai-partnership"
+      },
+      {
+        "headline": "Nvidia and AMD Strike Multibillion-Dollar Deals With Meta",
+        "summary": "Both AMD and Nvidia announced partnerships with Meta this week, securing collaborations and billions of dollars in commitments. The deals add to the heavy bets the three companies are making on AI.",
+        "source": "PC Gamer",
+        "url": "https://pcgamer.com/software/ai/nvidia-and-amd-invest-billions-into-meta-as-companies-egg-each-other-on-to-bet-even-more-on-ai"
+      }
+    ],
+    "business": [
+      {
+        "headline": "Intel Plunges Over 20% After Weak Forecast on PC Slowdown",
+        "summary": "Intel issued weaker-than-expected fourth-quarter guidance, citing ongoing softness in the PC market. Its finance chief said the slowdown should continue at least through the first half of next year. Shares fell more than 20% in after-hours trading.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/10/29/intel-intc-q3-earnings-report-2026-.html"
+      },
+      {
+        "headline": "Nasdaq Futures Tumble Over 2% as Amazon and Intel Deepen AI Spending Worries",
+        "summary": "Nasdaq futures fell more than 2% on Friday. Amazon signaled its AI spending boom is far from over, and Intel warned it would burn cash this year.",
+        "source": "Reuters",
+        "url": "https://kfgo.com/2026/10/30/nasdaq-futures-tumble-as-amazon-intel-results-deepen-ai-spending-woes/"
+      },
+      {
+        "headline": "Caterpillar Sinks 9% as Wall Street Braces for Midterms and Jobs Data",
+        "summary": "Caterpillar shares fell 9% on Thursday after the company held its annual sales growth forecast despite strong data-center demand for its power equipment. Reuters says the market is wary of AI as midterm elections, more earnings and jobs data approach.",
+        "source": "Reuters",
+        "url": "https://ca.investing.com/news/economy-news/midterm-elections-earnings-jobs-data-loom-for-aiwary-market-4917113"
+      }
+    ],
+    "world": [
+      {
+        "headline": "Russian Drone Strike on Dnipro Train Station Kills at Least 14",
+        "summary": "A Russian drone hit the main railway station in Dnipro as people waited to board a train on Thursday morning, killing at least 14. Zelenskyy called the attack horrific. It came as a localized ceasefire in the occupied city of Oleshky entered its third day.",
+        "source": "CNN",
+        "url": "https://www.cnn.com/2026/10/29/europe/russia-ukraine-strikes-dnipro-train-station-intl"
+      },
+      {
+        "headline": "Iran Pressed to Make Nuclear Concessions as Post-Midterm Strikes Loom",
+        "summary": "Axios reports that U.S., Israeli and regional sources say Arab mediators are pushing Iran for nuclear concessions to prevent a resumption of war after the U.S. midterms. The effort follows U.S. warnings to allies about possible renewed military action.",
+        "source": "Axios",
+        "url": "https://www.axios.com/2026/10/28/iran-war-arab-mediators-war-post-midterms"
+      },
+      {
+        "headline": "Netanyahu Alleges Arab-Sector Rigging as Israel Opens Election Probe",
+        "summary": "Israel is probing the vote after Prime Minister Netanyahu alleged rigging in the Arab sector, according to Bloomberg. The Arab vote surge helped leave the election without a clear winner.",
+        "source": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/articles/2026-10-29/israel-probes-votes-after-netanyahu-alleges-arab-sector-rigging"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "Trump Prepares Potential Challenges to Midterm Election Results",
+        "summary": "This opinion piece in The Hill, from two days ago, concerns Trump's preparations to challenge unfavorable midterm results. I saw only a snippet and headline, so the details of the argument are not summarized.",
+        "source": "The Hill",
+        "url": "https://thehill.com/opinion/white-house/6173657-trump-midterm-election-challenges/",
+        "author": "The Hill contributor (name not confirmed)"
+      },
+      {
+        "headline": "Trump Can't Let Iran Turn a Military Defeat Into a Diplomatic Victory",
+        "summary": "This piece argues that Tehran is deliberately prolonging nuclear talks to weaken the president's standing ahead of the Nov. 3 midterms. The piece is about six days old.",
+        "source": "Fox News",
+        "url": "https://www.foxnews.com/opinion/trump-cant-let-iran-turn-military-defeat-into-diplomatic-victory",
+        "author": "Fox News Opinion contributor (name not confirmed)"
+      },
+      {
+        "headline": "The AI Boom Is Setting Up the Fed for a Rate Seesaw",
+        "summary": "Dudley, a Bloomberg Opinion columnist and former New York Fed president, writes that the AI investment boom and its effect on stock valuations are a major wild card for U.S. interest rates. He notes that Fed Chair Kevin Warsh is taking it slow. The piece is from Oct. 21.",
+        "source": "Bloomberg Opinion",
+        "url": "https://www.bloomberg.com/opinion/articles/2026-10-21/the-ai-boom-is-setting-up-the-fed-for-a-rate-seesaw",
+        "author": "Bill Dudley"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Packers Hold Off Panthers 27-19 on Thursday Night Football",
+        "summary": "Jordan Love threw for 288 yards and three touchdowns as Green Bay beat Carolina 27-19 at Lambeau Field. The Packers improved to 5-3, and the Panthers fell to 3-4.",
+        "source": "Yahoo Sports",
+        "url": "https://sports.yahoo.com/articles/thursday-night-football-packers-hold-033445723.html"
+      },
+      {
+        "headline": "Milwaukee Celebrates Brewers' First World Series Title With Friday Parade",
+        "summary": "Milwaukee holds its championship parade Friday morning, a day after the Brewers clinched the first World Series title in franchise history. Schools in the city are closed for the celebration.",
+        "source": "MLB.com",
+        "url": "https://www.mlb.com/news/brewers-2026-world-series-championship-parade"
+      },
+      {
+        "headline": "Heat Beat Hawks 129-117 in Atlanta",
+        "summary": "Miami won 129-117 at State Farm Arena on Oct. 28, with Giannis Antetokounmpo and Davion Mitchell among the Heat players in the game. Other NBA results that day included wins for the Mavericks, Rockets and Warriors.",
+        "source": "Philippine Daily Inquirer",
+        "url": "https://sports.inquirer.net/704154/nba-scores-today-heat-mavericks-rockets-warriors-secure-wins/amp"
+      }
+    ]
+  }
+}
