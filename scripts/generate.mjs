@@ -83,8 +83,8 @@ Rules:
 - Every url must be a specific article page that appeared in your search results. Never guess or construct a URL. Links without a matching search result are removed before printing.
 - For game results, give only final scores you confirmed in a search result. If a game was still in progress, say so rather than guessing.
 - The lead is the single biggest news story of the day, from any section, and must not also appear in a section.
-- Every news section (tech, business, world, sports) must have exactly 3 stories, each about a different event. Two outlets covering the same deal, announcement or game count as one story: pick the best one and find a different story. Use 3-4 opinion pieces.
-- Don't use the same story or link twice anywhere in the edition, including the lead.
+- Every news section (tech, business, world, sports) must have exactly 3 stories. Every news story in the whole edition, including the lead, must be about a different event. Two outlets covering the same deal, earnings report, market move, announcement or game count as one story, even if one is in Tech and the other in Business: keep it in the one section where it fits best and find a different story for the other. Use 3-4 opinion pieces.
+- Before you write the edition, read through all the news headlines together and replace any story that repeats an event already covered.
 - Write headlines in newspaper title case.
 - News summaries are 2-3 plain, neutral, factual sentences. The lead summary is 4-6 sentences. The lead deck is a one-sentence subheading.
 - Opinion summaries describe the author's argument neutrally ("Smith argues that..."). Base them only on what you actually read. Never invent claims, quotes or authors.
@@ -304,9 +304,74 @@ function assemble(draft, seenUrls, today, number) {
     console.log(`section "${key}": ${stories.length} of ${drafted} drafted stories kept`);
     if (stories.length) edition.sections[key] = stories;
   }
-  const total = Object.values(edition.sections).reduce((a, s) => a + s.length, 0);
-  if (total < 6) throw new Error(`Only ${total} section stories survived validation; not printing.`);
   return edition;
+}
+
+// Drops news stories that cover the same event as an earlier story anywhere in
+// the edition (say, one sell-off in both Tech and Business). Word matching
+// can't tell "the same event" from "the same country", so a short Claude call
+// reads the headlines and summaries and names the repeats. Opinion is left out:
+// commenting on the day's news is its job. If the check itself fails, the
+// edition prints without it.
+async function dropRepeatedEvents(client, edition) {
+  const items = [{ id: "lead", section: "lead", story: edition.lead }];
+  for (const key of SECTION_KEYS) {
+    if (key === "opinion") continue;
+    (edition.sections[key] || []).forEach((story, i) => items.push({ id: `${key}-${i}`, section: key, story }));
+  }
+  const list = items.map((it) => `[${it.id}] ${it.story.headline}\n${it.story.summary}`).join("\n\n");
+
+  let repeats;
+  try {
+    const response = await client.messages.create({
+      model: MODEL,
+      max_tokens: 4000,
+      output_config: {
+        effort: "low",
+        format: {
+          type: "json_schema",
+          schema: {
+            type: "object",
+            properties: {
+              repeats: {
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: { id: { type: "string" }, same_event_as: { type: "string" } },
+                  required: ["id", "same_event_as"],
+                  additionalProperties: false,
+                },
+              },
+            },
+            required: ["repeats"],
+            additionalProperties: false,
+          },
+        },
+      },
+      messages: [{
+        role: "user",
+        content: `These are the news stories in today's edition of a newspaper, in order. Find every story that reports the same event as an EARLIER story in the list: the same earnings report, deal, announcement, market move, incident or game, even if the headlines are worded differently or one story also mentions other companies. Stories that merely involve the same country, person or industry but report different events are not repeats.\n\nFor each repeat, give its id and the id of the earlier story it repeats. Return an empty list if there are none.\n\n${list}`,
+      }],
+    });
+    const text = response.content.filter((b) => b.type === "text").map((b) => b.text).join("");
+    repeats = JSON.parse(text).repeats;
+  } catch (err) {
+    console.warn(`Repeat check skipped: ${err.message}`);
+    return;
+  }
+
+  const ids = new Set(items.map((it) => it.id));
+  const drop = new Set(repeats.filter((r) => r.id !== "lead" && ids.has(r.id)).map((r) => r.id));
+  for (const it of items) {
+    if (!drop.has(it.id)) continue;
+    const earlier = repeats.find((r) => r.id === it.id).same_event_as;
+    console.warn(`dropped ${it.id}: same event as ${earlier} ("${it.story.headline}")`);
+  }
+  for (const key of SECTION_KEYS) {
+    if (!edition.sections[key] || key === "opinion") continue;
+    edition.sections[key] = edition.sections[key].filter((_, i) => !drop.has(`${key}-${i}`));
+    if (!edition.sections[key].length) delete edition.sections[key];
+  }
 }
 
 async function main() {
@@ -333,6 +398,9 @@ async function main() {
   const client = new Anthropic();
   const { draft, seenUrls } = await research(client, buildPrompt(today, previous));
   const edition = assemble(draft, seenUrls, today, number);
+  await dropRepeatedEvents(client, edition);
+  const total = Object.values(edition.sections).reduce((a, s) => a + s.length, 0);
+  if (total < 6) throw new Error(`Only ${total} section stories survived validation; not printing.`);
 
   await fs.mkdir(EDITIONS_DIR, { recursive: true });
   await fs.writeFile(path.join(EDITIONS_DIR, `${today}.json`), JSON.stringify(edition, null, 2) + "\n");
