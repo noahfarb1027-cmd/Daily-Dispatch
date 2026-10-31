@@ -70,14 +70,14 @@ Sections:
 - tech: technology and A.I.
 - business: business, companies and markets
 - world: world affairs and geopolitics
-- opinion: 3-4 notable opinion pieces from the last 1-2 days, from respected opinion sections. Use at most one piece per outlet and one per author. Every piece needs the author's real name (or "The Editorial Board" for an unsigned editorial). If you can't find the name, pick a different piece; placeholders like "contributor" are removed. Columns are often republished under different headlines, so make sure the pieces are by different people and make different arguments. Prefer pieces about the day's big stories. Your search tool usually can't return pages from nytimes.com, wsj.com or theatlantic.com, so don't spend searches on them. Search outlets it can reach instead: Bloomberg Opinion, Washington Post Opinions, The Guardian (Opinion), The Free Press, Foreign Affairs, Foreign Policy, Politico Magazine, The Hill (Opinion), Fortune, Reuters Breakingviews, CNN Opinion, and Fox News Opinion. Run separate searches such as "Bloomberg Opinion" plus a topic of the day, or "op-ed" plus a topic, until you have 3-4 pieces with real links. The opinion section must not be empty.
+- opinion: 3-4 notable opinion pieces from the last 1-2 days, from respected opinion sections. Use at most one piece per outlet and one per author. Every piece needs the author's real name (or "The Editorial Board" for an unsigned editorial). If you can't find the name, pick a different piece; placeholders like "contributor" are removed. Columns are often republished under different headlines, so make sure the pieces are by different people and make different arguments. Prefer pieces about the day's big stories. Search these opinion sections: Bloomberg Opinion, Washington Post Opinions, The Free Press, Foreign Affairs, Foreign Policy, The Hill (Opinion), Fortune, Time, CNN Opinion, and Fox News Opinion. Run separate searches such as "Bloomberg Opinion" plus a topic of the day, or "op-ed" plus a topic, until you have 3-4 pieces with real links. The opinion section must not be empty.
 - sports: the biggest results and stories in U.S. and global sports
 
-Only these sites count as sources, and stories linking anywhere else are removed before printing: ${Object.keys(ALLOWED_SOURCES).join(", ")}.
+Your searches only return pages from these approved sites, and stories linking anywhere else are removed before printing: ${Object.keys(ALLOWED_SOURCES).filter((d) => !UNSEARCHABLE.has(d)).join(", ")}.
 Link to the outlet's own page. A local station or portal republishing a Reuters or AP story doesn't count; find the story on reuters.com or apnews.com instead. Never cite company press releases or company blogs; cite a news outlet's report of the announcement.
 Use only articles published in the last 2 days (opinion: last 3 days). Older links are removed.
 
-Search plan: you have about 30 searches. Spend roughly 4-5 on each news section and 6-8 on opinion. Before you write the edition, count the stories in every section. If any news section has fewer than 3 stories, search again for that section first.
+Search plan: you have about 30 searches. Do the opinion section FIRST: spend your first 6-8 searches finding 3-4 opinion pieces, before any news searches, so it can't be crowded out. Then spend roughly 4-5 searches on each news section. Before you write the edition, count the stories in every section. If any section has fewer than 3 stories, search again for that section.
 
 Rules:
 - Every url must be a specific article page that appeared in your search results. Never guess or construct a URL. Links without a matching search result are removed before printing.
@@ -205,7 +205,13 @@ const ALLOWED_SOURCES = {
 
 // Sites that block Anthropic's search crawler. Naming them in the search filter
 // makes the request fail, and searches can't return their pages anyway.
-const UNSEARCHABLE = new Set(["nytimes.com", "wsj.com", "theatlantic.com", "ft.com", "economist.com", "theguardian.com"]);
+const UNSEARCHABLE = new Set([
+  "nytimes.com", "wsj.com", "theatlantic.com", "ft.com", "economist.com", "theguardian.com",
+  // Reported by the API on 2026-10-31.
+  "apnews.com", "arstechnica.com", "barrons.com", "bbc.co.uk", "bbc.com", "businessinsider.com", "dw.com",
+  "latimes.com", "marketwatch.com", "newyorker.com", "politico.com", "politico.eu", "reuters.com",
+  "theathletic.com", "theverge.com", "usatoday.com", "wired.com",
+]);
 
 // Links older than this many days (going by the date in the link) are dropped.
 const MAX_AGE_DAYS = { news: 2, opinion: 3 };
