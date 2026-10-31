@@ -1,0 +1,88 @@
+{
+  "date": "2026-10-31",
+  "number": 5,
+  "lead": {
+    "kicker": "World",
+    "headline": "Tankers Hit Mines in Strait of Hormuz as Iran Talks Continue and Post-Midterm Strike Fears Grow",
+    "summary": "Iran's Revolutionary Guard said four tankers struck mines in the Strait of Hormuz. The claim disputes U.S. statements that the key shipping lanes had been cleared. Houthi forces also claimed a new wave of attacks on Saudi airports and oil sites. Diplomacy is continuing alongside the violence, and a Qatari delegation is in Tehran. Fears are growing that U.S. strikes could resume after the midterm elections.",
+    "source": "CNBC",
+    "url": "https://www.cnbc.com/2026/10/30/iran-trump-hormuz-oil-middle-east-.html",
+    "deck": "Iran says four tankers struck mines in the strait, disputing U.S. claims that shipping lanes had been cleared."
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "Nvidia Moves to Backstop Cloud Provider's $45 Billion Anthropic Project",
+        "summary": "Nvidia is in talks to give Nscale, a young AI cloud provider, billions of dollars in credit guarantees for debt. The money would fund a 460-megawatt data center that Anthropic plans to use, according to The Information.",
+        "source": "The Information",
+        "url": "https://theinformation.com/articles/nvidia-talks-provide-billions-credit-support-cloud-providers-45-billion-anthropic-deal"
+      },
+      {
+        "headline": "Roblox Shares Tumble After Fourth-Quarter Outlook Disappoints",
+        "summary": "Roblox shares fell as much as 21% on Friday after the company gave a weak fourth-quarter sales outlook. Bloomberg reported that user growth slowed and missed estimates despite a hit game.",
+        "source": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/articles/2026-10-29/roblox-users-miss-estimates-despite-hit-game-steal-an-egg"
+      },
+      {
+        "headline": "Nasdaq Suffers Worst Day Since June as Investors Dump Tech Shares",
+        "summary": "The Nasdaq lost 2.86% and closed at 25,437.00, its worst single-day performance since June. Investors dumped tech shares on worries about AI spending.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/10/29/stock-market-today-live-updates.html"
+      }
+    ],
+    "business": [
+      {
+        "headline": "Nasdaq 100 Tumbles, Intel Drops 29% as AI Spending Fails to Reassure Investors",
+        "summary": "A deep sell-off in technology stocks capped a third straight weekly loss for the Nasdaq 100. Bloomberg reported that investors who stayed all-in on the AI trade were hit hard as the companies at its center fell one after another. AP reported the S&P 500 fell 1.8%, its worst day since June.",
+        "source": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/articles/2026-10-30/ai-dip-buyers-gored-as-selling-spasm-caps-third-week-of-losses"
+      },
+      {
+        "headline": "Exxon and Chevron Hit Record Highs as War-Driven Refining Profits Soar",
+        "summary": "Exxon Mobil and Chevron both reported third-quarter earnings above Wall Street estimates, helped by strong refining margins tied to the Iran and Ukraine wars. Chevron's CEO told CNBC that the system is under stress.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/10/30/chevron-exxon-cvx-xom-earnings-q3-2026.html"
+      },
+      {
+        "headline": "Reddit, Pinterest and Roblox Stocks Tank After Third-Quarter Earnings",
+        "summary": "Reddit shares plunged roughly 25% to 29% on Friday after its quarterly report, as user growth and its outlook disappointed. Roblox and Pinterest also fell.",
+        "source": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/markets/article/reddit-pinterest-and-roblox-stocks-tank-after-q3-earnings-134009780.html"
+      }
+    ],
+    "world": [
+      {
+        "headline": "Hegseth Removes Top General, Accusing Him of Leaking Classified War Information",
+        "summary": "Defense Secretary Pete Hegseth abruptly removed a top general. He accused him of leaking classified information about the wars in Iran and Ukraine, amid a federal investigation, NBC News reported.",
+        "source": "NBC News",
+        "url": "https://www.nbcnews.com/politics/national-security/top-general-fired-hegseth-leak-investigation-rcna606456"
+      },
+      {
+        "headline": "Trump Reverses Course and Reinstates Cancelled Campaign Rallies",
+        "summary": "President Trump reinstated campaign rallies he had cancelled. Republican officials have not ruled out adding another event before the midterm election.",
+        "source": "Al Jazeera",
+        "url": "https://www.aljazeera.com/news/2026/10/30/trump-reverses-course-reinstates-cancelled-campaign-rallies"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Warriors Beat Lakers 112-95",
+        "summary": "Golden State beat the Los Angeles Lakers 112-95 on Friday, October 30, according to ESPN's final score.",
+        "source": "ESPN",
+        "url": "https://www.espn.com/nba/game/_/gameId/401909285/lakers-warriors"
+      },
+      {
+        "headline": "Baylor Routs UCF 41-9 in Interim Coach's Debut",
+        "summary": "DJ Lagway threw for 319 yards and four touchdowns as Baylor beat UCF 41-9 on Friday night. It was Klanderman's first game as interim coach.",
+        "source": "ESPN",
+        "url": "https://www.espn.com/college-football/scoreboard/_/group/80"
+      },
+      {
+        "headline": "Magic Top Raptors 121-114 in Toronto",
+        "summary": "Orlando beat Toronto 121-114 on Friday, October 30, according to the CBS Sports schedule page.",
+        "source": "CBS Sports",
+        "url": "https://www.cbssports.com/nba/schedule/"
+      }
+    ]
+  }
+}
