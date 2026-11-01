@@ -73,7 +73,7 @@ Sections:
 - opinion: 3-4 notable opinion pieces from the last 1-2 days, from respected opinion sections. Use at most one piece per outlet and one per author. Every piece needs the author's real name (or "The Editorial Board" for an unsigned editorial). If you can't find the name, pick a different piece; placeholders like "contributor" are removed. Columns are often republished under different headlines, so make sure the pieces are by different people and make different arguments. Prefer pieces about the day's big stories. Search these opinion sections: Bloomberg Opinion, Washington Post Opinions, The Free Press, Foreign Affairs, Foreign Policy, The Hill (Opinion), Fortune, Time, CNN Opinion, and Fox News Opinion. Run separate searches such as "Bloomberg Opinion" plus a topic of the day, or "op-ed" plus a topic, until you have 3-4 pieces with real links. The opinion section must not be empty.
 - sports: the biggest results and stories in U.S. and global sports
 
-Your searches only return pages from these approved sites, and stories linking anywhere else are removed before printing: ${Object.keys(ALLOWED_SOURCES).filter((d) => !UNSEARCHABLE.has(d)).join(", ")}.
+Only stories from these approved sites are printed; links anywhere else are removed: ${Object.keys(ALLOWED_SOURCES).filter((d) => !UNSEARCHABLE.has(d)).join(", ")}. Search the open web as usual, but when a result is from another site (including Reuters, AP or the BBC, whose pages can't be printed), find the same news on one of the approved sites and link to that.
 Link to the outlet's own page. A local station or portal republishing a Reuters or AP story doesn't count; find the story on reuters.com or apnews.com instead. Never cite company press releases or company blogs; cite a news outlet's report of the announcement.
 Use only articles published in the last 2 days (opinion: last 3 days). Older links are removed.
 
@@ -106,38 +106,24 @@ async function research(client, prompt) {
   const seenUrls = new Set();
   let response;
   const usage = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, searches: 0 };
-  // Search only approved outlets, so no search is spent on results that would be dropped.
-  const searchTool = {
-    type: "web_search_20260209",
-    name: "web_search",
-    max_uses: MAX_SEARCHES,
-    allowed_domains: Object.keys(ALLOWED_SOURCES).filter((d) => !UNSEARCHABLE.has(d)),
-  };
+  // Search is left unrestricted: limiting it to approved sites (allowed_domains)
+  // was tried on 2026-11-01 and found almost no recent news, because the big wires
+  // block Anthropic's search crawler. The approved-outlet check in cleanStory
+  // drops anything off the list instead.
+  const searchTool = { type: "web_search_20260209", name: "web_search", max_uses: MAX_SEARCHES };
 
   for (let turn = 0; turn <= MAX_CONTINUATIONS; turn++) {
-    try {
-      response = await client.beta.messages
-        .stream({
-          model: MODEL,
-          max_tokens: 64000,
-          betas: ["server-side-fallback-2026-07-01"],
-          fallbacks: "default",
-          output_config: { effort: EFFORT },
-          tools: [searchTool],
-          messages,
-        })
-        .finalMessage();
-    } catch (err) {
-      // If the search filter itself is rejected, print the paper with unrestricted search
-      // rather than skip the day; the approved-outlet check below still applies.
-      if (turn === 0 && searchTool.allowed_domains && err instanceof Anthropic.BadRequestError) {
-        console.warn(`Search filter rejected (${err.message}); retrying without it.`);
-        delete searchTool.allowed_domains;
-        turn--;
-        continue;
-      }
-      throw err;
-    }
+    response = await client.beta.messages
+      .stream({
+        model: MODEL,
+        max_tokens: 64000,
+        betas: ["server-side-fallback-2026-07-01"],
+        fallbacks: "default",
+        output_config: { effort: EFFORT },
+        tools: [searchTool],
+        messages,
+      })
+      .finalMessage();
 
     for (const block of response.content) {
       if (block.type === "web_search_tool_result" && Array.isArray(block.content)) {
