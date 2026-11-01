@@ -1,0 +1,85 @@
+{
+  "date": "2026-11-01",
+  "number": 6,
+  "lead": {
+    "kicker": "World",
+    "headline": "Iran and U.S. Explore Diplomatic Opening as Qatar Floats Two-Day Plan to Reopen Hormuz",
+    "summary": "Iranian negotiators were in Doha for talks with Qatari mediators aimed at ending the eight-month war. Iran's foreign minister said Iran and Qatar have reached a plan to reopen the Strait of Hormuz within two days if the U.S. meets Tehran's conditions. President Trump said the talks are going fine, but he has also suggested more attacks are possible. Secretary of State Marco Rubio said Trump has not yet decided whether to resume military action. The diplomacy is unfolding days before the U.S. midterm elections, which many in the region fear could be followed by renewed strikes.",
+    "source": "Al Jazeera",
+    "url": "https://www.aljazeera.com/news/2026/11/1/iran-and-us-explore-diplomacy-amid-rising-threats-of-war",
+    "deck": "Mediated contacts have opened a possible path between Tehran and Washington even as threats of renewed war persist."
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "Meta, Alphabet and Intel Share Sales Leave Buyers Far Underwater",
+        "summary": "Bloomberg reports that recent share sales by Meta, Alphabet and Intel have left buyers well below their purchase prices after the latest tech selloff.",
+        "source": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/articles/2026-10-30/meta-alphabet-intel-share-sales-leave-buyers-far-underwater"
+      },
+      {
+        "headline": "Amazon, Alphabet and Intel Earnings Disappoint, Pushing Nasdaq Toward Correction",
+        "summary": "Bloomberg reports that disappointing results from Amazon, Alphabet and Intel pushed the Nasdaq close to correction territory. The reports fed investor doubts about the payoff from heavy AI spending.",
+        "source": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/newsletters/2026-10-30/nasdaq-nears-correction-as-amazon-alphabet-intel-disappoint-wall-street"
+      }
+    ],
+    "business": [
+      {
+        "headline": "Friday's Rout Wipes Over $11 Billion Off U.S. Government's Intel Stake",
+        "summary": "Yahoo Finance reports that Intel's drop after a weak fourth-quarter revenue outlook cut the value of the government's stake by more than $11 billion.",
+        "source": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/markets/stocks/article/fridays-rout-shaved-over-11-billion-off-the-us-governments-stake-in-intel-203318952.html"
+      },
+      {
+        "headline": "Wall Street Closes October With Brutal Sell-Off",
+        "summary": "Yahoo Finance's live coverage shows the Dow, S&P 500 and Nasdaq all sold off sharply on the last Friday of October.",
+        "source": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-october-30-dow-sp-500-nasdaq-amazon-intel-ai-sell-off-191429143.html"
+      }
+    ],
+    "world": [
+      {
+        "headline": "Russian Strikes Plunge Ukrainian City Into Blackout as Zelenskyy Warns of More",
+        "summary": "CNBC reports that Russian strikes cut power to a Ukrainian city, and Zelenskyy warned of further missile attacks. The strikes came despite an energy ceasefire announced by Trump.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/10/30/russia-ukraine-putin-zelenskyy-energy-strikes.html"
+      },
+      {
+        "headline": "Evacuations From Besieged Oleshky Proceed Under Truce",
+        "summary": "Al Jazeera reports that evacuees are leaving the Russian-occupied town of Oleshky as a short truce holds. The town has no electricity, heat or running water.",
+        "source": "Al Jazeera",
+        "url": "https://www.aljazeera.com/news/2026/10/30/aid-convoy-enters-besieged-ukrainian-town-oleshky"
+      },
+      {
+        "headline": "Erdogan Urges Russia and Ukraine to Stop Black Sea Attacks",
+        "summary": "Turkey's president urged both Russia and Ukraine to stop targeting civilian ships in the Black Sea.",
+        "source": "Al Jazeera",
+        "url": "https://www.aljazeera.com/news/2026/10/31/turkiyes-erdogan-urges-russia-and-ukraine-to-stop-black-sea-attacks"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "Republicans Face a Rout. It Was Avoidable.",
+        "summary": "Ponnuru argues that a few different choices by Trump since his reelection could have spared Republicans the beating they now face in the midterms. He says presidents often fall prey to hubris after winning their own elections.",
+        "source": "Washington Post",
+        "url": "https://www.washingtonpost.com/opinions/2026/10/30/trump-republican-midterm-rout-was-avoidable/",
+        "author": "Ramesh Ponnuru"
+      },
+      {
+        "headline": "How Trump Can Fight Iran After the Midterms",
+        "summary": "MacLean argues that Trump will have five options on Iran once the midterms are over, more than he has now. He says a major escalation today could spook financial markets and hurt Republican candidates, and that none of the options is a sure path to victory.",
+        "source": "The Free Press",
+        "url": "https://www.thefp.com/p/trum-iran-war-strategy-midterm-elections",
+        "author": "Aaron MacLean"
+      },
+      {
+        "headline": "Trump's Record Is the GOP's Best Weapon in the Midterms",
+        "summary": "Cooke argues that Republicans can close the gap with Democrats by making the election about Trump's record. She points to Fox News polling that shows GOP voter-trust leads on crime, border security and immigration.",
+        "source": "Fox News",
+        "url": "https://www.foxnews.com/opinion/mehek-cooke-trumps-record-gops-best-weapon-midterms",
+        "author": "Mehek Cooke"
+      }
+    ]
+  }
+}
