@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-02",
+  "number": 7,
+  "lead": {
+    "kicker": "Business & Markets",
+    "headline": "Wall Street Rebounds From Bruising Sell-Off as Oil Prices Fall",
+    "summary": "U.S. stocks opened higher Monday as investors started November in recovery mode after Friday's technology-led sell-off. The week is packed with earnings, labor market data and the midterm elections.",
+    "source": "Yahoo Finance",
+    "url": "https://finance.yahoo.com/markets/live/stock-market-today-monday-november-2-dow-sp-500-nasdaq-091835095.html"
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "Marvell Reaches $115 Billion Deal for Lumentum Holdings",
+        "summary": "Marvell Technology agreed to buy data center optics maker Lumentum at an enterprise value of $115 billion, one of the largest tech tie-ups ever. The all-stock deal gives Marvell shareholders 67% of the combined company and is expected to close in the first half of 2028.",
+        "source": "Bloomberg",
+        "url": "https://bloomberg.com/news/articles/2026-11-02/marvell-reaches-115-billion-deal-for-lumentum-holdings"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Lamar Jackson Hurts Thumb on First Snap as Bills Rout Ravens",
+        "summary": "Ravens quarterback Lamar Jackson injured his right thumb on his first snap against Buffalo. He was headed to injured reserve with a potentially season-ending injury. The Bills' defense forced four takeaways, and Cam Ward had his best game of the season.",
+        "source": "NFL.com",
+        "url": "https://www.nfl.com/news/2026-nfl-season-week-8-what-we-learned-from-sunday-s-games"
+      },
+      {
+        "headline": "Cardinals Rally From 17-3 Second-Half Deficit to Stun Cowboys 33-30",
+        "summary": "Backup quarterback Gardner Minshew II and running back Tyler Allgeier led Arizona back in Dallas. The Cardinals won 33-30.",
+        "source": "ESPN",
+        "url": "https://www.espn.com/nfl/story/_/id/50349483/week-8-barnwell-lamar-bengals-cowboys-buccaneers-chiefs"
+      },
+      {
+        "headline": "Commanders Beat Eagles on Sunday Night, Sending Philadelphia to Sixth Straight Loss",
+        "summary": "Washington closed out Week 8 with a win over Philadelphia on Sunday Night Football. It was the Eagles' sixth consecutive defeat.",
+        "source": "ESPN",
+        "url": "https://www.espn.com/nfl/story/_/id/50349340/week-8-sunday-games-takeaways-questions-2026"
+      }
+    ]
+  }
+}
