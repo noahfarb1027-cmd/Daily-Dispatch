@@ -100,6 +100,8 @@ Write headlines in newspaper title case. ${opinion
     ? 'Summaries describe the author\'s argument neutrally in 2-3 sentences ("Smith argues that..."), based only on what you actually read. Never invent claims, quotes or authors.'
     : "Summaries are 2-3 plain, neutral, factual sentences."}
 
+The newspaper's own checks verify each story's site, date and link and quietly remove any that fail, so don't hold back a story because you're unsure about one of them. Never return an empty list: always give your best 4 candidates, preferring approved sites and the most recent articles.
+
 When you are done, reply with only a JSON array inside <stories></stories> tags, like this:
 <stories>
 [{"headline": "...", ${opinion ? '"author": "Name", ' : ""}"summary": "...", "source": "Outlet", "url": "https://..."${opinion ? "" : ', "importance": 7'}}]
@@ -152,7 +154,9 @@ async function researchSection(client, key, prompt) {
   if (!match) throw new Error(`no <stories> block: ${text.slice(-500)}`);
   const stories = JSON.parse(match[1]);
   if (!Array.isArray(stories)) throw new Error("<stories> is not a list");
-  return { stories, seenUrls };
+  // Whatever Claude wrote outside the tags; logged when a section comes back empty.
+  const note = text.replace(match[0], "").trim();
+  return { stories, seenUrls, note };
 }
 
 // The only sites the paper prints from, with the name to credit. Subdomains
@@ -285,9 +289,10 @@ function cleanSection(key, drafted, seenUrls, today, used) {
 // or malformed reply) leaves the section empty instead of stopping the paper.
 async function buildSection(client, key, today, avoid, used, { retry = false } = {}) {
   try {
-    const { stories, seenUrls } = await researchSection(client, key, buildSectionPrompt(key, today, avoid, { retry }));
+    const { stories, seenUrls, note } = await researchSection(client, key, buildSectionPrompt(key, today, avoid, { retry }));
     const kept = cleanSection(key, stories, seenUrls, today, used);
-    console.log(`section "${key}"${retry ? " (retry)" : ""}: ${kept.length} of ${stories.length} drafted stories kept`);
+    console.log(`section "${key}"${retry ? " (retry)" : ""}: ${kept.length} of ${stories.length} drafted stories kept (${seenUrls.size} links in search results)`);
+    if (!stories.length) console.warn(`  Claude's note: ${note.slice(-600) || "(none)"}`);
     return kept;
   } catch (err) {
     const msg = err instanceof Anthropic.APIError ? `Claude API error ${err.status}: ${err.message}` : err.message;
@@ -302,7 +307,10 @@ async function buildSection(client, key, today, avoid, used, { retry = false } =
 // reads the headlines and summaries and names the repeats. Opinion is left out:
 // commenting on the day's news is its job. If the check itself fails, the
 // edition prints without it.
-async function dropRepeatedEvents(client, sections) {
+//
+// When `onlyThese` is given (stories added by a retry), only those stories can be
+// dropped, so a second check never removes a story the first one already kept.
+async function dropRepeatedEvents(client, sections, onlyThese = null) {
   const items = [];
   for (const key of NEWS_KEYS) (sections[key] || []).forEach((story, i) => items.push({ id: `${key}-${i}`, story }));
   if (items.length < 2) return;
@@ -349,7 +357,8 @@ async function dropRepeatedEvents(client, sections) {
   }
 
   const ids = new Set(items.map((it) => it.id));
-  const drop = new Set(repeats.filter((r) => ids.has(r.id)).map((r) => r.id));
+  const droppable = (id) => ids.has(id) && (!onlyThese || onlyThese.has(items.find((it) => it.id === id).story));
+  const drop = new Set(repeats.filter((r) => droppable(r.id)).map((r) => r.id));
   for (const it of items) {
     if (!drop.has(it.id)) continue;
     const earlier = repeats.find((r) => r.id === it.id).same_event_as;
@@ -399,11 +408,14 @@ async function main() {
 
   // 2. Research a short section once more.
   const short = Object.keys(SECTIONS).filter((k) => sections[k].length < MIN_SECTION);
+  const added = new Set();
   for (const key of short) {
     const avoid = [...yesterday, ...(key === "opinion" ? sections.opinion.map((s) => s.headline) : covered())];
-    sections[key].push(...(await buildSection(client, key, today, avoid, used, { retry: true })));
+    const more = await buildSection(client, key, today, avoid, used, { retry: true });
+    more.forEach((s) => added.add(s));
+    sections[key].push(...more);
   }
-  if (short.some((k) => NEWS_KEYS.includes(k))) await dropRepeatedEvents(client, sections);
+  if (short.some((k) => NEWS_KEYS.includes(k)) && added.size) await dropRepeatedEvents(client, sections, added);
 
   // 3. The biggest news story becomes the lead; trim sections to size.
   const leadKey = NEWS_KEYS.filter((k) => sections[k].length)
