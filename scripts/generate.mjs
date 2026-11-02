@@ -1,7 +1,9 @@
 // Prints the day's edition of Noah's Daily Dispatch.
 //
-// Asks Claude (with web search) to report the last day's biggest stories,
-// keeps only stories whose links actually came back from a search, and writes
+// Researches each section in its own Claude call (with web search), keeps only
+// stories whose links came back from a search and pass the source, date and
+// byline checks, re-researches any section that comes up short, drops stories
+// that repeat an event, and picks the biggest story as the lead. Writes
 // site/editions/<date>.json plus the site/editions/index.json listing.
 //
 // Env: ANTHROPIC_API_KEY (required), FORCE=true to reprint today's edition.
@@ -17,13 +19,26 @@ const TIME_ZONE = "America/New_York";
 const EARLIEST_HOUR = 6; // don't print before 6 a.m. Eastern
 const MODEL = "claude-sonnet-5-5";
 const EFFORT = "medium";
-const MAX_SEARCHES = 30;
 // Sonnet 5.5 list prices, for the cost estimate in the log (USD).
 const PRICE = { input: 2 / 1e6, output: 10 / 1e6, cacheRead: 0.2 / 1e6, cacheWrite: 2.5 / 1e6, search: 10 / 1000 };
 const MAX_CONTINUATIONS = 8;
-const SECTION_KEYS = ["tech", "business", "world", "opinion", "sports"];
+
+// Each section is researched on its own, with its own searches, in this order;
+// later sections are told what earlier ones already cover.
+const SECTIONS = {
+  world: { name: "World Affairs", brief: "world affairs and geopolitics: wars, diplomacy, elections and major events outside business and tech", searches: 6, keep: 3 },
+  business: { name: "Business & Markets", brief: "business, companies, the economy and markets", searches: 6, keep: 3 },
+  tech: { name: "Technology & A.I.", brief: "technology and A.I.: companies, products, research and policy", searches: 6, keep: 3 },
+  sports: { name: "Sports", brief: "the biggest results and stories in U.S. and global sports. Link to game recaps or news articles, not scoreboards or schedule pages", searches: 6, keep: 3 },
+  opinion: { name: "Opinion", searches: 7, keep: 4 },
+};
+const SECTION_KEYS = ["tech", "business", "world", "opinion", "sports"]; // print order
+const NEWS_KEYS = ["world", "business", "tech", "sports"];
+const MIN_SECTION = 2;     // re-research a section that ends up with fewer stories than this
+const MIN_TO_PRINT = 4;    // section stories needed (besides the lead) to print at all
 
 const FORCE = process.env.FORCE === "true";
+const usage = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, searches: 0 };
 
 function easternNow() {
   const parts = Object.fromEntries(
@@ -56,67 +71,57 @@ function normalizeUrl(u) {
   }
 }
 
-function buildPrompt(today, previous) {
-  const avoid = previous
-    ? `\nYesterday's edition (${previous.date}) ran these headlines. Don't repeat them unless there is a major new development:\n${[
-        previous.lead?.headline,
-        ...SECTION_KEYS.flatMap((k) => (previous.sections?.[k] || []).map((s) => s.headline)),
-      ].filter(Boolean).map((h) => `- ${h}`).join("\n")}\n`
-    : "";
-
-  return `Today is ${today} (U.S. Eastern time). You are the editor of "Noah's Daily Dispatch", a personal morning newspaper. Use web search to report the biggest news of roughly the last 24 hours.
-
-Sections:
-- tech: technology and A.I.
-- business: business, companies and markets
-- world: world affairs and geopolitics
-- opinion: 3-4 notable opinion pieces from the last 1-2 days, from respected opinion sections. Use at most one piece per outlet and one per author. Every piece needs the author's real name (or "The Editorial Board" for an unsigned editorial). If you can't find the name, pick a different piece; placeholders like "contributor" are removed. Columns are often republished under different headlines, so make sure the pieces are by different people and make different arguments. Prefer pieces about the day's big stories. Search these opinion sections: Bloomberg Opinion, Washington Post Opinions, The Free Press, Foreign Affairs, Foreign Policy, The Hill (Opinion), Fortune, Time, CNN Opinion, and Fox News Opinion. Run separate searches such as "Bloomberg Opinion" plus a topic of the day, or "op-ed" plus a topic, until you have 3-4 pieces with real links. The opinion section must not be empty.
-- sports: the biggest results and stories in U.S. and global sports
-
-Only stories from these approved sites are printed; links anywhere else are removed: ${Object.keys(ALLOWED_SOURCES).filter((d) => !UNSEARCHABLE.has(d)).join(", ")}. Search the open web as usual, but when a result is from another site (including Reuters, AP or the BBC, whose pages can't be printed), find the same news on one of the approved sites and link to that.
-Link to the outlet's own page. A local station or portal republishing a Reuters or AP story doesn't count; find the story on reuters.com or apnews.com instead. Never cite company press releases or company blogs; cite a news outlet's report of the announcement.
-Use only articles published in the last 2 days (opinion: last 3 days). Older links are removed.
-
-Search plan: you have about 30 searches. Do the opinion section FIRST: spend your first 6-8 searches finding 3-4 opinion pieces, before any news searches, so it can't be crowded out. Then spend roughly 4-5 searches on each news section. Before you write the edition, count the stories in every section. If any section has fewer than 3 stories, search again for that section.
-
-Rules:
-- Every url must be a specific article page that appeared in your search results. Never guess or construct a URL. Links without a matching search result are removed before printing.
-- For game results, give only final scores you confirmed in a search result. If a game was still in progress, say so rather than guessing.
-- The lead is the single biggest news story of the day, from any section, and must not also appear in a section.
-- Every news section (tech, business, world, sports) must have exactly 3 stories. Every news story in the whole edition, including the lead, must be about a different event. Two outlets covering the same deal, earnings report, market move, announcement or game count as one story, even if one is in Tech and the other in Business: keep it in the one section where it fits best and find a different story for the other. Use 3-4 opinion pieces.
-- Before you write the edition, read through all the news headlines together and replace any story that repeats an event already covered.
-- Write headlines in newspaper title case.
-- News summaries are 2-3 plain, neutral, factual sentences. The lead summary is 4-6 sentences. The lead deck is a one-sentence subheading.
-- Opinion summaries describe the author's argument neutrally ("Smith argues that..."). Base them only on what you actually read. Never invent claims, quotes or authors.
-${avoid}
-When you are done researching, reply with only the edition as JSON inside <edition></edition> tags, in exactly this shape:
-<edition>
-{"lead": {"kicker": "Section name", "headline": "...", "deck": "...", "summary": "...", "source": "Outlet", "url": "https://..."},
- "sections": {
-   "tech": [{"headline": "...", "summary": "...", "source": "Outlet", "url": "https://..."}],
-   "business": [...], "world": [...],
-   "opinion": [{"headline": "...", "author": "Name or The Editorial Board", "summary": "...", "source": "Outlet", "url": "https://..."}],
-   "sports": [...]
- }}
-</edition>`;
+function addUsage(u = {}) {
+  usage.input += u.input_tokens ?? 0;
+  usage.output += u.output_tokens ?? 0;
+  usage.cacheRead += u.cache_read_input_tokens ?? 0;
+  usage.cacheWrite += u.cache_creation_input_tokens ?? 0;
+  usage.searches += u.server_tool_use?.web_search_requests ?? 0;
 }
 
-async function research(client, prompt) {
+function buildSectionPrompt(key, today, avoid, { retry = false } = {}) {
+  const section = SECTIONS[key];
+  const opinion = key === "opinion";
+  const avoidList = avoid.length
+    ? `\nThese stories are already covered (yesterday's paper or other sections of today's). Don't repeat their events unless there is a major new development:\n${avoid.map((h) => `- ${h}`).join("\n")}\n`
+    : "";
+  const task = opinion
+    ? `Find 4 notable opinion pieces published in the last 1-2 days, from respected opinion sections such as Bloomberg Opinion, Washington Post Opinions, The Free Press, Foreign Affairs, Foreign Policy, The Hill (Opinion), Fortune, Time, CNN Opinion and Fox News Opinion. Use at most one piece per outlet and one per author, and prefer pieces about the day's big stories. Every piece needs the author's real name (or "The Editorial Board" for an unsigned editorial); if you can't find the name, pick a different piece. Columns are often republished under different headlines, so make sure the pieces are by different people and make different arguments.`
+    : `Find the 4 biggest stories of roughly the last 24 hours in ${section.brief}. Each story must be about a different event: two articles about the same deal, earnings report, market move, announcement or game count as one story.`;
+  return `Today is ${today} (U.S. Eastern time). You are researching the ${section.name} section of "Noah's Daily Dispatch", a personal morning newspaper. You have about ${section.searches} web searches.${retry ? " An earlier attempt at this section came up short, so search more widely." : ""}
+
+${task}
+
+Only stories from these approved sites are printed; links anywhere else are removed: ${Object.keys(ALLOWED_SOURCES).filter((d) => !UNSEARCHABLE.has(d)).join(", ")}. Search the open web as usual, but when a result is from another site (including Reuters, AP or the BBC, whose pages can't be printed), find the same news on one of the approved sites and link to that. Link to the outlet's own article page, never a press release or company blog.
+Use only articles published in the last ${opinion ? 3 : 2} days. Older links are removed.
+Every url must be a specific article page that appeared in your search results. Never guess or construct a URL.
+${opinion ? "" : "For game results, give only final scores you confirmed in a search result.\n"}${avoidList}
+Write headlines in newspaper title case. ${opinion
+    ? 'Summaries describe the author\'s argument neutrally in 2-3 sentences ("Smith argues that..."), based only on what you actually read. Never invent claims, quotes or authors.'
+    : "Summaries are 2-3 plain, neutral, factual sentences."}
+
+When you are done, reply with only a JSON array inside <stories></stories> tags, like this:
+<stories>
+[{"headline": "...", ${opinion ? '"author": "Name", ' : ""}"summary": "...", "source": "Outlet", "url": "https://..."${opinion ? "" : ', "importance": 7'}}]
+</stories>${opinion ? "" : '\n"importance" is 1-10: how big the story is for a general reader today (10 = the day\'s top story anywhere).'}`;
+}
+
+// One Claude call with web search. Returns the parsed stories and every URL its
+// searches returned.
+async function researchSection(client, key, prompt) {
   const messages = [{ role: "user", content: prompt }];
   const seenUrls = new Set();
-  let response;
-  const usage = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, searches: 0 };
   // Search is left unrestricted: limiting it to approved sites (allowed_domains)
   // was tried on 2026-11-01 and found almost no recent news, because the big wires
-  // block Anthropic's search crawler. The approved-outlet check in cleanStory
-  // drops anything off the list instead.
-  const searchTool = { type: "web_search_20260209", name: "web_search", max_uses: MAX_SEARCHES };
+  // block Anthropic's search crawler. cleanStory drops anything off the list instead.
+  const searchTool = { type: "web_search_20260209", name: "web_search", max_uses: SECTIONS[key].searches };
+  let response;
 
   for (let turn = 0; turn <= MAX_CONTINUATIONS; turn++) {
     response = await client.beta.messages
       .stream({
         model: MODEL,
-        max_tokens: 64000,
+        max_tokens: 32000,
         betas: ["server-side-fallback-2026-07-01"],
         fallbacks: "default",
         output_config: { effort: EFFORT },
@@ -133,32 +138,21 @@ async function research(client, prompt) {
         }
       }
     }
-    const u = response.usage ?? {};
-    usage.input += u.input_tokens ?? 0;
-    usage.output += u.output_tokens ?? 0;
-    usage.cacheRead += u.cache_read_input_tokens ?? 0;
-    usage.cacheWrite += u.cache_creation_input_tokens ?? 0;
-    usage.searches += u.server_tool_use?.web_search_requests ?? 0;
-    console.log(`turn ${turn + 1}: stop_reason=${response.stop_reason}, model=${response.model}, searched URLs so far=${seenUrls.size}`);
-
-    if (response.stop_reason === "refusal") {
-      throw new Error(`Request was declined: ${JSON.stringify(response.stop_details)}`);
-    }
+    addUsage(response.usage);
+    if (response.stop_reason === "refusal") throw new Error(`declined: ${JSON.stringify(response.stop_details)}`);
     if (response.stop_reason !== "pause_turn") break;
     // Resume the paused server-side search loop: send the partial turn back as-is.
     messages.push({ role: "assistant", content: response.content });
   }
-
-  if (response.stop_reason === "pause_turn") throw new Error("Research did not finish within the continuation limit.");
-  if (response.stop_reason === "max_tokens") throw new Error("Response hit max_tokens before the edition was finished.");
+  if (response.stop_reason === "pause_turn") throw new Error("research did not finish within the continuation limit");
+  if (response.stop_reason === "max_tokens") throw new Error("hit max_tokens before finishing");
 
   const text = response.content.filter((b) => b.type === "text").map((b) => b.text).join("");
-  const match = text.match(/<edition>([\s\S]*?)<\/edition>/);
-  if (!match) throw new Error(`No <edition> block in the response:\n${text.slice(-2000)}`);
-  const cost = usage.input * PRICE.input + usage.output * PRICE.output + usage.cacheRead * PRICE.cacheRead
-    + usage.cacheWrite * PRICE.cacheWrite + usage.searches * PRICE.search;
-  console.log(`usage: ${usage.input} input, ${usage.cacheRead} cache-read, ${usage.cacheWrite} cache-write, ${usage.output} output tokens, ${usage.searches} searches; estimated cost $${cost.toFixed(2)}`);
-  return { draft: JSON.parse(match[1]), seenUrls };
+  const match = text.match(/<stories>([\s\S]*?)<\/stories>/);
+  if (!match) throw new Error(`no <stories> block: ${text.slice(-500)}`);
+  const stories = JSON.parse(match[1]);
+  if (!Array.isArray(stories)) throw new Error("<stories> is not a list");
+  return { stories, seenUrls };
 }
 
 // The only sites the paper prints from, with the name to credit. Subdomains
@@ -189,8 +183,8 @@ const ALLOWED_SOURCES = {
   "nfl.com": "NFL.com", "nhl.com": "NHL.com", "wnba.com": "WNBA.com",
 };
 
-// Sites that block Anthropic's search crawler. Naming them in the search filter
-// makes the request fail, and searches can't return their pages anyway.
+// Sites that block Anthropic's search crawler: their pages never come back from
+// a search, so their links can never pass the search-result check.
 const UNSEARCHABLE = new Set([
   "nytimes.com", "wsj.com", "theatlantic.com", "ft.com", "economist.com", "theguardian.com",
   // Reported by the API on 2026-10-31.
@@ -257,46 +251,49 @@ function cleanStory(story, seenUrls, { withAuthor = false, label, today, maxAgeD
   return out;
 }
 
-function assemble(draft, seenUrls, today, number) {
-  const lead = cleanStory(draft.lead, seenUrls, { label: "lead", today, maxAgeDays: MAX_AGE_DAYS.news });
-  if (!lead) throw new Error("The lead story failed validation; not printing a front page without a lead.");
-  const str = (v) => (typeof v === "string" ? v.trim() : "");
-  const edition = {
-    date: today,
-    number,
-    lead: { kicker: str(draft.lead.kicker) || "Top Story", ...lead, ...(str(draft.lead.deck) ? { deck: str(draft.lead.deck) } : {}) },
-    sections: {},
-  };
-  const usedUrls = new Set([normalizeUrl(lead.url)]);
-  const usedAuthors = new Set();
-  for (const key of SECTION_KEYS) {
-    const stories = (Array.isArray(draft.sections?.[key]) ? draft.sections[key] : [])
-      .map((s, i) => cleanStory(s, seenUrls, {
-        withAuthor: key === "opinion", label: `${key}[${i}]`, today,
-        maxAgeDays: key === "opinion" ? MAX_AGE_DAYS.opinion : MAX_AGE_DAYS.news,
-      }))
-      .filter((s, i) => {
-        if (!s) return false;
-        const url = normalizeUrl(s.url);
-        if (usedUrls.has(url)) {
-          console.warn(`dropped ${key}[${i}]: same link already in this edition`);
-          return false;
-        }
-        const author = key === "opinion" && s.author ? s.author.toLowerCase() : null;
-        if (author && author !== "the editorial board" && usedAuthors.has(author)) {
-          console.warn(`dropped ${key}[${i}]: second piece by ${s.author}`);
-          return false;
-        }
-        usedUrls.add(url);
-        if (author) usedAuthors.add(author);
-        return true;
-      })
-      .slice(0, 4);
-    const drafted = Array.isArray(draft.sections?.[key]) ? draft.sections[key].length : 0;
-    console.log(`section "${key}": ${stories.length} of ${drafted} drafted stories kept`);
-    if (stories.length) edition.sections[key] = stories;
+
+// Validates one section's drafted stories against the shared state of the
+// edition (links and opinion authors already used).
+function cleanSection(key, drafted, seenUrls, today, used) {
+  const opinion = key === "opinion";
+  const kept = [];
+  drafted.forEach((s, i) => {
+    const story = cleanStory(s, seenUrls, {
+      withAuthor: opinion, label: `${key}[${i}]`, today,
+      maxAgeDays: opinion ? MAX_AGE_DAYS.opinion : MAX_AGE_DAYS.news,
+    });
+    if (!story) return;
+    const url = normalizeUrl(story.url);
+    if (used.urls.has(url)) {
+      console.warn(`dropped ${key}[${i}]: same link already in this edition`);
+      return;
+    }
+    const author = opinion ? story.author.toLowerCase() : null;
+    if (author && author !== "the editorial board" && used.authors.has(author)) {
+      console.warn(`dropped ${key}[${i}]: second piece by ${story.author}`);
+      return;
+    }
+    if (!opinion) story.importance = Number(s.importance) || 0;
+    used.urls.add(url);
+    if (author) used.authors.add(author);
+    kept.push(story);
+  });
+  return kept;
+}
+
+// Researches and validates one section. A failed call (an API error, a missing
+// or malformed reply) leaves the section empty instead of stopping the paper.
+async function buildSection(client, key, today, avoid, used, { retry = false } = {}) {
+  try {
+    const { stories, seenUrls } = await researchSection(client, key, buildSectionPrompt(key, today, avoid, { retry }));
+    const kept = cleanSection(key, stories, seenUrls, today, used);
+    console.log(`section "${key}"${retry ? " (retry)" : ""}: ${kept.length} of ${stories.length} drafted stories kept`);
+    return kept;
+  } catch (err) {
+    const msg = err instanceof Anthropic.APIError ? `Claude API error ${err.status}: ${err.message}` : err.message;
+    console.warn(`section "${key}"${retry ? " (retry)" : ""} failed: ${msg}`);
+    return [];
   }
-  return edition;
 }
 
 // Drops news stories that cover the same event as an earlier story anywhere in
@@ -305,12 +302,10 @@ function assemble(draft, seenUrls, today, number) {
 // reads the headlines and summaries and names the repeats. Opinion is left out:
 // commenting on the day's news is its job. If the check itself fails, the
 // edition prints without it.
-async function dropRepeatedEvents(client, edition) {
-  const items = [{ id: "lead", section: "lead", story: edition.lead }];
-  for (const key of SECTION_KEYS) {
-    if (key === "opinion") continue;
-    (edition.sections[key] || []).forEach((story, i) => items.push({ id: `${key}-${i}`, section: key, story }));
-  }
+async function dropRepeatedEvents(client, sections) {
+  const items = [];
+  for (const key of NEWS_KEYS) (sections[key] || []).forEach((story, i) => items.push({ id: `${key}-${i}`, story }));
+  if (items.length < 2) return;
   const list = items.map((it) => `[${it.id}] ${it.story.headline}\n${it.story.summary}`).join("\n\n");
 
   let repeats;
@@ -342,9 +337,10 @@ async function dropRepeatedEvents(client, edition) {
       },
       messages: [{
         role: "user",
-        content: `These are the news stories in today's edition of a newspaper, in order. Find every story that reports the same event as an EARLIER story in the list: the same earnings report, deal, announcement, market move, incident or game, even if the headlines are worded differently or one story also mentions other companies. Stories that merely involve the same country, person or industry but report different events are not repeats.\n\nFor each repeat, give its id and the id of the earlier story it repeats. Return an empty list if there are none.\n\n${list}`,
+        content: `These are the news stories in today's edition of a newspaper, in order. Find every story that reports the same event as an EARLIER story in the list: the same earnings report, deal, announcement, incident or game, or the same day's market move seen from a different angle (for example, one sell-off covered as an index drop and again as a company's share losses). Stories that merely involve the same country, person or industry but report different events are not repeats.\n\nFor each repeat, give its id and the id of the earlier story it repeats. Return an empty list if there are none.\n\n${list}`,
       }],
     });
+    addUsage(response.usage);
     const text = response.content.filter((b) => b.type === "text").map((b) => b.text).join("");
     repeats = JSON.parse(text).repeats;
   } catch (err) {
@@ -353,18 +349,18 @@ async function dropRepeatedEvents(client, edition) {
   }
 
   const ids = new Set(items.map((it) => it.id));
-  const drop = new Set(repeats.filter((r) => r.id !== "lead" && ids.has(r.id)).map((r) => r.id));
+  const drop = new Set(repeats.filter((r) => ids.has(r.id)).map((r) => r.id));
   for (const it of items) {
     if (!drop.has(it.id)) continue;
     const earlier = repeats.find((r) => r.id === it.id).same_event_as;
     console.warn(`dropped ${it.id}: same event as ${earlier} ("${it.story.headline}")`);
   }
-  for (const key of SECTION_KEYS) {
-    if (!edition.sections[key] || key === "opinion") continue;
-    edition.sections[key] = edition.sections[key].filter((_, i) => !drop.has(`${key}-${i}`));
-    if (!edition.sections[key].length) delete edition.sections[key];
+  for (const key of NEWS_KEYS) {
+    if (sections[key]) sections[key] = sections[key].filter((_, i) => !drop.has(`${key}-${i}`));
   }
 }
+
+const sectionTotal = (sections) => Object.values(sections).reduce((a, s) => a + s.length, 0);
 
 async function main() {
   const { date: today, hour } = easternNow();
@@ -388,21 +384,50 @@ async function main() {
     throw new Error("ANTHROPIC_API_KEY is not set. Add it under the repo's Settings → Secrets and variables → Actions.");
   }
   const client = new Anthropic();
-  const { draft, seenUrls } = await research(client, buildPrompt(today, previous));
-  const edition = assemble(draft, seenUrls, today, number);
-  await dropRepeatedEvents(client, edition);
-  const total = Object.values(edition.sections).reduce((a, s) => a + s.length, 0);
-  if (total < 6) throw new Error(`Only ${total} section stories survived validation; not printing.`);
+  const yesterday = previous
+    ? [previous.lead?.headline, ...Object.values(previous.sections || {}).flat().map((s) => s.headline)].filter(Boolean)
+    : [];
+  const used = { urls: new Set(), authors: new Set() };
+  const sections = {};
+  const covered = () => NEWS_KEYS.flatMap((k) => (sections[k] || []).map((s) => s.headline));
+
+  // 1. Research each section separately, telling later news sections what earlier ones cover.
+  for (const key of [...NEWS_KEYS, "opinion"]) {
+    sections[key] = await buildSection(client, key, today, key === "opinion" ? yesterday : [...yesterday, ...covered()], used);
+  }
+  await dropRepeatedEvents(client, sections);
+
+  // 2. Research a short section once more.
+  const short = Object.keys(SECTIONS).filter((k) => sections[k].length < MIN_SECTION);
+  for (const key of short) {
+    const avoid = [...yesterday, ...(key === "opinion" ? sections.opinion.map((s) => s.headline) : covered())];
+    sections[key].push(...(await buildSection(client, key, today, avoid, used, { retry: true })));
+  }
+  if (short.some((k) => NEWS_KEYS.includes(k))) await dropRepeatedEvents(client, sections);
+
+  // 3. The biggest news story becomes the lead; trim sections to size.
+  const leadKey = NEWS_KEYS.filter((k) => sections[k].length)
+    .sort((a, b) => Math.max(...sections[b].map((s) => s.importance)) - Math.max(...sections[a].map((s) => s.importance)))[0];
+  if (!leadKey) throw new Error("No news story survived the checks; not printing.");
+  sections[leadKey].sort((a, b) => b.importance - a.importance);
+  const { importance: _, ...lead } = sections[leadKey].shift();
+  const edition = { date: today, number, lead: { kicker: SECTIONS[leadKey].name, ...lead }, sections: {} };
+  for (const key of SECTION_KEYS) {
+    const stories = sections[key].slice(0, SECTIONS[key].keep).map(({ importance, ...s }) => s);
+    if (stories.length) edition.sections[key] = stories;
+  }
+
+  const cost = usage.input * PRICE.input + usage.output * PRICE.output + usage.cacheRead * PRICE.cacheRead
+    + usage.cacheWrite * PRICE.cacheWrite + usage.searches * PRICE.search;
+  console.log(`usage: ${usage.input} input, ${usage.cacheRead} cache-read, ${usage.cacheWrite} cache-write, ${usage.output} output tokens, ${usage.searches} searches; estimated cost $${cost.toFixed(2)}`);
+  console.log(`final: lead from ${leadKey}; ${SECTION_KEYS.map((k) => `${k} ${edition.sections[k]?.length ?? 0}`).join(", ")}`);
+
+  const total = sectionTotal(edition.sections);
+  if (total < MIN_TO_PRINT) throw new Error(`Only ${total} section stories besides the lead survived; not printing.`);
 
   await fs.mkdir(EDITIONS_DIR, { recursive: true });
   await fs.writeFile(path.join(EDITIONS_DIR, `${today}.json`), JSON.stringify(edition, null, 2) + "\n");
-
-  const entry = {
-    date: today,
-    number,
-    headline: edition.lead.headline,
-    stories: 1 + Object.values(edition.sections).reduce((a, s) => a + s.length, 0),
-  };
+  const entry = { date: today, number, headline: edition.lead.headline, stories: 1 + total };
   const nextIndex = [entry, ...index.filter((e) => e.date !== today)].sort((a, b) => b.date.localeCompare(a.date));
   await fs.writeFile(INDEX_PATH, JSON.stringify(nextIndex, null, 2) + "\n");
 

@@ -1,6 +1,6 @@
 # Noah's Daily Dispatch
 
-A personal morning newspaper. Every day at about 6:47 a.m. New York time, a Cloudflare cron trigger starts a GitHub Action that asks Claude Sonnet 5.5 (with web search) for the biggest stories in tech, business, world affairs, opinion and sports. It keeps only stories whose links actually came back from a search, then commits the edition to this repo. Cloudflare Pages redeploys the site on every commit.
+A personal morning newspaper. Every day at about 6:47 a.m. New York time, a Cloudflare cron trigger starts a GitHub Action that has Claude Sonnet 5.5 (with web search) research each section of the paper (world affairs, business, tech, sports and opinion) in its own call. It keeps only stories that pass the source rules below, researches any section that comes up short once more, makes the biggest story the lead, and commits the edition to this repo. Cloudflare Pages redeploys the site on every commit.
 
 ```
 site/                    ← the website (Cloudflare serves this folder)
@@ -63,5 +63,5 @@ npm run preview                                            # view the site at ht
 
 ## Notes
 
-- **Cost.** Each edition is one Claude Sonnet 5.5 run at medium effort with up to 30 web searches. The Action log prints each run's token usage and estimated cost on a line starting with `usage:`.
-- **Source rules.** Only stories from the approved outlets in `ALLOWED_SOURCES` (`scripts/generate.mjs`) are printed; edit that list to add or remove sites. Claude searches the open web, and before printing, a story is dropped if its link isn't on an approved outlet, never appeared in Claude's search results, is older than 2 days (opinion: 3), repeats a link already in the edition, reports the same event as an earlier news story anywhere in the edition (checked by a short second Claude call), or is an opinion piece with no real author or a second piece by the same author. If the lead story fails, or fewer than 6 stories pass, the run fails and nothing is published.
+- **Cost.** Each edition is five Claude Sonnet 5.5 calls at medium effort (one per section, about 6 web searches each), plus a retry for any short section and a short repeat check. The Action log prints each run's token usage and estimated cost on a line starting with `usage:`.
+- **Source rules.** Only stories from the approved outlets in `ALLOWED_SOURCES` (`scripts/generate.mjs`) are printed; edit that list to add or remove sites. Claude searches the open web, and before printing, a story is dropped if its link isn't on an approved outlet, never appeared in Claude's search results, is older than 2 days (opinion: 3), repeats a link already in the edition, reports the same event as an earlier news story anywhere in the edition (checked by a short second Claude call), or is an opinion piece with no real author or a second piece by the same author. The paper still prints if a section comes up empty; it's skipped only if no news story or fewer than 4 other stories survive.
