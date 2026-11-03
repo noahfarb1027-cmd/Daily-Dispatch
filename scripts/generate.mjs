@@ -23,18 +23,21 @@ const EFFORT = "medium";
 const PRICE = { input: 2 / 1e6, output: 10 / 1e6, cacheRead: 0.2 / 1e6, cacheWrite: 2.5 / 1e6, search: 10 / 1000 };
 const MAX_CONTINUATIONS = 8;
 
-// Each section is researched on its own, with its own searches, in this order;
-// later sections are told what earlier ones already cover.
+// News is researched in one call with a large search budget, opinion in a
+// second, so neither can use up the other's searches. (One call per section, tried
+// on 2026-11-02, gave each call too few searches: the tool also counts its own
+// result processing against the limit, so sections ran dry after a search or two.)
 const SECTIONS = {
-  world: { name: "World Affairs", brief: "world affairs and geopolitics: wars, diplomacy, elections and major events outside business and tech", searches: 6, keep: 3 },
-  business: { name: "Business & Markets", brief: "business, companies, the economy and markets", searches: 6, keep: 3 },
-  tech: { name: "Technology & A.I.", brief: "technology and A.I.: companies, products, research and policy", searches: 6, keep: 3 },
-  sports: { name: "Sports", brief: "the biggest results and stories in U.S. and global sports. Link to game recaps or news articles, not scoreboards or schedule pages", searches: 6, keep: 3 },
-  opinion: { name: "Opinion", searches: 7, keep: 4 },
+  world: { name: "World Affairs", brief: "world affairs and geopolitics: wars, diplomacy, elections and major events outside business and tech", keep: 3 },
+  business: { name: "Business & Markets", brief: "business, companies, the economy and markets", keep: 3 },
+  tech: { name: "Technology & A.I.", brief: "technology and A.I.: companies, products, research and policy", keep: 3 },
+  sports: { name: "Sports", brief: "the biggest results and stories in U.S. and global sports, linking to game recaps or news articles", keep: 3 },
+  opinion: { name: "Opinion", keep: 4 },
 };
+const SEARCHES = { news: 40, opinion: 12, retry: 15 };
 const SECTION_KEYS = ["tech", "business", "world", "opinion", "sports"]; // print order
 const NEWS_KEYS = ["world", "business", "tech", "sports"];
-const MIN_SECTION = 2;     // re-research a section that ends up with fewer stories than this
+const MIN_SECTION = 2;     // re-research sections that end up with fewer stories than this
 const MIN_TO_PRINT = 4;    // section stories needed (besides the lead) to print at all
 
 const FORCE = process.env.FORCE === "true";
@@ -79,44 +82,57 @@ function addUsage(u = {}) {
   usage.searches += u.server_tool_use?.web_search_requests ?? 0;
 }
 
-function buildSectionPrompt(key, today, avoid, { retry = false } = {}) {
-  const section = SECTIONS[key];
-  const opinion = key === "opinion";
+const COMMON_RULES = () => `Only stories from these approved sites are printed; links anywhere else are removed: ${Object.keys(ALLOWED_SOURCES).filter((d) => !UNSEARCHABLE.has(d)).join(", ")}. Search the open web as usual, but when a result is from another site (including Reuters, AP or the BBC, whose pages can't be printed), find the same news on one of the approved sites and link to that.
+Every url must be a specific article page that appeared in your search results, never a section front page, index or live-updates hub, and never a press release or company blog. Never guess or construct a URL.
+The newspaper's own checks verify each story's site, date and link and quietly remove any that fail, so don't hold back a story because you're unsure about one of them, and never return an empty list.`;
+
+// `keys` is the news sections to research (all of them, or just the short ones on a retry).
+function buildNewsPrompt(today, keys, avoid, searches, { retry = false } = {}) {
   const avoidList = avoid.length
-    ? `\nThese stories are already covered (yesterday's paper or other sections of today's). Don't repeat their events unless there is a major new development:\n${avoid.map((h) => `- ${h}`).join("\n")}\n`
+    ? `\nThese stories are already covered (yesterday's paper or earlier in today's). Don't repeat their events unless there is a major new development:\n${avoid.map((h) => `- ${h}`).join("\n")}\n`
     : "";
-  const task = opinion
-    ? `Find 4 notable opinion pieces published in the last 1-2 days, from respected opinion sections such as Bloomberg Opinion, Washington Post Opinions, The Free Press, Foreign Affairs, Foreign Policy, The Hill (Opinion), Fortune, Time, CNN Opinion and Fox News Opinion. Use at most one piece per outlet and one per author, and prefer pieces about the day's big stories. Every piece needs the author's real name (or "The Editorial Board" for an unsigned editorial); if you can't find the name, pick a different piece. Columns are often republished under different headlines, so make sure the pieces are by different people and make different arguments.`
-    : `Find the 4 biggest stories of roughly the last 24 hours in ${section.brief}. Each story must be about a different event: two articles about the same deal, earnings report, market move, announcement or game count as one story.`;
-  return `Today is ${today} (U.S. Eastern time). You are researching the ${section.name} section of "Noah's Daily Dispatch", a personal morning newspaper. You have about ${section.searches} web searches.${retry ? " An earlier attempt at this section came up short, so search more widely." : ""}
+  return `Today is ${today} (U.S. Eastern time). You are the news editor of "Noah's Daily Dispatch", a personal morning newspaper. You have about ${searches} web searches.${retry ? " An earlier pass came up short on these sections, so search more widely." : ""}
 
-${task}
+Find the biggest news of roughly the last 24 hours for these sections, 4 stories each:
+${keys.map((k) => `- ${k}: ${SECTIONS[k].brief}`).join("\n")}
 
-Only stories from these approved sites are printed; links anywhere else are removed: ${Object.keys(ALLOWED_SOURCES).filter((d) => !UNSEARCHABLE.has(d)).join(", ")}. Search the open web as usual, but when a result is from another site (including Reuters, AP or the BBC, whose pages can't be printed), find the same news on one of the approved sites and link to that. Link to the outlet's own article page, never a press release or company blog.
-Use only articles published in the last ${opinion ? 3 : 2} days. Older links are removed.
-Every url must be a specific article page that appeared in your search results. Never guess or construct a URL.
-${opinion ? "" : "For game results, give only final scores you confirmed in a search result.\n"}${avoidList}
-Write headlines in newspaper title case. ${opinion
-    ? 'Summaries describe the author\'s argument neutrally in 2-3 sentences ("Smith argues that..."), based only on what you actually read. Never invent claims, quotes or authors.'
-    : "Summaries are 2-3 plain, neutral, factual sentences."}
+Split your searches across all ${keys.length} section${keys.length > 1 ? "s" : ""} so none comes up empty. Every story in the edition must be about a different event: two articles about the same deal, earnings report, day's market move, announcement or game count as one story, even across sections.
+${COMMON_RULES()}
+Use only articles published in the last 3 days. For game results, give only final scores you confirmed in a search result.
+${avoidList}
+Write headlines in newspaper title case. Summaries are 2-3 plain, neutral, factual sentences.
 
-The newspaper's own checks verify each story's site, date and link and quietly remove any that fail, so don't hold back a story because you're unsure about one of them. Never return an empty list: always give your best 4 candidates, preferring approved sites and the most recent articles.
-
-When you are done, reply with only a JSON array inside <stories></stories> tags, like this:
+When you are done, reply with only a JSON object inside <stories></stories> tags, with one list per section:
 <stories>
-[{"headline": "...", ${opinion ? '"author": "Name", ' : ""}"summary": "...", "source": "Outlet", "url": "https://..."${opinion ? "" : ', "importance": 7'}}]
-</stories>${opinion ? "" : '\n"importance" is 1-10: how big the story is for a general reader today (10 = the day\'s top story anywhere).'}`;
+{${keys.map((k) => `"${k}": [{"headline": "...", "summary": "...", "source": "Outlet", "url": "https://...", "importance": 7}]`).join(", ")}}
+</stories>
+"importance" is 1-10: how big the story is for a general reader today (10 = the day's top story anywhere). The biggest one becomes the front-page lead.`;
 }
 
-// One Claude call with web search. Returns the parsed stories and every URL its
-// searches returned.
-async function researchSection(client, key, prompt) {
+function buildOpinionPrompt(today, avoid, searches, { retry = false } = {}) {
+  const avoidList = avoid.length ? `\nAlready chosen, so pick different pieces and authors:\n${avoid.map((h) => `- ${h}`).join("\n")}\n` : "";
+  return `Today is ${today} (U.S. Eastern time). You are the opinion editor of "Noah's Daily Dispatch", a personal morning newspaper. You have about ${searches} web searches.${retry ? " An earlier pass came up short, so search more widely." : ""}
+
+Find 4 notable opinion pieces published in the last 1-3 days, from respected opinion sections such as Bloomberg Opinion, Washington Post Opinions, The Free Press, Foreign Affairs, Foreign Policy, The Hill (Opinion), Fortune, Time, CNN Opinion and Fox News Opinion. Use at most one piece per outlet and one per author, and prefer pieces about the day's big stories. Every piece needs the author's real name (or "The Editorial Board" for an unsigned editorial); if you can't find the name, pick a different piece. Columns are often republished under different headlines, so make sure the pieces are by different people and make different arguments.
+${COMMON_RULES()}
+${avoidList}
+Write headlines in newspaper title case. Summaries describe the author's argument neutrally in 2-3 sentences ("Smith argues that..."), based only on what you actually read. Never invent claims, quotes or authors.
+
+When you are done, reply with only a JSON object inside <stories></stories> tags:
+<stories>
+{"opinion": [{"headline": "...", "author": "Name", "summary": "...", "source": "Outlet", "url": "https://..."}]}
+</stories>`;
+}
+
+// One Claude call with web search. Returns the parsed {section: stories} object
+// and every URL its searches returned.
+async function research(client, prompt, maxSearches) {
   const messages = [{ role: "user", content: prompt }];
   const seenUrls = new Set();
   // Search is left unrestricted: limiting it to approved sites (allowed_domains)
   // was tried on 2026-11-01 and found almost no recent news, because the big wires
   // block Anthropic's search crawler. cleanStory drops anything off the list instead.
-  const searchTool = { type: "web_search_20260209", name: "web_search", max_uses: SECTIONS[key].searches };
+  const searchTool = { type: "web_search_20260209", name: "web_search", max_uses: maxSearches };
   let response;
 
   for (let turn = 0; turn <= MAX_CONTINUATIONS; turn++) {
@@ -153,7 +169,7 @@ async function researchSection(client, key, prompt) {
   const match = text.match(/<stories>([\s\S]*?)<\/stories>/);
   if (!match) throw new Error(`no <stories> block: ${text.slice(-500)}`);
   const stories = JSON.parse(match[1]);
-  if (!Array.isArray(stories)) throw new Error("<stories> is not a list");
+  if (!stories || typeof stories !== "object" || Array.isArray(stories)) throw new Error("<stories> is not an object of sections");
   // Whatever Claude wrote outside the tags; logged when a section comes back empty.
   const note = text.replace(match[0], "").trim();
   return { stories, seenUrls, note };
@@ -198,7 +214,7 @@ const UNSEARCHABLE = new Set([
 ]);
 
 // Links older than this many days (going by the date in the link) are dropped.
-const MAX_AGE_DAYS = { news: 2, opinion: 3 };
+const MAX_AGE_DAYS = { news: 3, opinion: 3 };
 
 function allowedSourceName(url) {
   try {
@@ -224,12 +240,28 @@ function isRealAuthor(name) {
   return Boolean(name) && !/not confirmed|unknown|contributor|staff|n\/a|unnamed|anonymous/i.test(name);
 }
 
+// Article links carry a slug or an id (/2026/11/03/..., /fed-holds-rates, /gameId/4019...).
+// A path with neither, like cnbc.com/mergers/ or washingtonpost.com/opinions/columns/,
+// is a section front page.
+function isFrontPage(url) {
+  try {
+    const segments = new URL(url).pathname.split("/").filter(Boolean);
+    return !segments.some((seg) => /[-_\d]/.test(seg));
+  } catch {
+    return true;
+  }
+}
+
 function cleanStory(story, seenUrls, { withAuthor = false, label, today, maxAgeDays }) {
   const str = (v) => (typeof v === "string" ? v.trim() : "");
   const out = { headline: str(story?.headline), summary: str(story?.summary), source: str(story?.source), url: str(story?.url) };
   if (withAuthor) out.author = str(story?.author);
   if (!out.headline || !out.summary || !/^https:\/\//.test(out.url)) {
     console.warn(`dropped ${label}: missing fields`);
+    return null;
+  }
+  if (isFrontPage(out.url)) {
+    console.warn(`dropped ${label}: a section front page, not an article (${out.url})`);
     return null;
   }
   const outlet = allowedSourceName(out.url);
@@ -285,20 +317,25 @@ function cleanSection(key, drafted, seenUrls, today, used) {
   return kept;
 }
 
-// Researches and validates one section. A failed call (an API error, a missing
-// or malformed reply) leaves the section empty instead of stopping the paper.
-async function buildSection(client, key, today, avoid, used, { retry = false } = {}) {
+// Runs one research call and validates what comes back, section by section. A
+// failed call (an API error, a missing or malformed reply) leaves its sections
+// empty instead of stopping the paper.
+async function researchAndClean(client, label, keys, prompt, maxSearches, today, used) {
+  const result = Object.fromEntries(keys.map((k) => [k, []]));
   try {
-    const { stories, seenUrls, note } = await researchSection(client, key, buildSectionPrompt(key, today, avoid, { retry }));
-    const kept = cleanSection(key, stories, seenUrls, today, used);
-    console.log(`section "${key}"${retry ? " (retry)" : ""}: ${kept.length} of ${stories.length} drafted stories kept (${seenUrls.size} links in search results)`);
-    if (!stories.length) console.warn(`  Claude's note: ${note.slice(-600) || "(none)"}`);
-    return kept;
+    const { stories, seenUrls, note } = await research(client, prompt, maxSearches);
+    for (const key of keys) {
+      const drafted = Array.isArray(stories[key]) ? stories[key] : [];
+      result[key] = cleanSection(key, drafted, seenUrls, today, used);
+      console.log(`section "${key}"${label}: ${result[key].length} of ${drafted.length} drafted stories kept`);
+    }
+    console.log(`  (${seenUrls.size} links in search results)`);
+    if (keys.some((k) => !(stories[k] || []).length)) console.warn(`  Claude's note: ${note.slice(-600) || "(none)"}`);
   } catch (err) {
     const msg = err instanceof Anthropic.APIError ? `Claude API error ${err.status}: ${err.message}` : err.message;
-    console.warn(`section "${key}"${retry ? " (retry)" : ""} failed: ${msg}`);
-    return [];
+    console.warn(`research for ${keys.join(", ")}${label} failed: ${msg}`);
   }
+  return result;
 }
 
 // Drops news stories that cover the same event as an earlier story anywhere in
@@ -400,22 +437,30 @@ async function main() {
   const sections = {};
   const covered = () => NEWS_KEYS.flatMap((k) => (sections[k] || []).map((s) => s.headline));
 
-  // 1. Research each section separately, telling later news sections what earlier ones cover.
-  for (const key of [...NEWS_KEYS, "opinion"]) {
-    sections[key] = await buildSection(client, key, today, key === "opinion" ? yesterday : [...yesterday, ...covered()], used);
-  }
+  // 1. One call for all the news, one for opinion.
+  Object.assign(sections, await researchAndClean(client, "", NEWS_KEYS,
+    buildNewsPrompt(today, NEWS_KEYS, yesterday, SEARCHES.news), SEARCHES.news, today, used));
+  Object.assign(sections, await researchAndClean(client, "", ["opinion"],
+    buildOpinionPrompt(today, [], SEARCHES.opinion), SEARCHES.opinion, today, used));
   await dropRepeatedEvents(client, sections);
 
-  // 2. Research a short section once more.
-  const short = Object.keys(SECTIONS).filter((k) => sections[k].length < MIN_SECTION);
+  // 2. One more pass for any short sections.
   const added = new Set();
-  for (const key of short) {
-    const avoid = [...yesterday, ...(key === "opinion" ? sections.opinion.map((s) => s.headline) : covered())];
-    const more = await buildSection(client, key, today, avoid, used, { retry: true });
-    more.forEach((s) => added.add(s));
-    sections[key].push(...more);
+  const shortNews = NEWS_KEYS.filter((k) => sections[k].length < MIN_SECTION);
+  if (shortNews.length) {
+    const more = await researchAndClean(client, " (retry)", shortNews,
+      buildNewsPrompt(today, shortNews, [...yesterday, ...covered()], SEARCHES.retry, { retry: true }), SEARCHES.retry, today, used);
+    for (const key of shortNews) {
+      more[key].forEach((s) => added.add(s));
+      sections[key].push(...more[key]);
+    }
+    if (added.size) await dropRepeatedEvents(client, sections, added);
   }
-  if (short.some((k) => NEWS_KEYS.includes(k)) && added.size) await dropRepeatedEvents(client, sections, added);
+  if (sections.opinion.length < MIN_SECTION) {
+    const more = await researchAndClean(client, " (retry)", ["opinion"],
+      buildOpinionPrompt(today, sections.opinion.map((s) => `${s.headline} (${s.author})`), SEARCHES.retry, { retry: true }), SEARCHES.retry, today, used);
+    sections.opinion.push(...more.opinion);
+  }
 
   // 3. The biggest news story becomes the lead; trim sections to size.
   const leadKey = NEWS_KEYS.filter((k) => sections[k].length)
