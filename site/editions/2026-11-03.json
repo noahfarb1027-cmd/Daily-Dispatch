@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-03",
+  "number": 8,
+  "lead": {
+    "kicker": "Business & Markets",
+    "headline": "Stock Futures Waver Ahead of Midterm Election Results and AMD Earnings",
+    "summary": "U.S. stock futures were little changed early Tuesday as investors waited for midterm election results. AMD was due to report quarterly earnings after the close.",
+    "source": "Yahoo Finance",
+    "url": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-3-dow-sp-500-nasdaq-midterms-amd-090846378.html"
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "Tech Sell-Off Extends as AI Return Doubts Weigh on Nasdaq While Dow Gains",
+        "summary": "The S&P 500 and Nasdaq extended a tech-led sell-off on Monday, even as the Dow gained and oil prices fell. Investors voiced doubts about the returns on AI spending, with memory and optical-communications stocks under pressure.",
+        "source": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/markets/live/stock-market-today-monday-november-2-dow-sp-500-nasdaq-091835095.html"
+      }
+    ],
+    "business": [
+      {
+        "headline": "Paramount and California Attorney General Reportedly Set to Discuss Settling Warner Bros. Discovery Lawsuit",
+        "summary": "Paramount and the California attorney general's office reportedly planned to meet Monday to discuss settling the lawsuit over Warner Bros. Discovery. Separately, SpaceX-Tesla merger speculation has drawn attention now that earnings season is winding down.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/mergers/"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "Economic Growth Alone Won't Solve the US Debt Problem",
+        "summary": "Fox argues that economic growth by itself cannot fix America's fiscal imbalance. The column, from Bloomberg Opinion, looks at the U.S. debt problem.",
+        "source": "Bloomberg Opinion",
+        "url": "https://www.bloomberg.com/opinion/articles/2026-11-02/us-debt-economic-growth-alone-can-t-fix-the-fiscal-imbalance",
+        "author": "Justin Fox"
+      },
+      {
+        "headline": "A Terrible Night Awaits the GOP, and Even That Might Be an Understatement",
+        "summary": "Olsen offers his final midterm prediction, forecasting that Democrats will win both the House and the Senate. He argues that Republicans face a very bad election night, possibly worse than is widely expected. I read only the headline and subheading, so this summary is limited to that.",
+        "source": "Washington Post Opinions",
+        "url": "https://www.washingtonpost.com/opinions/columns/",
+        "author": "Henry Olsen"
+      }
+    ]
+  }
+}
