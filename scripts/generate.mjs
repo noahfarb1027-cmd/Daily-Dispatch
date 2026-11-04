@@ -31,7 +31,7 @@ const SECTIONS = {
   world: { name: "World Affairs", brief: "world affairs and geopolitics: wars, diplomacy, elections and major events outside business and tech", keep: 3 },
   business: { name: "Business & Markets", brief: "business, companies, the economy and markets", keep: 3 },
   tech: { name: "Technology & A.I.", brief: "technology and A.I.: companies, products, research and policy", keep: 3 },
-  sports: { name: "Sports", brief: "the biggest results and stories in U.S. and global sports, linking to game recaps or news articles", keep: 3 },
+  sports: { name: "Sports", brief: "sports, focused on Boston teams (Celtics, Red Sox, Patriots, Bruins). Favor analysis over box scores: power rankings, trade and free-agency analysis, injury news and columns about where the teams stand. Include a final score only for a big game, such as a Boston win or loss that matters, a rivalry game or the playoffs. Fill any spot Boston can't with the biggest national sports story", keep: 3 },
   opinion: { name: "Opinion", keep: 4 },
 };
 const SEARCHES = { news: 40, opinion: 12, retry: 15 };
@@ -98,7 +98,7 @@ ${keys.map((k) => `- ${k}: ${SECTIONS[k].brief}`).join("\n")}
 
 Split your searches across all ${keys.length} section${keys.length > 1 ? "s" : ""} so none comes up empty. Every story in the edition must be about a different event: two articles about the same deal, earnings report, day's market move, announcement or game count as one story, even across sections.
 ${COMMON_RULES()}
-Use only articles published in the last 3 days. For game results, give only final scores you confirmed in a search result.
+Use only articles published in the last 3 days. When you give a game's final score, it must be one you confirmed in a search result.
 ${avoidList}
 Write headlines in newspaper title case. Summaries are 2-3 plain, neutral, factual sentences.
 
@@ -201,6 +201,9 @@ const ALLOWED_SOURCES = {
   "espn.com": "ESPN", "theathletic.com": "The Athletic", "cbssports.com": "CBS Sports", "nbcsports.com": "NBC Sports",
   "si.com": "Sports Illustrated", "sports.yahoo.com": "Yahoo Sports", "mlb.com": "MLB.com", "nba.com": "NBA.com",
   "nfl.com": "NFL.com", "nhl.com": "NHL.com", "wnba.com": "WNBA.com",
+  // Boston sports
+  "bostonglobe.com": "The Boston Globe", "boston.com": "Boston.com", "nbcsportsboston.com": "NBC Sports Boston",
+  "masslive.com": "MassLive",
 };
 
 // Sites that block Anthropic's search crawler: their pages never come back from
@@ -243,6 +246,41 @@ function isRealAuthor(name) {
 // Article links carry a slug or an id (/2026/11/03/..., /fed-holds-rates, /gameId/4019...).
 // A path with neither, like cnbc.com/mergers/ or washingtonpost.com/opinions/columns/,
 // is a section front page.
+// Checks a headline against the words in its link. Most article links carry a
+// slug written from the publisher's own headline, so a headline that moves the
+// opposite way from its slug (oil "falls" vs. "oil-prices-climb-after...") was
+// written from a different article or version than the one linked. Only a clear
+// contradiction counts: publishers often word slugs differently from headlines,
+// and live blogs and roundups have generic slugs, so missing words prove nothing.
+const UP = /^(climb|climbs|climbed|rise|rises|rose|risen|rising|jump|jumps|jumped|surge|surges|surged|soar|soars|soared|gain|gains|gained|rally|rallies|rallied|rebound|rebounds|rebounded|higher)$/;
+const DOWN = /^(fall|falls|fell|fallen|falling|drop|drops|dropped|slide|slides|slid|sink|sinks|sank|tumble|tumbles|tumbled|plunge|plunges|plunged|decline|declines|declined|slump|slumps|slumped|lower|dip|dips|dipped)$/;
+
+const words = (text) => text.toLowerCase().replace(/['’]/g, "").split(/[^a-z0-9]+/).filter(Boolean);
+
+// The slug is the path segment with the most real words; ids, dates and hashes
+// (like 30f401a6-d321-11f1-..._story) have none.
+function slugWords(url) {
+  try {
+    const realWords = (seg) => words(seg.replace(/\.[a-z]+$/, "")).filter((w) => /^[a-z]{2,}$/.test(w));
+    return new URL(url).pathname.split("/").map(realWords).sort((a, b) => b.length - a.length)[0] || [];
+  } catch {
+    return [];
+  }
+}
+
+// Returns why the headline contradicts its link, or null.
+function headlineMismatch(headline, url) {
+  const slug = slugWords(url);
+  if (slug.length < 3) return null;
+  const head = words(headline);
+  const dir = (ws) => ({ up: ws.some((w) => UP.test(w)), down: ws.some((w) => DOWN.test(w)) });
+  const h = dir(head), s = dir(slug);
+  if ((h.down && !h.up && s.up && !s.down) || (h.up && !h.down && s.down && !s.up)) {
+    return `headline says ${h.up ? "up" : "down"} but its link says ${s.up ? "up" : "down"}`;
+  }
+  return null;
+}
+
 function isFrontPage(url) {
   try {
     const segments = new URL(url).pathname.split("/").filter(Boolean);
@@ -258,6 +296,11 @@ function cleanStory(story, seenUrls, { withAuthor = false, label, today, maxAgeD
   if (withAuthor) out.author = str(story?.author);
   if (!out.headline || !out.summary || !/^https:\/\//.test(out.url)) {
     console.warn(`dropped ${label}: missing fields`);
+    return null;
+  }
+  const mismatch = headlineMismatch(out.headline, out.url);
+  if (mismatch) {
+    console.warn(`dropped ${label}: ${mismatch} ("${out.headline}", ${out.url})`);
     return null;
   }
   if (isFrontPage(out.url)) {
