@@ -1,0 +1,102 @@
+{
+  "date": "2026-11-04",
+  "number": 9,
+  "lead": {
+    "kicker": "World Affairs",
+    "headline": "Democrats Win Control of Congress in Midterm Rout",
+    "summary": "Democrats won the Senate and captured the House in the midterm elections, giving them full control of Congress. The result is a major political setback for President Trump.",
+    "source": "NPR",
+    "url": "https://www.npr.org/2026/11/03/g-s1-149526/2026-midterms-congress-balance-of-power"
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "Nvidia Tells Data Center Clients to Trim China Business, FT Says",
+        "summary": "Nvidia has reportedly told data center customers to reduce their exposure to Chinese clients. The report cites geopolitical risk.",
+        "source": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-03/nvidia-tells-data-center-clients-to-trim-china-business-ft-says"
+      },
+      {
+        "headline": "Anthropic Commits to $895 Billion in Spending as Mega-IPO Nears",
+        "summary": "Bloomberg reports Anthropic's revenue is approaching $17 billion ahead of a large IPO. The company has also committed to roughly $895 billion in spending.",
+        "source": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-02/anthropic-revenue-hits-nearly-17-billion-before-blockbuster-ipo"
+      },
+      {
+        "headline": "AI Inference Startup Fal Doubles Valuation to $16 Billion",
+        "summary": "Fal doubled its valuation to $16 billion as demand for AI inference surges.",
+        "source": "TechCrunch",
+        "url": "https://techcrunch.com/2026/11/03/ai-inference-startup-fal-doubles-its-valuation-to-16b-as-demand-surges/"
+      }
+    ],
+    "business": [
+      {
+        "headline": "AMD Jumps as Data Center Revenue Nearly Doubles",
+        "summary": "AMD shares rose about 8% after its third-quarter report beat expectations. Data center revenue nearly doubled from a year earlier.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/03/amd-amd-q3-earnings-report-2026-.html"
+      },
+      {
+        "headline": "Nvidia's Huang Gave Blessing to Marvell's $115 Billion Lumentum Deal",
+        "summary": "Marvell agreed to acquire Lumentum in a roughly $115 billion tech deal. Bloomberg reports Nvidia CEO Jensen Huang backed the transaction.",
+        "source": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-03/nvidia-s-huang-gave-blessing-to-marvell-lumentum-megadeal"
+      },
+      {
+        "headline": "Crude Oil Falls for a Second Day on Hopes for Iran Diplomacy",
+        "summary": "Oil prices declined as markets hoped for a diplomatic resolution to the Iran war. The move came despite reports of U.S. strikes on Qeshm Island.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/03/oil-prices-climb-after-us-reportedly-strikes-irans-qeshm-island.html"
+      }
+    ],
+    "world": [
+      {
+        "headline": "U.S. Launches Limited Strikes on Iranian Targets Near Strait of Hormuz",
+        "summary": "U.S. forces struck Iranian targets, including on Qeshm Island, on the eve of Election Day. Iran played down hopes for a deal to end the war.",
+        "source": "CBS News",
+        "url": "https://www.cbsnews.com/news/u-s-strikes-iran-targets/"
+      },
+      {
+        "headline": "Russian Strike on Ukrainian Aid Hub Kills Dozens as U.S. Announces New Peace Talks",
+        "summary": "A Russian attack on an aid center in southern Ukraine killed at least 31 people. The strike came as Washington announced a new round of peace talks.",
+        "source": "Al Jazeera",
+        "url": "https://www.aljazeera.com/news/2026/11/2/russian-bombing-of-ukrainian-aid-centre-kills-24-people-zelenskyy"
+      },
+      {
+        "headline": "Israeli Strike Kills Boy in Gaza as Qataris Say Vessel Struck in Gulf",
+        "summary": "An Israeli strike killed a boy in Gaza, and Qatari officials said a vessel was struck in the Gulf. Iran's top diplomat said he hopes the U.S. shows rationality.",
+        "source": "ABC News",
+        "url": "https://abcnews.com/International/wireStory/israeli-strike-kills-boy-gaza-qataris-vessel-struck-137745763"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "There May Be a Silver Lining in Trump's Brutal Midterm Defeat",
+        "summary": "Peek writes that Americans across the country strongly rebuked the sitting president on Tuesday, signaling they are unhappy with the first two years of his second term. Her column argues that the defeat may still carry a silver lining for Trump.",
+        "source": "Fox News Opinion",
+        "url": "https://www.foxnews.com/opinion/liz-peek-silver-lining-trumps-brutal-midterm-defeat",
+        "author": "Liz Peek"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Bears Rout Seahawks 34-17 on Monday Night Football",
+        "summary": "Chicago beat Seattle 34-17 in prime time. Jeffery Simmons and Caleb Williams led the Bears.",
+        "source": "NBC Sports",
+        "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/monday-night-football-jeffery-simmons-caleb-williams-lead-bears-to-34-17-rout-of-seahawks"
+      },
+      {
+        "headline": "Knicks Beat Nets 103-90",
+        "summary": "New York defeated Brooklyn 103-90 on Nov. 2.",
+        "source": "ESPN",
+        "url": "https://www.espn.com/nba/recap/_/gameId/401909910"
+      },
+      {
+        "headline": "Robertson's Natural Hat Trick Powers Stars Past Capitals 6-5",
+        "summary": "Dallas beat Washington 6-5, with Robertson scoring a natural hat trick.",
+        "source": "Washington Post",
+        "url": "https://www.washingtonpost.com/sports/nhl/2026/11/03/stars-capitals-score/04d373fc-d7fb-11f1-930a-e08f8086f5ac_story.html"
+      }
+    ]
+  }
+}
