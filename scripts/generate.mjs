@@ -34,7 +34,7 @@ const SECTIONS = {
   sports: { name: "Sports", brief: "sports, focused on Boston teams (Celtics, Red Sox, Patriots, Bruins). Favor analysis over box scores: power rankings, trade and free-agency analysis, injury news and columns about where the teams stand. Include a final score only for a big game, such as a Boston win or loss that matters, a rivalry game or the playoffs. Fill any spot Boston can't with the biggest national sports story", keep: 3 },
   opinion: { name: "Opinion", keep: 4 },
 };
-const SEARCHES = { news: 40, opinion: 12, retry: 15 };
+const SEARCHES = { news: 40, opinion: 20, retry: 15 };
 const SECTION_KEYS = ["tech", "business", "world", "opinion", "sports"]; // print order
 const NEWS_KEYS = ["world", "business", "tech", "sports"];
 const MIN_SECTION = 2;     // re-research sections that end up with fewer stories than this
@@ -93,7 +93,7 @@ function buildNewsPrompt(today, keys, avoid, searches, { retry = false } = {}) {
     : "";
   return `Today is ${today} (U.S. Eastern time). You are the news editor of "Noah's Daily Dispatch", a personal morning newspaper. You have about ${searches} web searches.${retry ? " An earlier pass came up short on these sections, so search more widely." : ""}
 
-Find the biggest news of roughly the last 24 hours for these sections, 4 stories each:
+Find the biggest news of roughly the last 24 hours for these sections, 5 stories each:
 ${keys.map((k) => `- ${k}: ${SECTIONS[k].brief}`).join("\n")}
 
 Split your searches across all ${keys.length} section${keys.length > 1 ? "s" : ""} so none comes up empty. Every story in the edition must be about a different event: two articles about the same deal, earnings report, day's market move, announcement or game count as one story, even across sections.
@@ -126,27 +126,43 @@ When you are done, reply with only a JSON object inside <stories></stories> tags
 
 // One Claude call with web search. Returns the parsed {section: stories} object
 // and every URL its searches returned.
-async function research(client, prompt, maxSearches) {
+//
+// `basic` uses the plain search tool, which returns results directly. The newer
+// one (web_search_20260209) hands results over as data for Claude to process in
+// code, and that processing counts against the search limit: on 2026-11-05 the
+// opinion call ran out of searches before reading a single piece.
+async function research(client, prompt, maxSearches, { basic = false } = {}) {
   const messages = [{ role: "user", content: prompt }];
   const seenUrls = new Set();
   // Search is left unrestricted: limiting it to approved sites (allowed_domains)
   // was tried on 2026-11-01 and found almost no recent news, because the big wires
   // block Anthropic's search crawler. cleanStory drops anything off the list instead.
-  const searchTool = { type: "web_search_20260209", name: "web_search", max_uses: maxSearches };
+  const searchTool = { type: basic ? "web_search_20250305" : "web_search_20260209", name: "web_search", max_uses: maxSearches };
   let response;
 
   for (let turn = 0; turn <= MAX_CONTINUATIONS; turn++) {
-    response = await client.beta.messages
-      .stream({
-        model: MODEL,
-        max_tokens: 32000,
-        betas: ["server-side-fallback-2026-07-01"],
-        fallbacks: "default",
-        output_config: { effort: EFFORT },
-        tools: [searchTool],
-        messages,
-      })
-      .finalMessage();
+    try {
+      response = await client.beta.messages
+        .stream({
+          model: MODEL,
+          max_tokens: 32000,
+          betas: ["server-side-fallback-2026-07-01"],
+          fallbacks: "default",
+          output_config: { effort: EFFORT },
+          tools: [searchTool],
+          messages,
+        })
+        .finalMessage();
+    } catch (err) {
+      // If the plain search tool is refused for this model, use the newer one rather than lose the section.
+      if (turn === 0 && searchTool.type === "web_search_20250305" && err instanceof Anthropic.BadRequestError) {
+        console.warn(`Plain search tool refused (${err.message}); using web_search_20260209.`);
+        searchTool.type = "web_search_20260209";
+        turn--;
+        continue;
+      }
+      throw err;
+    }
 
     for (const block of response.content) {
       if (block.type === "web_search_tool_result" && Array.isArray(block.content)) {
@@ -376,10 +392,10 @@ function cleanSection(key, drafted, seenUrls, today, used) {
 // Runs one research call and validates what comes back, section by section. A
 // failed call (an API error, a missing or malformed reply) leaves its sections
 // empty instead of stopping the paper.
-async function researchAndClean(client, label, keys, prompt, maxSearches, today, used) {
+async function researchAndClean(client, label, keys, prompt, maxSearches, today, used, { basic = false } = {}) {
   const result = Object.fromEntries(keys.map((k) => [k, []]));
   try {
-    const { stories, seenUrls, note } = await research(client, prompt, maxSearches);
+    const { stories, seenUrls, note } = await research(client, prompt, maxSearches, { basic });
     for (const key of keys) {
       const drafted = Array.isArray(stories[key]) ? stories[key] : [];
       result[key] = cleanSection(key, drafted, seenUrls, today, used);
@@ -504,7 +520,7 @@ async function main() {
   Object.assign(sections, await researchAndClean(client, "", NEWS_KEYS,
     buildNewsPrompt(today, NEWS_KEYS, yesterday, SEARCHES.news), SEARCHES.news, today, used));
   Object.assign(sections, await researchAndClean(client, "", ["opinion"],
-    buildOpinionPrompt(today, [], SEARCHES.opinion), SEARCHES.opinion, today, used));
+    buildOpinionPrompt(today, [], SEARCHES.opinion), SEARCHES.opinion, today, used, { basic: true }));
   await dropRepeatedEvents(client, sections);
 
   // 2. One more pass for any short sections.
@@ -521,7 +537,7 @@ async function main() {
   }
   if (sections.opinion.length < MIN_SECTION) {
     const more = await researchAndClean(client, " (retry)", ["opinion"],
-      buildOpinionPrompt(today, sections.opinion.map((s) => `${s.headline} (${s.author})`), SEARCHES.retry, { retry: true }), SEARCHES.retry, today, used);
+      buildOpinionPrompt(today, sections.opinion.map((s) => `${s.headline} (${s.author})`), SEARCHES.retry, { retry: true }), SEARCHES.retry, today, used, { basic: true });
     sections.opinion.push(...more.opinion);
   }
 
