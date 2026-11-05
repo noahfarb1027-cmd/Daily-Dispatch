@@ -229,13 +229,22 @@ function allowedSourceName(url) {
   }
 }
 
-// Most news links carry their publication date, as /2026/10/30/ or 2026-10-30.
+// Most news links carry their publication date, as /2026/10/30/, 2026-10-30 or,
+// at France 24 and others, run together as 20261030.
 function daysOld(url, today) {
-  const m = url.match(/(20\d{2})[\/-](\d{2})[\/-](\d{2})(?:\D|$)/);
-  if (!m) return null;
-  const published = Date.UTC(+m[1], +m[2] - 1, +m[3]);
   const [y, mo, d] = today.split("-").map(Number);
-  return Math.round((Date.UTC(y, mo - 1, d) - published) / 86400000);
+  const candidates = [
+    url.match(/(20\d{2})[\/-](\d{2})[\/-](\d{2})(?:\D|$)/),
+    url.match(/(?<!\d)(20\d{2})(\d{2})(\d{2})(?!\d)/),
+  ];
+  for (const m of candidates) {
+    if (!m) continue;
+    const [year, month, day] = [+m[1], +m[2], +m[3]];
+    // Skip digit runs that only look like dates (ids, version numbers).
+    if (Math.abs(year - y) > 1 || month < 1 || month > 12 || day < 1 || day > 31) continue;
+    return Math.round((Date.UTC(y, mo - 1, d) - Date.UTC(year, month - 1, day)) / 86400000);
+  }
+  return null;
 }
 
 // A placeholder like "Fox News contributor (name not confirmed)" isn't a byline.
@@ -343,6 +352,10 @@ function cleanSection(key, drafted, seenUrls, today, used) {
     });
     if (!story) return;
     const url = normalizeUrl(story.url);
+    if (used.printed.has(url)) {
+      console.warn(`dropped ${key}[${i}]: already ran in a recent edition (${story.url})`);
+      return;
+    }
     if (used.urls.has(url)) {
       console.warn(`dropped ${key}[${i}]: same link already in this edition`);
       return;
@@ -476,7 +489,14 @@ async function main() {
   const yesterday = previous
     ? [previous.lead?.headline, ...Object.values(previous.sections || {}).flat().map((s) => s.headline)].filter(Boolean)
     : [];
-  const used = { urls: new Set(), authors: new Set() };
+  // Links printed in the last week, so a story can't run again under a new headline.
+  const recent = index.filter((e) => e.date < today).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 7);
+  const printed = new Set();
+  for (const e of recent) {
+    const ed = await readJSON(path.join(EDITIONS_DIR, `${e.date}.json`), null);
+    if (ed) [ed.lead, ...Object.values(ed.sections || {}).flat()].forEach((s) => s?.url && printed.add(normalizeUrl(s.url)));
+  }
+  const used = { urls: new Set(), authors: new Set(), printed };
   const sections = {};
   const covered = () => NEWS_KEYS.flatMap((k) => (sections[k] || []).map((s) => s.headline));
 
