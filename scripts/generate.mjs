@@ -419,10 +419,16 @@ async function researchAndClean(client, label, keys, prompt, maxSearches, today,
 //
 // When `onlyThese` is given (stories added by a retry), only those stories can be
 // dropped, so a second check never removes a story the first one already kept.
-async function dropRepeatedEvents(client, sections, onlyThese = null) {
+//
+// `past` is news the last few editions already ran (headline and summary). A
+// story reporting one of those events again is dropped too, unless it reports a
+// major new development. (On 2026-11-06 "Democrats Capture House Majority" ran
+// two days after the paper led with the result, from a different link.)
+async function dropRepeatedEvents(client, sections, onlyThese = null, past = []) {
   const items = [];
   for (const key of NEWS_KEYS) (sections[key] || []).forEach((story, i) => items.push({ id: `${key}-${i}`, story }));
-  if (items.length < 2) return;
+  if (!items.length || (items.length < 2 && !past.length)) return;
+  const pastList = past.map((p, i) => `[past-${i}] ${p.headline}\n${p.summary}`).join("\n\n");
   const list = items.map((it) => `[${it.id}] ${it.story.headline}\n${it.story.summary}`).join("\n\n");
 
   let repeats;
@@ -454,7 +460,7 @@ async function dropRepeatedEvents(client, sections, onlyThese = null) {
       },
       messages: [{
         role: "user",
-        content: `These are the news stories in today's edition of a newspaper, in order. Find every story that reports the same event as an EARLIER story in the list: the same earnings report, deal, announcement, incident or game, or the same day's market move seen from a different angle (for example, one sell-off covered as an index drop and again as a company's share losses). Stories that merely involve the same country, person or industry but report different events are not repeats.\n\nFor each repeat, give its id and the id of the earlier story it repeats. Return an empty list if there are none.\n\n${list}`,
+        content: `${past.length ? `These news stories already ran in the newspaper's last few editions:\n\n${pastList}\n\n` : ""}These are the news stories in today's edition, in order. Find every story in today's edition that reports the same event as an EARLIER story in today's list${past.length ? ", or the same event as a story that already ran (a past-N id), unless it reports a major new development such as a result, decision or reversal that wasn't known before" : ""}. The same event means the same earnings report, deal, announcement, election result, incident or game, or the same day's market move seen from a different angle (for example, one sell-off covered as an index drop and again as a company's share losses). Stories that merely involve the same country, person or industry but report different events are not repeats.\n\nFor each repeat, give its id and the id of the story it repeats. Return an empty list if there are none.\n\n${list}`,
       }],
     });
     addUsage(response.usage);
@@ -513,6 +519,12 @@ async function main() {
     if (ed) [ed.lead, ...Object.values(ed.sections || {}).flat()].forEach((s) => s?.url && printed.add(normalizeUrl(s.url)));
   }
   const used = { urls: new Set(), authors: new Set(), printed };
+  // News from the last 3 editions, for the repeat check.
+  const past = [];
+  for (const e of recent.slice(0, 3)) {
+    const ed = await readJSON(path.join(EDITIONS_DIR, `${e.date}.json`), null);
+    if (ed) [ed.lead, ...NEWS_KEYS.flatMap((k) => ed.sections?.[k] || [])].forEach((s) => s?.headline && past.push(s));
+  }
   const sections = {};
   const covered = () => NEWS_KEYS.flatMap((k) => (sections[k] || []).map((s) => s.headline));
 
@@ -521,7 +533,7 @@ async function main() {
     buildNewsPrompt(today, NEWS_KEYS, yesterday, SEARCHES.news), SEARCHES.news, today, used));
   Object.assign(sections, await researchAndClean(client, "", ["opinion"],
     buildOpinionPrompt(today, [], SEARCHES.opinion), SEARCHES.opinion, today, used, { basic: true }));
-  await dropRepeatedEvents(client, sections);
+  await dropRepeatedEvents(client, sections, null, past);
 
   // 2. One more pass for any short sections.
   const added = new Set();
@@ -533,7 +545,7 @@ async function main() {
       more[key].forEach((s) => added.add(s));
       sections[key].push(...more[key]);
     }
-    if (added.size) await dropRepeatedEvents(client, sections, added);
+    if (added.size) await dropRepeatedEvents(client, sections, added, past);
   }
   if (sections.opinion.length < MIN_SECTION) {
     const more = await researchAndClean(client, " (retry)", ["opinion"],
