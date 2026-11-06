@@ -1,0 +1,99 @@
+{
+  "date": "2026-11-06",
+  "number": 11,
+  "lead": {
+    "kicker": "Business & Markets",
+    "headline": "Magnificent 7 Loses $1 Trillion as AI Stocks Tumble",
+    "summary": "A sell-off in AI and chip stocks sent the S&P 500 down 4.4%, its worst day since April 2025. The Dow fell about 1,800 points and the Nasdaq entered correction territory.",
+    "source": "CNBC",
+    "url": "https://www.cnbc.com/2026/11/05/stock-market-selloff-ai-fears.html"
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "METR Finds Anthropic's AI Models Improving at Twice the Historical Pace",
+        "summary": "An outside research group says Anthropic is rapidly accelerating AI development, with its models improving roughly twice as fast as historical trends. The report comes amid calls for a slowdown.",
+        "source": "ABC News",
+        "url": "https://abcnews.com/Technology/wireStory/anthropic-rapidly-accelerating-ai-development-amid-slowdown-calls-137885082"
+      }
+    ],
+    "business": [
+      {
+        "headline": "October Jobs Report Due Friday After ADP Shows 86,000 Private Hires",
+        "summary": "The government's October jobs report arrives Friday, with analysts expecting modest hiring. ADP reported private employers added 86,000 jobs, above expectations.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/05/october-jobs-report-preview.html"
+      }
+    ],
+    "world": [
+      {
+        "headline": "Trump Says Ukraine Peace Deal Is Near After Meeting Putin Envoy",
+        "summary": "Trump said he met a Russian envoy and expects a Russia-Ukraine deal soon, calling it a big agreement. The meeting followed the envoy's appearance with Melania Trump and Ukrainians.",
+        "source": "Al Jazeera",
+        "url": "https://www.aljazeera.com/news/2026/11/6/trump-met-russian-envoy-after-he-appeared-with-melania-trump-and-ukrainians"
+      },
+      {
+        "headline": "Iran Calls U.S. Reply on Hormuz Plan Unconvincing as Trump Confirms Strikes",
+        "summary": "Iran said Washington's response to its Strait of Hormuz proposal was unconvincing. Trump confirmed new U.S. strikes as ceasefire hopes remained fragile.",
+        "source": "Al Jazeera",
+        "url": "https://www.aljazeera.com/news/2026/11/4/iran-says-us-reply-to-hormuz-plan-unconvincing-trump-confirms-strikes"
+      },
+      {
+        "headline": "Democrats Capture House Majority in Midterm Elections",
+        "summary": "CBS News projects Democrats won the House majority with major wins, flipping dozens of seats. Republicans are grappling with the fallout.",
+        "source": "CBS News",
+        "url": "https://www.cbsnews.com/live-updates/midterm-election-results-2026-democrats-house-senate-trump/"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "A Cornered Trump Is a More Volatile Trump",
+        "summary": "O'Brien argues that Trump has always been a loner who distrusts others, sees every contest as zero-sum and favors swift, bold unilateral moves. He suggests that a president facing this week's bruising midterm defeat is likely to become more volatile.",
+        "source": "Bloomberg Opinion",
+        "url": "https://www.bloomberg.com/opinion/articles/2026-11-05/midterm-election-2026-a-cornered-trump-is-a-more-volatile-trump",
+        "author": "Timothy L. O'Brien"
+      },
+      {
+        "headline": "We All Had Trump Derangement Syndrome",
+        "summary": "Zimmerman argues that both parties exaggerated Trump's power and influence going into the midterms. He says the Democratic sweep was driven largely by voters' disdain for Trump, and that fears such as immigration agents swarming polling sites did not come true.",
+        "source": "The Hill",
+        "url": "https://thehill.com/opinion/campaign/6199971-blue-tsunami-election-results/",
+        "author": "Jonathan Zimmerman"
+      },
+      {
+        "headline": "The Interstate Where the Midterms Were Won",
+        "summary": "Klein argues that politicians misread elections and see mandates that aren't there. In his view, the one real mandate was for the quiet competence of candidates along I-35, which he says should guide the Democratic Party's governing strategy.",
+        "source": "The Free Press",
+        "url": "https://www.thefp.com/p/the-interstate-where-the-midterms-were-won",
+        "author": "Joe Klein"
+      },
+      {
+        "headline": "Five Timeless Political Lessons That Got Lost in 2026",
+        "summary": "Chaffetz argues that Republicans lost sight of campaign basics such as candidate quality, primary integrity and sound endorsements. He cites South Carolina as a reminder of what happens when a party takes shortcuts, and says Republicans should return to these fundamentals ahead of 2028.",
+        "source": "Fox News Opinion",
+        "url": "https://www.foxnews.com/opinion/jason-chaffetz-five-timeless-political-lessons-lost-2026",
+        "author": "Jason Chaffetz"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Jaguars Blow Out Ravens 33-10 on Thursday Night Football",
+        "summary": "Trevor Lawrence and the Jaguars pulled away from Baltimore, winning 33-10 on Thursday night.",
+        "source": "NBC Sports",
+        "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/thursday-night-football-jaguars-blow-out-ravens-33-10"
+      },
+      {
+        "headline": "With Tom Brady in the Booth, Drake Maye Takes Center Stage Against Packers",
+        "summary": "A Globe preview of Sunday's Patriots-Packers game looks at Maye, players to watch and a Brady-centered broadcast.",
+        "source": "Boston Globe",
+        "url": "https://www.bostonglobe.com/2026/11/06/sports/patriots-packers-unconventional-preview/"
+      },
+      {
+        "headline": "Celtics Rise Into NBA Power Rankings Top Five",
+        "summary": "NBC Sports' Week 3 power rankings have Houston at No. 1, with Boston and Memphis leaping into the top five.",
+        "source": "NBC Sports",
+        "url": "https://www.nbcsports.com/nba/news/2026-27-nba-power-rankings-week-2-houston-takes-over-no-1-boston-memphis-leap-into-top-5"
+      }
+    ]
+  }
+}
