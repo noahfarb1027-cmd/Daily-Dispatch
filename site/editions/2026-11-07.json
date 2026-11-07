@@ -1,0 +1,110 @@
+{
+  "date": "2026-11-07",
+  "number": 12,
+  "lead": {
+    "kicker": "World Affairs",
+    "headline": "Russia Launches Ballistic Missile Attack on Kyiv, Injuring Residents",
+    "summary": "Russia struck Kyiv and the surrounding region with a barrage of ballistic missiles after Ukrainian President Volodymyr Zelensky warned of a mass attack. Residents were injured and buildings were damaged.",
+    "source": "Al Jazeera",
+    "url": "https://www.aljazeera.com/news/2026/11/7/russia-launches-missile-attack-on-kyiv-injuring-residents"
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "OpenAI to Change How It Handles Data Center Efforts After Outcry",
+        "summary": "OpenAI said it will change its approach to data centers after local opposition, including voter rejections of local measures. It plans to pay for its own power and infrastructure and to rebrand the sites as compute campuses.",
+        "source": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-05/openai-to-change-how-it-handles-data-center-efforts-after-outcry"
+      },
+      {
+        "headline": "Claude Can Now Analyze Your Spending With New Personal Finance Tool",
+        "summary": "Anthropic added a personal finance feature to Claude that analyzes users' spending.",
+        "source": "TechCrunch",
+        "url": "https://techcrunch.com/2026/11/05/claude-can-now-analyze-your-spending-with-its-new-personal-finance-tool/"
+      }
+    ],
+    "business": [
+      {
+        "headline": "U.S. Economy Added 165,000 Jobs in October",
+        "summary": "Employers added 165,000 jobs in October, according to the Labor Department's monthly report. The figures beat expectations and kept the Federal Reserve's focus on inflation.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/06/jobs-report-october-2026.html"
+      },
+      {
+        "headline": "Oil Set for Sharp Weekly Fall as Investors Weigh Iran Conflict After Midterms",
+        "summary": "Oil prices were on track for a steep weekly decline after the midterm elections. Investors weighed hopes for an end to the Iran war against the risk of renewed conflict.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/amp/2026/11/06/oil-price-today-brent-wti.html"
+      },
+      {
+        "headline": "Airbnb Shares Jump Over 10% as Third-Quarter Earnings Beat Forecasts",
+        "summary": "Airbnb beat third-quarter estimates for earnings and revenue, and travel bookings rose. Its shares jumped more than 10%.",
+        "source": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/airbnb-shares-jump-over-10-110340931.html"
+      }
+    ],
+    "world": [
+      {
+        "headline": "Russia's Land Gains in Ukraine Dwindle as Diesel Reportedly Goes Unsold",
+        "summary": "Russia's territorial advances in Ukraine have slowed, according to analysis of the front lines. Reports also say its diesel exports are going unsold.",
+        "source": "Al Jazeera",
+        "url": "https://www.aljazeera.com/news/2026/11/6/in-ukraine-russias-territorial-gains-dwindle-as-its-diesel-goes-unsold"
+      },
+      {
+        "headline": "Israeli Attacks Kill Four in Gaza, Including a Child",
+        "summary": "Four people, including a child, were killed in Israeli attacks on Gaza. The deaths continue a run of lethal strikes during the ceasefire period.",
+        "source": "Al Jazeera",
+        "url": "https://www.aljazeera.com/news/2026/11/5/four-people-including-a-child-killed-in-israeli-attacks-on-gaza"
+      },
+      {
+        "headline": "U.S.-EU Channel for China Talks Comes Back to Life",
+        "summary": "A dialogue channel between the U.S. and EU on China policy has revived after stalling following President Trump's return to office, according to an SCMP exclusive.",
+        "source": "South China Morning Post",
+        "url": "https://www.scmp.com/news/china/diplomacy/article/3373614/us-and-eus-china-talks-channel-comes-back-life-after-stalling-trumps-return"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "US Allies Need a Plan for a Lame-Duck Trump",
+        "summary": "Champion notes the conventional wisdom that Trump, after losing both houses of Congress, will lash out through foreign policy, where his power is undiluted. He says this has Ukrainians, Iranians and Israelis worried, and that Cuba's leaders should be too. He argues that US allies need a plan for the lame-duck period.",
+        "source": "Bloomberg Opinion",
+        "url": "https://www.bloomberg.com/opinion/articles/2026-11-06/us-allies-need-a-plan-for-a-lame-duck-trump",
+        "author": "Marc Champion"
+      },
+      {
+        "headline": "Can Religious Democrats Close the 'God Gap'?",
+        "summary": "Wear argues that the midterms show the Democratic Party has discovered the power of faith. His column asks whether religious Democrats can narrow the 'God gap' with Republicans.",
+        "source": "Washington Post Opinions",
+        "url": "https://www.washingtonpost.com/opinions/2026/11/06/midterms-show-power-faith-democratic-party/",
+        "author": "Michael Wear"
+      },
+      {
+        "headline": "Hey, Fellow Republicans. Tired of Winning Yet?",
+        "summary": "Igoe argues that Trump broke his promise that Republicans would win so much they'd tire of winning. He says the 2026 Republican losses rest on the president. He warns that the damage to the party's state and local bench will make 2028 easier for freshman Democrats.",
+        "source": "The Hill",
+        "url": "https://thehill.com/opinion/campaign/6198317-hey-fellow-republicans-tired-of-winning-yet",
+        "author": "Kevin Igoe"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Patriots Rule Out A.J. Brown and TreVeyon Henderson Against Packers",
+        "summary": "New England's final injury report rules out receiver A.J. Brown and running back TreVeyon Henderson for Sunday's game with Green Bay.",
+        "source": "Boston.com",
+        "url": "https://www.boston.com/sports/new-england-patriots/2026/11/06/patriots-packers-injury-report-aj-brown/"
+      },
+      {
+        "headline": "After Short Playoff Runs, How Will the Red Sox Attack an Unusual Offseason?",
+        "summary": "The Globe looks at Boston's roster questions and the options available after back-to-back brief postseason appearances.",
+        "source": "Boston Globe",
+        "url": "https://www.bostonglobe.com/2026/11/06/sports/red-sox-roster-offseason/"
+      },
+      {
+        "headline": "Bruins Beat Penguins 6-2 for Third Straight Win",
+        "summary": "Pavel Zacha scored twice as Boston won 6-2 in Pittsburgh, according to Yahoo Sports.",
+        "source": "Yahoo Sports",
+        "url": "https://sports.yahoo.com/articles/zacha-scores-twice-lead-bruins-033929698.html"
+      }
+    ]
+  }
+}
