@@ -1,0 +1,99 @@
+{
+  "date": "2026-11-08",
+  "number": 13,
+  "lead": {
+    "kicker": "World Affairs",
+    "headline": "China Confirms Talks Underway on Historic Xi-Trump-Putin Meeting",
+    "summary": "Beijing said discussions are under way on a possible three-way summit of the Chinese, U.S. and Russian leaders. No date or final agreement has been announced.",
+    "source": "NBC News",
+    "url": "https://www.nbcnews.com/world/china/china-confirms-discussions-are-underway-historic-xi-trump-putin-meetin-rcna607938"
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "Nvidia Retakes World's Biggest Company Title From Apple on Election Day",
+        "summary": "Nvidia overtook Apple to again become the world's most valuable company on Election Day. The move reflects continued swings in AI-related stocks.",
+        "source": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-took-back-world-biggest-123723546.html"
+      }
+    ],
+    "business": [
+      {
+        "headline": "Nasdaq and S&P 500 Rebound as Dow Slips, Capping a Bruising Week for AI Stocks",
+        "summary": "Tech-heavy indexes bounced back on Friday after a sharp midweek selloff. The jobs report and earnings were in focus.",
+        "source": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-november-6-dow-sp-500-nasdaq-jobs-report-earnings-135953863.html"
+      },
+      {
+        "headline": "Moderna Reports Third-Quarter 2026 Earnings",
+        "summary": "Moderna released its third-quarter results on Nov. 6. CNBC's page covers the vaccine maker's quarterly numbers.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/06/moderna-mrna-earnings-q3-2026.html"
+      },
+      {
+        "headline": "Why US Midterm Voters Opted for Economic Populism",
+        "summary": "A Bloomberg newsletter looks at how economic concerns shaped the midterm results. It examines what the populist tilt could mean for markets and policy.",
+        "source": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/newsletters/2026-11-08/why-us-midterm-voters-opted-for-economic-populism"
+      }
+    ],
+    "world": [
+      {
+        "headline": "Will Trump Strike Iran's Nuclear Sites Again as Tehran Wages 'Cognitive Warfare'?",
+        "summary": "Al Jazeera looks at whether Washington will resume strikes on Iranian nuclear sites. The analysis comes as the U.S. is reported to have hit Qeshm Island while Trump says talks with Tehran are going well.",
+        "source": "Al Jazeera",
+        "url": "https://www.aljazeera.com/news/2026/11/7/will-trump-strike-nuclear-sites-again-as-iran-engages-cognitive"
+      },
+      {
+        "headline": "Russia Says It Hit Ukrainian Postal Hub and Ship as Kyiv Strikes Ryazan Refinery",
+        "summary": "Russia said it struck a Ukrainian postal hub and a ship. Ukraine reported hitting an oil refinery in Russia's Ryazan region.",
+        "source": "Al Jazeera",
+        "url": "https://www.aljazeera.com/news/2026/11/5/russia-says-it-hit-ukrainian-postal-hub-and-ship-as-ukraine-strikes-ryazan"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "The Republicans Who Love to Lose",
+        "summary": "Lehman argues that blaming the midterm defeat on demographic change lets Republicans off the hook for the poor policy choices that turned voters against the GOP in two years. He says this theory absolves the party of responsibility for its historic loss.",
+        "source": "The Free Press",
+        "url": "https://www.thefp.com/p/the-republicans-who-love-to-lose",
+        "author": "Charles Fain Lehman"
+      },
+      {
+        "headline": "The Utter Failure of Republican Redistricting Opens a Door",
+        "summary": "Gebelhoff says one welcome result of Tuesday's rout was the failure of the GOP's gerrymandering effort to save its House majority. Democrats kept almost all the redrawn seats and picked up some North Carolina seats the new maps had made more vulnerable. He argues this gives both parties a chance to de-escalate the redistricting war.",
+        "source": "Washington Post Opinions",
+        "url": "https://www.washingtonpost.com/opinions/2026/11/06/republican-gerrymandering-war-failure-opens-door-peacemaking/",
+        "author": "Robert Gebelhoff"
+      },
+      {
+        "headline": "Democrats Can Now Fix the Supreme Court Without Reforming It",
+        "summary": "Feldman argues that a Democratic Senate can block any further Trump Supreme Court pick. He says that should make Democrats rethink plans to pack the court or strip its jurisdiction. If a Democrat wins the presidency in 2028 and the party holds the Senate, he writes, it could flip the court from 6-3 conservative to 5-4 liberal.",
+        "source": "Bloomberg Opinion",
+        "url": "https://www.bloomberg.com/opinion/articles/2026-11-05/supreme-court-reform-is-now-unnecessary-for-democrats",
+        "author": "Noah Feldman"
+      },
+      {
+        "headline": "Rebuilding US Foreign Policy After Trump",
+        "summary": "The authors argue that the Iran war and tariffs loomed large in the Republican midterm wipeout, and that many of Trump's foreign policy choices are unlikely to endure. They expect the new Congress to use oversight, including possible impeachment proceedings against Hegseth, to restrain or reverse some of them. They also note that some of his policies will be hard to undo in the short run.",
+        "source": "The Hill",
+        "url": "https://thehill.com/opinion/international/6204917-congressional-pushback-iran-war/",
+        "author": "Jonathan Monten, Jordan Tama and Joshua Busby"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Red Sox Boss Hints at Clear Offseason Goal Beyond Adding Offense",
+        "summary": "Sports Illustrated reports on what Boston's baseball leadership is prioritizing this winter besides adding hitters.",
+        "source": "Sports Illustrated",
+        "url": "https://www.si.com/mlb/red-sox/onsi/red-sox-boss-hints-clear-offseason-goal-outside-of-adding-offense-pat3"
+      },
+      {
+        "headline": "NFL Week 9 Bold Predictions: Jefferson Feasts on Bills, Commanders Upset Rams",
+        "summary": "NFL.com's analysts make bold calls for Sunday's slate of games.",
+        "source": "NFL.com",
+        "url": "https://www.nfl.com/news/nfl-week-9-bold-predictions-justin-jefferson-feasts-on-bills-commanders-upset-rams"
+      }
+    ]
+  }
+}
