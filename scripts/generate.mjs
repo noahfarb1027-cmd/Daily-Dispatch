@@ -100,13 +100,13 @@ Split your searches across all ${keys.length} section${keys.length > 1 ? "s" : "
 ${COMMON_RULES()}
 Use only articles published in the last 3 days. When you give a game's final score, it must be one you confirmed in a search result.
 ${avoidList}
-Write headlines in newspaper title case. Summaries are 2-3 plain, neutral, factual sentences.
+Write headlines in newspaper title case. Summaries are 2-3 plain, neutral, factual sentences that report what happened: the result, number, decision or quote. Never describe the page instead ("CNBC's page covers the quarterly numbers"); if you can't tell what an article reports, pick a different one.
 
 When you are done, reply with only a JSON object inside <stories></stories> tags, with one list per section:
 <stories>
-{${keys.map((k) => `"${k}": [{"headline": "...", "summary": "...", "source": "Outlet", "url": "https://...", "importance": 7}]`).join(", ")}}
+{${keys.map((k) => `"${k}": [{"headline": "...", "summary": "...", "source": "Outlet", "url": "https://...", "published": "YYYY-MM-DD", "importance": 7}]`).join(", ")}}
 </stories>
-"importance" is 1-10: how big the story is for a general reader today (10 = the day's top story anywhere). The biggest one becomes the front-page lead.`;
+"published" is the date the article was published, from the article itself. "importance" is 1-10: how big the story is for a general reader today (10 = the day's top story anywhere). The biggest one becomes the front-page lead.`;
 }
 
 function buildOpinionPrompt(today, avoid, searches, { retry = false } = {}) {
@@ -120,7 +120,7 @@ Write headlines in newspaper title case. Summaries describe the author's argumen
 
 When you are done, reply with only a JSON object inside <stories></stories> tags:
 <stories>
-{"opinion": [{"headline": "...", "author": "Name", "summary": "...", "source": "Outlet", "url": "https://..."}]}
+{"opinion": [{"headline": "...", "author": "Name", "summary": "...", "source": "Outlet", "url": "https://...", "published": "YYYY-MM-DD"}]}
 </stories>`;
 }
 
@@ -263,6 +263,20 @@ function daysOld(url, today) {
   return null;
 }
 
+function publishedAge(published, today) {
+  const m = typeof published === "string" && published.match(/^(20\d{2})-(\d{2})-(\d{2})/);
+  if (!m) return null;
+  const [y, mo, d] = today.split("-").map(Number);
+  return Math.round((Date.UTC(y, mo - 1, d) - Date.UTC(+m[1], +m[2] - 1, +m[3])) / 86400000);
+}
+
+// A summary like "CNBC's page covers the vaccine maker's quarterly numbers" says
+// what a page is about, not what happened: a sign Claude never read the article.
+function describesPage(summary) {
+  return /\b(page|webpage|site|link|article|story|coverage|report)\s+(covers|looks at|has|includes|provides|lists|details|discusses|contains|offers)\b/i.test(summary)
+    || /\b(the|this|its|cnbc's|bloomberg's|[a-z]+'s)\s+(page|webpage|site)\b/i.test(summary);
+}
+
 // A placeholder like "Fox News contributor (name not confirmed)" isn't a byline.
 function isRealAuthor(name) {
   return Boolean(name) && !/not confirmed|unknown|contributor|staff|n\/a|unnamed|anonymous/i.test(name);
@@ -343,9 +357,16 @@ function cleanStory(story, seenUrls, { withAuthor = false, label, today, maxAgeD
     console.warn(`dropped ${label}: no real author name ("${out.author}")`);
     return null;
   }
-  const age = daysOld(out.url, today);
+  // The date in the link is the most reliable; for links without one, use the
+  // publication date Claude reports (on 2026-11-08 a 5-day-old Nvidia story
+  // passed because its Yahoo Finance link had no date).
+  const age = daysOld(out.url, today) ?? publishedAge(story?.published, today);
   if (age !== null && age > maxAgeDays) {
     console.warn(`dropped ${label}: ${age} days old (${out.url})`);
+    return null;
+  }
+  if (describesPage(out.summary)) {
+    console.warn(`dropped ${label}: summary describes the page instead of the news ("${out.summary}")`);
     return null;
   }
   if (!seenUrls.has(normalizeUrl(out.url))) {
