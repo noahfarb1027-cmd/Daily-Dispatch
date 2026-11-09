@@ -1,0 +1,111 @@
+{
+  "date": "2026-11-09",
+  "number": 14,
+  "lead": {
+    "kicker": "Business & Markets",
+    "headline": "Nvidia Board Opens Investigation Into CEO Jensen Huang",
+    "summary": "Nvidia's board launched an independent investigation after Huang admitted to a relationship with a businesswoman whom intelligence agencies say is a Chinese spy. Nvidia shares slid in premarket trading on the news.",
+    "source": "CNBC",
+    "url": "https://www.cnbc.com/2026/11/08/nvidia-jensen-huang-investigation-china-spy.html"
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "AI Industry Faces New Political Reality After Democratic Midterm Wins",
+        "summary": "After a campaign filled with anger over AI data centers, the midterms brought a wave of Democrats to office. The result points to tougher regulation of the industry ahead.",
+        "source": "PBS NewsHour",
+        "url": "https://www.pbs.org/newshour/nation/opposition-to-ai-data-centers-in-the-midterms-foreshadows-tougher-regulations-ahead"
+      }
+    ],
+    "business": [
+      {
+        "headline": "Microsoft Plans to Use Fewer Neoclouds as AI Buildout Shows Strain",
+        "summary": "Microsoft is consolidating its relationships with AI cloud providers such as CoreWeave, Nebius and IREN, and is not renewing an Oracle arrangement. The move raised new questions about the pace of the AI data center buildout.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/06/microsoft-moves-to-consolidate-its-relationships-with-neoclouds-in-ai.html"
+      },
+      {
+        "headline": "Wall Street Week Ahead: CoreWeave Earnings and Inflation Data Take Center Stage",
+        "summary": "Investors face the October CPI report and CoreWeave earnings this week. Both come after a volatile stretch for AI-related stocks.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/investingclub/2026/11/08/here-are-the-2-big-things-were-watching-in-the-stock-market-in-the-week-ahead.html"
+      },
+      {
+        "headline": "Alphabet Weighs Asia Bond Sale as AI Fears Fuel Volatility",
+        "summary": "Alphabet is considering a bond sale in Asia as worries about AI spending drive global market swings, according to Bloomberg.",
+        "source": "Bloomberg",
+        "url": "https://bloomberg.com/news/articles/2026-11-09/alphabet-mulls-asia-bond-sale-as-ai-fears-fuel-global-volatility"
+      }
+    ],
+    "world": [
+      {
+        "headline": "Russian Strikes Leave Hundreds of Thousands in Ukraine Without Power",
+        "summary": "Overnight Russian strikes caused what President Zelenskyy called widespread power outages across Ukraine. Reports put the number of people without electricity at several hundred thousand, with the Zhytomyr region among the hardest hit.",
+        "source": "CBS News",
+        "url": "https://www.cbsnews.com/news/ukraine-russia-war-strike-power/"
+      },
+      {
+        "headline": "New Zealand Left in Political Limbo After Knife-Edge Election",
+        "summary": "Saturday's election gave no clear winner. Stronger-than-expected results for New Zealand First and another smaller party leave them well placed to dictate terms in coalition talks.",
+        "source": "CNN",
+        "url": "https://www.cnn.com/2026/11/07/world/new-zealand-election-result-uncertain-intl-hnk"
+      },
+      {
+        "headline": "Trump Names Stephen Miller Chief of Staff After Midterm Losses",
+        "summary": "President Trump announced that Stephen Miller will replace Susie Wiles as White House chief of staff. Wiles is moving to Trump's political operation after Republican losses in the midterms.",
+        "source": "PBS NewsHour",
+        "url": "https://www.pbs.org/newshour/politics/trump-names-stephen-miller-his-next-chief-of-staff-after-major-republican-midterm-losses"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "Five Ways Trump Can Still Change the World",
+        "summary": "Brands argues that Trump no longer bestrides the world, since a frustrating war against Iran has badly weakened his standing at home and abroad. He says the president still has two years to make peace, cement the \"Donroe Doctrine\", push back on China and help the US dominate in AI.",
+        "source": "Bloomberg Opinion",
+        "url": "https://www.bloomberg.com/opinion/features/2026-11-08/five-ways-trump-can-still-change-the-world",
+        "author": "Hal Brands"
+      },
+      {
+        "headline": "Democrats Won the Midterms. Republicans May Have Won Something Bigger.",
+        "summary": "McArdle acknowledges that Democrats won the most resounding midterm victory in 50 years. She argues that Social Security and Medicare will force painful choices on whichever party is in control.",
+        "source": "Washington Post",
+        "url": "https://www.washingtonpost.com/opinions/2026/11/08/republicans-can-turn-midterm-defeat-democrats-into-opportunity/",
+        "author": "Megan McArdle"
+      },
+      {
+        "headline": "The Trans Issue Is Still Democrats' Biggest Loser",
+        "summary": "Lane argues that the midterms were a deserved, overwhelmingly negative verdict on Trump and the GOP Congress. He says the same states that elected Democrats en masse also approved new limits on males in girls' sports and on youth transition surgeries, so voters turned down a core progressive position.",
+        "source": "The Free Press",
+        "url": "https://www.thefp.com/p/the-trans-issue-is-still-democrats",
+        "author": "Charles Lane"
+      },
+      {
+        "headline": "Democrat Win Is a Wake-Up Call for Republicans, Not a Vote for Socialism",
+        "summary": "Parker argues that the midterms sent a clear message on affordability. She says unaffordable housing, healthcare costs and tariffs eroded the GOP's 2024 gains. In her view, Democrats would be wrong to read their wins as a mandate for socialism or bigger government, and Republicans need to reconnect their policies to the voters they serve.",
+        "source": "Fox News Opinion",
+        "url": "https://www.foxnews.com/opinion/elaine-parker-democrat-win-wake-up-call-republicans-not-vote-socialism",
+        "author": "Elaine Parker"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Packers Rout Patriots 45-27 as Turnovers Sink New England",
+        "summary": "Green Bay beat the Patriots 45-27 at Gillette Stadium, leading 24-14 at halftime. The Packers piled up 478 yards of offense.",
+        "source": "ESPN",
+        "url": "https://www.espn.com/nfl/recap/_/gameId/401873049"
+      },
+      {
+        "headline": "Bruins Beat Panthers 4-1 for Fourth Straight Win",
+        "summary": "Elias Lindholm, Mikey Eyssimont and Morgan Geekie scored in a testy first period as Boston beat rival Florida 4-1. Jeremy Swayman made 40 saves, and the Bruins improved to 13-4-1.",
+        "source": "Boston Globe",
+        "url": "https://www.bostonglobe.com/2026/11/08/sports/bruins-panthers-sunday-matinee-td-garden/"
+      },
+      {
+        "headline": "Tatum Leads Celtics Past Hornets 119-80 in NBA Cup Game",
+        "summary": "Jayson Tatum broke out of a long-range slump to lead Boston to a 119-80 rout in Charlotte. He scored 34 points in three quarters.",
+        "source": "Boston Globe",
+        "url": "https://www.bostonglobe.com/2026/11/06/sports/celtics-hornets-game-score/"
+      }
+    ]
+  }
+}
