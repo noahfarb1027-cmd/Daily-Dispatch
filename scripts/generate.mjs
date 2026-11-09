@@ -29,8 +29,8 @@ const MAX_CONTINUATIONS = 8;
 // result processing against the limit, so sections ran dry after a search or two.)
 const SECTIONS = {
   world: { name: "World Affairs", brief: "world affairs and geopolitics: wars, diplomacy, elections and major events outside business and tech", keep: 3 },
-  business: { name: "Business & Markets", brief: "business, companies, the economy and markets", keep: 3 },
-  tech: { name: "Technology & A.I.", brief: "technology and A.I.: companies, products, research and policy", keep: 3 },
+  business: { name: "Business & Markets", brief: "business, the economy and markets: earnings, stock and bond moves, deals, jobs and inflation data, the Fed, and companies outside tech. A tech company's earnings or share move goes here; any other tech-company news goes in tech", keep: 3 },
+  tech: { name: "Technology & A.I.", brief: "technology and A.I.: new products and launches, A.I. models and research, chips, apps and platforms, cybersecurity, and moves by tech companies such as deals, partnerships, data-center plans, leadership changes and lawsuits (but not their earnings or share moves, which go in business). Tech regulation counts only when the story is about the technology or companies, not the politics", keep: 3 },
   sports: { name: "Sports", brief: "sports, focused on Boston teams (Celtics, Red Sox, Patriots, Bruins). Favor analysis over box scores: power rankings, trade and free-agency analysis, injury news and columns about where the teams stand. Include a final score only for a big game, such as a Boston win or loss that matters, a rivalry game or the playoffs. Fill any spot Boston can't with the biggest national sports story", keep: 3 },
   opinion: { name: "Opinion", keep: 4 },
 };
