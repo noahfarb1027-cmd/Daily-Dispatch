@@ -1,0 +1,111 @@
+{
+  "date": "2026-11-10",
+  "number": 15,
+  "lead": {
+    "kicker": "World Affairs",
+    "headline": "Russia, Ukraine and U.S. Open Talks in Abu Dhabi as Trump Says War Can 'End Soon'",
+    "summary": "Three-way talks between American, Ukrainian and Russian representatives opened Tuesday in the United Arab Emirates. Trump said the war can end soon, and Zelenskyy claimed Russia is suffering record losses.",
+    "source": "ABC News",
+    "url": "https://abcnews.com/International/russia-ukraine-us-meet-abu-dhabi-talks-trump/story?id=137970621"
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "Anthropic Releases Claude Fable 5.2 and Mythos 5.2 Ahead of IPO",
+        "summary": "Anthropic on Monday released two new AI models, Claude Fable 5.2 and Claude Mythos 5.2. The launch comes as the company prepares for an initial public offering.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/09/anthropic-claude-fable-5-2-mythos-5-2.html"
+      },
+      {
+        "headline": "Anthropic Secures $3.4 Billion Generator Deal for AI Data Centers",
+        "summary": "The Financial Times reported that Anthropic has secured a $3.4 billion deal for generators to power its AI data centers.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/08/anthropic-generator-deal-ai-data-centers.html"
+      }
+    ],
+    "business": [
+      {
+        "headline": "October CPI Report Due Tuesday: What to Expect",
+        "summary": "The key inflation report for October comes out Tuesday. Chicago Fed President Austan Goolsbee spoke Monday about inflation pressures ahead of the data.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/09/october-cpi-report-2026-inflation.html"
+      },
+      {
+        "headline": "SoftBank Shares Surge 13% as Asian Tech Stocks Rebound",
+        "summary": "Asian technology stocks surged Tuesday, tracking a Wall Street rebound as a sharp drop in oil prices lifted sentiment. SoftBank Group shares jumped about 13%.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/10/ai-softbank-sk-hynix-samsung-wall-street-tech-stocks.html"
+      },
+      {
+        "headline": "Fed's Williams Says Inflation Remains Too High",
+        "summary": "New York Fed President John Williams said it is essential to bring inflation back to the 2 percent target in a timely manner.",
+        "source": "The Hill",
+        "url": "https://thehill.com/business/6203854-fed-williams-inflation-too-high/"
+      }
+    ],
+    "world": [
+      {
+        "headline": "Four Children Among Five Killed as Floods Hit Gaza",
+        "summary": "Heavy rain and strong winds since late Friday flooded about 70,000 tents and brought down dozens of walls in Gaza. The flooding comes amid a humanitarian crisis as Israel continues to restrict shelter supplies.",
+        "source": "Al Jazeera",
+        "url": "https://www.aljazeera.com/news/2026/11/8/floods-in-gaza-leave-tens-of-thousands-without-shelter"
+      },
+      {
+        "headline": "Russia and Ukraine Trade Overnight Strikes, Killing at Least Four",
+        "summary": "The Kremlin said this week's negotiations between Russia, Ukraine and the U.S. will remain in a closed format. Overnight strikes by both sides killed at least four people.",
+        "source": "Al Jazeera",
+        "url": "https://www.aljazeera.com/news/2026/11/9/at-least-one-person-killed-as-russia-and-ukraine-trade-strikes-overnight"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "All the Questions Congress Needs to Ask Jensen Huang",
+        "summary": "Lee argues that Nvidia's chief executive has long insisted that cutting China off from AI chips was the biggest threat to US AI leadership. He says reports of Huang's affair with a suspected Chinese spy point to a different risk. Lee notes that Huang has already admitted being dishonest about the relationship, and he lays out questions for Congress to put to him.",
+        "source": "Bloomberg Opinion",
+        "url": "https://www.bloomberg.com/opinion/articles/2026-11-09/nvidia-ceo-jensen-huang-affair-all-the-questions-congress-needs-to-ask?sref=eo0IIyEe",
+        "author": "Dave Lee"
+      },
+      {
+        "headline": "Why Republican Eye Rolls Could Turn Into Action Against Trump First",
+        "summary": "Boot argues that Trump has pursued an idiosyncratic and unsuccessful foreign policy that draws little support even among Republicans. He says the midterm results could provoke a bipartisan push against it. He suggests a chastened group of GOP lawmakers might work with Democrats to reorient policy toward putting America first rather than Trump.",
+        "source": "Washington Post Opinions",
+        "url": "https://www.washingtonpost.com/opinions/2026/11/09/post-midterm-foreign-policy-america-not-trump-first/",
+        "author": "Max Boot"
+      },
+      {
+        "headline": "Trump Fails to Learn Midterm Lesson With Stephen Miller Chief of Staff Pick",
+        "summary": "Granger argues that after the midterm rebuke a president would normally reassess, but Trump is doubling down by naming Stephen Miller to replace Susie Wiles. She says the promotion of Miller, a driving force behind the administration's hard-line immigration agenda, suggests the White House's lesson is not to listen or recalibrate.",
+        "source": "The Hill (Opinion)",
+        "url": "https://thehill.com/opinion/lindseys-lens/6208656-trump-promotes-stephen-miller/",
+        "author": "Lindsey Granger"
+      },
+      {
+        "headline": "The Midterms Were a Painful Lesson Republicans Can't Skip Learning",
+        "summary": "Gowdy calls the midterms an excruciating night for Republicans and says they must take the loss seriously. He rejects the claim that the party lost because it was \"too successful\" and warns that this thinking could turn a one-cycle loss into decades in the minority. He says Republicans need serious self-reflection rather than blaming the wrong people.",
+        "source": "Fox News Opinion",
+        "url": "https://www.foxnews.com/opinion/trey-gowdy-midterms-painful-lesson-republicans-cant-skip-learning",
+        "author": "Trey Gowdy"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Raiders Better Off Standing Pat at NFL Trade Deadline",
+        "summary": "With the NFL trade deadline Tuesday at 4 p.m. ET, the 4-5 Raiders are still mathematically in the playoff race. ESPN argues they should hold their veterans, including Maxx Crosby.",
+        "source": "ESPN",
+        "url": "https://www.espn.com/nfl/story/_/id/50433312/las-vegas-raiders-2026-trade-deadline-approach"
+      },
+      {
+        "headline": "Sam Darnold Ruled Out for Week 10, Drew Lock in Line to Start",
+        "summary": "Seahawks quarterback Sam Darnold has been ruled out for Week 10. Drew Lock is in line to start in his place.",
+        "source": "NBC Sports",
+        "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/sam-darnold-ruled-out-for-week-10-drew-lock-in-line-to-start"
+      },
+      {
+        "headline": "NFL News Roundup: McCarthy Expected to Play Week 10, Herbert Avoids Finger Fracture",
+        "summary": "J.J. McCarthy is expected to play in Week 10. Chargers quarterback Justin Herbert avoided a finger fracture.",
+        "source": "NFL.com",
+        "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-monday-nov-9"
+      }
+    ]
+  }
+}
