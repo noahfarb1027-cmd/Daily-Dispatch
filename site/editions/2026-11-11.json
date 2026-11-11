@@ -1,0 +1,104 @@
+{
+  "date": "2026-11-11",
+  "number": 16,
+  "lead": {
+    "kicker": "Business & Markets",
+    "headline": "October CPI Rises 0.4%, Hotter Than Expected",
+    "summary": "The consumer price index rose a seasonally adjusted 0.4% in October, more than economists expected, the Bureau of Labor Statistics reported Tuesday. Core inflation rose 0.3%.",
+    "source": "CNBC",
+    "url": "https://www.cnbc.com/2026/11/10/cpi-inflation-report-october-2026.html"
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "Anthropic Launches Claude Meetings to Turn Discussions Into Plans and Tasks",
+        "summary": "Anthropic launched Claude Meetings, a feature that converts workplace discussions into plans and tasks.",
+        "source": "TechCrunch",
+        "url": "https://techcrunch.com/2026/11/10/anthropic-launches-claude-meetings-to-turn-workplace-discussions-into-plans-and-tasks/"
+      },
+      {
+        "headline": "Adobe Adds AI Agents and an MCP to Photoshop, Premiere and Firefly",
+        "summary": "Adobe is releasing a local MCP to expose more Creative Cloud features to AI agents. It also added new creative tools across its apps.",
+        "source": "TechCrunch",
+        "url": "https://techcrunch.com/2026/11/10/adobe-adds-more-ai-to-its-products-and-launches-an-mcp/"
+      },
+      {
+        "headline": "Reddit Turns User Conversations Into AI-Powered Product Reviews",
+        "summary": "Reddit's new AI reviews summarize what users like and dislike about 10,000 products. The feature targets holiday shoppers.",
+        "source": "TechCrunch",
+        "url": "https://techcrunch.com/2026/11/10/reddit-is-turning-user-conversations-into-ai-powered-product-reviews/"
+      }
+    ],
+    "business": [
+      {
+        "headline": "Bond Yields Surge Most in 19 Months as Traders Brace for Fed Hikes",
+        "summary": "Treasury yields jumped after the hot inflation reading. Traders priced in a 91% chance of a quarter-point Fed hike in December and a 9% chance of a half-point hike, per CME FedWatch.",
+        "source": "CNN",
+        "url": "https://www.cnn.com/2026/11/10/investing/bond-yields-inflation-fed"
+      },
+      {
+        "headline": "Nvidia Sells Off for a Second Day Over Huang Fallout",
+        "summary": "Nvidia shares sank 5.47% Tuesday as investors weighed the fallout from CEO Jensen Huang's affair with an alleged Chinese spy. The stock had already fallen about 4% Monday.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/10/nvidia-nvda-jensen-huang-affair-chinese-spy.html"
+      }
+    ],
+    "world": [
+      {
+        "headline": "House GOP Leaders Block Vote on Hegseth Impeachment Push",
+        "summary": "House Republican leaders killed an effort to force a vote on impeaching Defense Secretary Pete Hegseth. Rep. Thomas Massie's articles accuse Hegseth of waging the Iran war without congressional approval and ignoring laws meant to minimize civilian casualties.",
+        "source": "CNN",
+        "url": "https://www.cnn.com/2026/11/10/politics/thomas-massie-pete-hegseth-impeachment"
+      },
+      {
+        "headline": "Trump Says Renewed Strikes on Iran Are 'Quite Unlikely'",
+        "summary": "President Trump said Monday that a renewed military campaign against Iran is quite unlikely and does not seem necessary. He tied that to progress in negotiations over Iran's nuclear program.",
+        "source": "Axios",
+        "url": "https://www.axios.com/2026/11/09/trump-iran-war-qatar-negotiations-attacks-unlikely"
+      },
+      {
+        "headline": "Israeli Strikes and Gunfire Kill Four in Gaza",
+        "summary": "Hospital authorities said Israeli strikes and gunfire killed four people in the Gaza Strip on Tuesday. Three of the deaths came in two separate incidents.",
+        "source": "Boston Globe",
+        "url": "https://www.bostonglobe.com/2026/11/10/nation/mideast-israel-gaza-strikes/"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "The Nvidia Spy Scandal Was Hiding in Plain Sight",
+        "summary": "Ignatius argues that Jensen Huang appears to be the most prominent American yet caught in a Chinese intelligence honey trap. He says the evidence suggests China's spy service was running both a chip supply-chain operation and an influence operation on U.S. tech policy. He argues that Washington was slow to see the risk.",
+        "source": "Washington Post",
+        "url": "https://www.washingtonpost.com/opinions/2026/11/10/jensen-huang-nvidia-china-spy-scandal-was-hiding-plain-sight/",
+        "author": "David Ignatius"
+      },
+      {
+        "headline": "Did a Blue Tsunami Just End an Era? Not So Fast",
+        "summary": "Ferguson argues that the 2026 midterms were a regular shellacking rather than a political paradigm shift. He draws on history, from Eisenhower to Nixon, to show what tends to happen when a second term turns sour.",
+        "source": "The Free Press",
+        "url": "https://www.thefp.com/p/niall-ferguson-biden-trump-history-midterms",
+        "author": "Niall Ferguson"
+      },
+      {
+        "headline": "Kevin Warsh Is Now Free to Unleash His Inner Hawk",
+        "summary": "Levin argues that after the hotter-than-expected October consumer price report, Fed Chair Kevin Warsh should raise interest rates again at the next meeting. He says inflation is running around 3.9% against a 2% goal, and that even another hike may not be enough to tame it.",
+        "source": "Bloomberg Opinion",
+        "url": "https://www.bloomberg.com/opinion/articles/2026-11-10/federal-reserve-must-raise-rates-again-to-tame-persistent-inflation",
+        "author": "Jonathan Levin"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Celtics Rout 76ers 123-101 as Tatum Outduels Jaylen Brown",
+        "summary": "Jayson Tatum scored 21 points and Paul George had 36 as the Celtics beat Philadelphia 123-101 on Tuesday. It was the first meeting with former teammate Jaylen Brown.",
+        "source": "Boston.com",
+        "url": "https://www.boston.com/sports/boston-celtics/2026/11/10/jayson-tatum-gets-better-of-ex-teammate-jaylen-brown-george-drops-36-as-celtics-top-76ers/"
+      },
+      {
+        "headline": "Patriots' Injury Run Gets Worse Ahead of Munich Game",
+        "summary": "The Patriots are missing Will Campbell and Ben Brown, among others, with knee injuries, plus further hamstring problems. The injuries follow a 45-27 home loss to Green Bay.",
+        "source": "Boston Globe",
+        "url": "https://www.bostonglobe.com/2026/11/08/sports/patriots-arent-making-excuses-their-near-catastrophic-injury-run-has-only-gotten-worse/"
+      }
+    ]
+  }
+}
