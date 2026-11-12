@@ -1,0 +1,98 @@
+{
+  "date": "2026-11-12",
+  "number": 17,
+  "lead": {
+    "kicker": "World Affairs",
+    "headline": "Russia and Ukraine Agree to Prisoner Exchange as Abu Dhabi Talks End Without Breakthrough",
+    "summary": "U.S.-mediated talks in Abu Dhabi ended with an agreement on a large exchange of prisoners of war. There was no broader breakthrough toward ending the war. U.S. envoy Jared Kushner called the talks productive.",
+    "source": "NPR",
+    "url": "https://www.npr.org/2026/11/11/g-s1-152954/russia-ukraine-war-talks"
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "Anthropic Sets IPO Price Range of $70 to $78 a Share, Implying $1.4 Trillion Valuation",
+        "summary": "In an updated filing, Anthropic said it will offer 825 million Class A shares at $70 to $78 each. The range implies a valuation of about $1.4 trillion, and trading is reportedly slated to begin Nov. 19.",
+        "source": "TechCrunch",
+        "url": "https://techcrunch.com/2026/11/10/anthropic-sets-ipo-price-range-of-70-to-78-per-share-to-reach-an-implied-valuation-of-1-404-trillion/"
+      }
+    ],
+    "business": [
+      {
+        "headline": "AI Stocks Rebound as Wall Street Nearly Erases Last Week's Sell-Off",
+        "summary": "The S&P 500 rose 98.45 points to 7,619.38, and the Dow added 254.60 to 52,486.49. The Nasdaq gained more than 1% as a CoreWeave earnings beat revived the AI trade.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/10/stock-market-today-live-updates.html"
+      },
+      {
+        "headline": "CoreWeave CEO Cancels Planned Share Sale Program After Earnings",
+        "summary": "CoreWeave CEO Michael Intrator told CNBC he canceled his planned share sale program. He cited rising interest rates and an unfavorable political environment, which have fueled concerns that the AI boom is cooling.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/11/coreweave-ceo-election-data-center-buildout.html"
+      }
+    ],
+    "world": [
+      {
+        "headline": "Judge Allows Trump's Defamation Suit Against the BBC to Proceed",
+        "summary": "A U.S. federal judge denied a motion to dismiss President Trump's defamation case against the BBC. The ruling came on Tuesday, and the suit seeks $10 billion.",
+        "source": "CBS News",
+        "url": "https://www.cbsnews.com/news/trump-bbc-defamation-case-us-judge-denies-motion-to-dismiss/"
+      },
+      {
+        "headline": "Trump Touts Veterans Day Arch Plan at Arlington Ceremony",
+        "summary": "Speaking at Arlington National Cemetery on Veterans Day, President Trump said veterans had waited 200 years for a proposed triumphal arch. He also used the speech to defend the war with Iran.",
+        "source": "CNN",
+        "url": "https://www.cnn.com/2026/11/11/politics/video/president-trump-participates-in-veterans-day-ceremony"
+      },
+      {
+        "headline": "UNIFIL Patrol Comes Under Fire in Southern Lebanon",
+        "summary": "A patrol of the U.N. peacekeeping force UNIFIL was fired on in southern Lebanon. The incident came as an April ceasefire between Israel and Hezbollah remains fragile.",
+        "source": "Al Jazeera",
+        "url": "https://aljazeera.com/news/2026/11/10/unifil-patrol-comes-under-fire-in-southern-lebanon"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "Skipping a Rate Hike Doesn't Look So Clever Now",
+        "summary": "Authers argues that the new October inflation data suggest the Fed should have raised rates last month, as many had urged. He says Chairman Kevin Warsh strained logic to justify holding, and that avoiding an attack from Trump before the midterms seemed to be a factor. In his view, the figures show why voters were so angry at the polls.",
+        "source": "Bloomberg Opinion",
+        "url": "https://bloomberg.com/opinion/newsletters/2026-11-11/skipping-a-rate-hike-doesn-t-look-so-clever-now",
+        "author": "John Authers"
+      },
+      {
+        "headline": "Hegseth Impeachment Blocked Despite Numerous Failings",
+        "summary": "Granger comments on House Republicans voting to block consideration of impeachment articles against Defense Secretary Pete Hegseth. Her column is critical of Hegseth, and she says it is time for him to go. The piece is an edited transcription of her on-air commentary.",
+        "source": "The Hill",
+        "url": "https://thehill.com/opinion/lindseys-lens/6214136-pete-hegseth-impeachment-defense/",
+        "author": "Lindsey Granger"
+      },
+      {
+        "headline": "Donald Trump Doubles Down",
+        "summary": "Lake argues that anyone hoping Trump will cooperate with the new Democratic Congress after the midterm defeat should lower their expectations. Trump has signaled openness to compromise, including on immigration. Lake says the White House may still be unable to escape political combat, and that Trump's approach resembles that of Barack Obama.",
+        "source": "The Free Press",
+        "url": "https://thefp.com/p/donald-trump-doubles-down",
+        "author": "Eli Lake"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Celtics Look to Avoid a Letdown Against Raptors After Rout of 76ers",
+        "summary": "After beating Philadelphia on Tuesday, Boston faces Toronto next. The Globe's preview covers injuries and game details.",
+        "source": "Boston Globe",
+        "url": "https://www.bostonglobe.com/2026/11/11/sports/celtics-76ers-preview-november-11-2026/"
+      },
+      {
+        "headline": "Celtics Rally From 22 Down to Beat Raptors 98-93, Win Fifth Straight",
+        "summary": "Jayson Tatum made the tying and go-ahead free throws with 25.2 seconds left as Boston overcame a 22-point deficit in Toronto. The win closed out a 4-0 road trip.",
+        "source": "Yahoo Sports",
+        "url": "https://sports.yahoo.com/articles/4-takeaways-celtics-beat-raptors-030621726.html"
+      },
+      {
+        "headline": "Patriots and Lions Head to Munich as the NFL's Germany Push Continues",
+        "summary": "New England and Detroit meet Sunday in Munich for the NFL's sixth regular-season game in Germany. The Patriots are traveling to Allianz Arena after consecutive losses.",
+        "source": "Washington Post",
+        "url": "https://www.washingtonpost.com/sports/nfl/2026/11/11/patriots-lions-munich-germany-nfl/249631b0-ddbf-11f1-912c-4fbb80d73f7f_story.html"
+      }
+    ]
+  }
+}
