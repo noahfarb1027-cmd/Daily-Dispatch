@@ -1,0 +1,98 @@
+{
+  "date": "2026-11-13",
+  "number": 18,
+  "lead": {
+    "kicker": "Technology & A.I.",
+    "headline": "Nvidia CEO Jensen Huang Resigns; CFO Colette Kress Named Interim CEO",
+    "summary": "Nvidia announced Jensen Huang's resignation as CEO, with CFO Colette Kress serving as interim chief while the board searches for a permanent successor. Nvidia shares fell about 4% on the news.",
+    "source": "CNBC",
+    "url": "https://www.cnbc.com/2026/11/12/nvidia-jensen-huang-ceo-live-updates.html"
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "SpaceX and Tesla Merger Talks Advance Toward Record Deal",
+        "summary": "Bloomberg reported that SpaceX and Tesla are progressing in merger negotiations. A deal, which would be the biggest ever, could be announced as soon as December.",
+        "source": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-12/spacex-and-tesla-talks-on-record-merger-are-said-to-progress"
+      }
+    ],
+    "business": [
+      {
+        "headline": "10-Year Treasury Yield Jumps Back Above 5% as Oil Rises and Fed Hike Bets Build",
+        "summary": "The 10-year Treasury yield surged above 5% on Thursday, alongside higher oil prices. Traders increased bets on further Federal Reserve rate hikes.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/12/us-treasurys-bonds-yields.html"
+      },
+      {
+        "headline": "Trump Threatens to Double Tariffs on Mexico Over Migrant Caravans",
+        "summary": "President Trump threatened Thursday to immediately double tariffs on Mexican imports unless Mexico stops migrant caravans heading toward the U.S. border. The threat escalates trade tensions between the two countries.",
+        "source": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/economy/policy/articles/trump-threatens-double-mexico-tariffs-161314425.html"
+      },
+      {
+        "headline": "U.S. Existing-Home Sales Fall to Lowest Level in 16 Years",
+        "summary": "Sales of previously owned U.S. homes fell 5.5% in October to an annualized 3.75 million, the weakest pace in 16 years. Rising mortgage rates and inflation worries weighed on the market.",
+        "source": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-12/sales-of-existing-us-homes-tumble-to-lowest-level-since-2010"
+      }
+    ],
+    "world": [
+      {
+        "headline": "Trump Says U.S. Doesn't Need a Deal With Iran as Hormuz Standoff Persists",
+        "summary": "President Trump said Thursday that the U.S. does not need a deal with Iran and warned Tehran of severe consequences if it targets American officials. Iran has denied that any talks with Washington are under way.",
+        "source": "ABC News",
+        "url": "https://abcnews.com/International/live-updates/iran-live-updates-americans-tired-forever-wars-araghchi/?id=137967256"
+      },
+      {
+        "headline": "Israeli Strike on Gaza's Nasser Hospital Kills at Least Six, Including a Surgeon",
+        "summary": "An overnight Israeli strike on the Nasser Hospital complex in southern Gaza killed at least six people. Palestinian surgeon Dr. Rizk Abu Shaira was among the dead. The Israeli military said it was targeting a Hamas commander and other militants, while Hamas denied using the hospital for military purposes.",
+        "source": "NBC News",
+        "url": "https://www.nbcnews.com/world/middle-east/israeli-strike-gaza-nasser-hospital-abu-shaira-doctor-hamas-rcna608932"
+      },
+      {
+        "headline": "Chris Van Hollen to Challenge Schumer for Senate Democratic Leader",
+        "summary": "Maryland Sen. Chris Van Hollen announced Thursday that he will challenge Chuck Schumer for Senate majority leader in the next Congress. The move comes barely a week after the midterm elections and opens an internal power struggle among Senate Democrats.",
+        "source": "Axios",
+        "url": "https://www.axios.com/2026/11/13/schumer-van-hollen-senate-majority-leader"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "We Crossed the Rubicon With Iran, So We Can't Stop Halfway",
+        "summary": "Sondland argues that winning the war with Iran is not the same as winning the peace. He calls for a strategy that combines diplomacy, sanctions and sustained military force to keep Tehran from rebuilding its capabilities. He says the U.S. doesn't need to occupy Iran or install a new government, and he faults the administration for not explaining this to Congress and the public.",
+        "source": "Fox News Opinion",
+        "url": "https://www.foxnews.com/opinion/crossed-rubicon-iran-cant-stop-halfway",
+        "author": "Gordon Sondland"
+      },
+      {
+        "headline": "History Is Calling Europe on Ukraine. Can It Answer?",
+        "summary": "Champion says there are reasons to see an opening for a Ukraine peace deal, including Russia's attendance at new talks and a less Moscow-friendly incoming Congress. He argues that the idea that a pact is imminent is misleading, and that the talks fit Putin's war strategy. In his view Europe must decide who will speak for it in this new phase.",
+        "source": "Bloomberg Opinion",
+        "url": "https://www.bloomberg.com/opinion/articles/2026-11-12/history-is-calling-europe-on-ukraine-can-it-answer",
+        "author": "Marc Champion"
+      },
+      {
+        "headline": "The Jensen Huang Affair Exposes Corporate America's China Problem",
+        "summary": "Writing as corporate-investigations professionals, Aviv and Hurewitz say the Huang affair fits a familiar pattern of China using intelligence services and business relationships to obtain American technology. They argue it shows a further vulnerability, that corporate leaders themselves are now national security targets. They conclude that corporate security programs must evolve and that protecting executives should become a national security priority.",
+        "source": "The Hill",
+        "url": "https://thehill.com/opinion/national-security/6213893-nvidia-ceo-jensen-huang-affair/",
+        "author": "Don Aviv and Jeremy Hurewitz"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Patriots Injury Report: Rhamondre Stevenson, A.J. Brown Among 11 Limited Ahead of Lions",
+        "summary": "Eleven Patriots were limited in Thursday's practice, including Rhamondre Stevenson and A.J. Brown. Running back TreVeyon Henderson has been ruled out for the Munich game.",
+        "source": "Yahoo Sports",
+        "url": "https://sports.yahoo.com/articles/patriots-vs-lions-thursday-injury-214157668.html"
+      },
+      {
+        "headline": "Red Sox Enter Offseason Hunting the Best Offensive Upgrade at Any Position",
+        "summary": "The Red Sox have no specific positional need this offseason and plan to pursue any offensive upgrade that fits. They may lose Sonny Gray in free agency.",
+        "source": "Yahoo Sports",
+        "url": "https://sports.yahoo.com/articles/red-sox-arent-targeting-specific-110202080.html"
+      }
+    ]
+  }
+}
