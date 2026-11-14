@@ -1,0 +1,92 @@
+{
+  "date": "2026-11-14",
+  "number": 19,
+  "lead": {
+    "kicker": "World Affairs",
+    "headline": "UN Says 25 Seafarers Killed in and Around Hormuz Since Iran War Began",
+    "summary": "The United Nations says at least 25 seafarers have been killed in and around the Strait of Hormuz since the US-Israeli war on Iran broke out in February. The toll comes as ships keep getting hit near the waterway.",
+    "source": "Al Jazeera",
+    "url": "https://www.aljazeera.com/news/2026/11/14/un-says-25-seafarers-killed-in-around-hormuz-since-february"
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "Google Upgrades Search With Gemini 4 Hydrogen",
+        "summary": "Google's AI Mode is now powered by Gemini 4 Hydrogen. It is meant to handle complex queries better and return richer visual answers.",
+        "source": "TechCrunch",
+        "url": "https://techcrunch.com/2026/11/12/googles-latest-search-upgrade-promises-better-answers-to-your-most-complicated-questions/"
+      }
+    ],
+    "business": [
+      {
+        "headline": "Wholesale Prices Rise 0.3% in October, Annual Rate Hits 6.5%",
+        "summary": "The producer price index rose 0.3% in October, below the 0.4% economists expected. The annual rate of 6.5% is the highest in nearly four years.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/13/ppi-inflation-report-october-2026.html"
+      },
+      {
+        "headline": "Nvidia Closes Below $4 Trillion Market Cap for First Time Since July 2025",
+        "summary": "Nvidia shares kept falling after Jensen Huang's resignation as CEO. The company closed below a $4 trillion market value for the first time since July 2025.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/13/nvidia-nvda-stock-jensen-huang-transition.html"
+      },
+      {
+        "headline": "Dow Edges Up as S&P 500 and Nasdaq Slip to Cap Volatile Week",
+        "summary": "On Friday the Dow rose 0.1%, the S&P 500 fell 0.4% and the Nasdaq dropped 0.9%. The S&P 500 still gained 2.5% for the week.",
+        "source": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-november-13-dow-sp-500-nasdaq-nvidia-ppi-141451558.html"
+      }
+    ],
+    "world": [
+      {
+        "headline": "Turkey and Qatar Sign Mutual Defense Agreement",
+        "summary": "Turkey and Qatar signed a mutual defense agreement on Friday after Turkish President Erdogan met Qatar's emir. The two leaders pledged a unified response to any attack on either country.",
+        "source": "Al Jazeera",
+        "url": "https://aljazeera.com/news/2026/11/13/turkiye-and-qatar-sign-mutual-defence-agreement"
+      },
+      {
+        "headline": "Iran's Ghalibaf Says Hormuz Will 'Never Return' to Pre-War Status",
+        "summary": "Iran's parliament speaker and top negotiator, Mohammad Bagher Ghalibaf, told Al Jazeera the Strait of Hormuz will never return to its pre-war status.",
+        "source": "Al Jazeera",
+        "url": "https://www.aljazeera.com/news/2026/11/11/strait-of-hormuz-will-never-return-to-pre-war-status-ghalibaf"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "Russia's Economy Is Reeling — Trump Should Be Raising the Pressure If He Wants Peace",
+        "summary": "Zakheim argues that Russia's economy is going from bad to worse, citing its central bank's refusal to cut a 14 percent interest rate and record Russian casualties in October. He says Trump should end his waiver of the Graham sanctions law. In his view, that would show Putin that Washington is serious about getting him to negotiate with some flexibility.",
+        "source": "The Hill",
+        "url": "https://thehill.com/opinion/national-security/6215155-russian-economy-worsens-inflation-rises/",
+        "author": "Dov Zakheim"
+      },
+      {
+        "headline": "The Midterms Won't Define Trump's Legacy. Iran Will.",
+        "summary": "Thiessen draws on Reagan, who lost the Senate and still won the Cold War, to argue that Trump can follow the same path. He contends that the midterm defeat will matter less to Trump's place in history than how the Iran war ends.",
+        "source": "Washington Post",
+        "url": "https://washingtonpost.com/opinions/2026/11/12/midterms-defeat-wont-define-donald-trumps-legacy-iran-will",
+        "author": "Marc A. Thiessen"
+      },
+      {
+        "headline": "How Landslides Renew American Politics",
+        "summary": "Levin argues that the scale and breadth of the Democrats' midterm win may matter more than its policy implications, and that it could signal a new phase of American political life. He notes that voters rejected Republicans but still view Democrats poorly, and that Democrats ran on no shared agenda. With more states in play, he says, winning the center is key.",
+        "source": "The Free Press",
+        "url": "https://thefp.com/p/how-landslides-renew-american-politics?amp=&amp=",
+        "author": "Yuval Levin"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Unconventional Preview: Patriots Face Another Tough Foe in Lions",
+        "summary": "The Patriots play the one-loss Lions in Munich on Sunday. The Globe's preview predicts a 35-31 Detroit win and says New England would return home at .500.",
+        "source": "The Boston Globe",
+        "url": "https://www.bostonglobe.com/2026/11/13/sports/unconventional-preview-patriots-lions-nfl-football/"
+      },
+      {
+        "headline": "Red Sox Reportedly Inquire About Outfielder Seiya Suzuki",
+        "summary": "The Red Sox have reportedly asked about free-agent Cubs outfielder Seiya Suzuki as a possible power-hitting addition this offseason.",
+        "source": "Yahoo Sports",
+        "url": "https://sports.yahoo.com/articles/boston-red-sox-free-agent-012738511.html"
+      }
+    ]
+  }
+}
