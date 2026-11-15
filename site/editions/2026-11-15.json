@@ -1,0 +1,98 @@
+{
+  "date": "2026-11-15",
+  "number": 20,
+  "lead": {
+    "kicker": "World Affairs",
+    "headline": "Iran Says It Struck U.S. Radar in Bahrain as Gulf Tensions Rise",
+    "summary": "Iran's Revolutionary Guards said they launched six drones at a U.S. air-defense radar at Bahrain's Riffa Air Base. Bahrain said it intercepted the attacks and sounded its first nationwide alert in months. It was Iran's second drone attack on Bahrain in three days.",
+    "source": "Al Jazeera",
+    "url": "https://www.aljazeera.com/news/2026/11/15/iran-says-it-targets-us-radar-in-bahrain-what-do-we-know"
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "Advocacy Groups Sue Anthropic, OpenAI and Others Over Catastrophic AI Risks",
+        "summary": "Nonprofit groups filed suit in San Francisco Superior Court against companies including Anthropic, Meta and OpenAI. They claim the companies are knowingly building technology that poses catastrophic risks to humanity.",
+        "source": "CBS News",
+        "url": "https://www.cbsnews.com/news/advocacy-groups-sue-ai-companies/"
+      },
+      {
+        "headline": "Lutnick Faces Questions Over Nvidia Spy Scandal and His Sons' Ties to the Chipmaker",
+        "summary": "Commerce Secretary Howard Lutnick faces scrutiny over suspected chip smuggling issues and the deep ties between his sons' firm, Cantor Fitzgerald, and Nvidia.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/13/howard-lutnick-nvidia-jensen-huang-china-cantor-fitzgerald.html"
+      }
+    ],
+    "business": [
+      {
+        "headline": "Cerebras Jumps After Beating Revenue Estimates and Announcing Microsoft Deal",
+        "summary": "The AI chipmaker reported third-quarter core revenue of $230.9 million, above the $214.7 million expected. It also said it signed a cloud deal with Microsoft, and its shares rose about 16%.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/12/cerebras-systems-cbrs-q3-earnings-report-2026.html"
+      },
+      {
+        "headline": "U.S. and China Discuss Tariff Cuts and Farm Trade Ahead of Trump-Xi Meeting",
+        "summary": "At their first trade council meeting, China and the U.S. discussed tariff cuts and agricultural trade. The talks came ahead of a Trump-Xi meeting next week.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/amp/2026/11/14/china-us-tariffs-xi-trump-meeting.html"
+      }
+    ],
+    "world": [
+      {
+        "headline": "Chile's Kast Faces Growing Protests as Fuel Prices Soar and Approval Plunges",
+        "summary": "Far-right President José Antonio Kast is facing mounting public anger as rising fuel prices trigger transport strikes and protests across Chile. His approval ratings have fallen.",
+        "source": "NPR",
+        "url": "https://www.npr.org/2026/11/14/nx-s1-6040144/chile-protests-fuel-kast-students"
+      },
+      {
+        "headline": "Pope Leo Calls Peru His 'Homeland' on Final Leg of South America Trip",
+        "summary": "Pope Leo XIV arrived in Lima to begin the last stage of his South American journey. He declared Peru his homeland, the country where he served for decades as a priest and bishop.",
+        "source": "CBS News",
+        "url": "https://www.cbsnews.com/news/pope-leo-peru-homeland-south-america-trip/"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "Democrats Win an Election and Immediately Move to Subvert Democracy",
+        "summary": "Turley argues that Democrats are already looking to reverse measures voters approved, citing Colorado's governor-elect on revisiting anti-trans measures. He also says Democratic leaders are planning to fundamentally change the constitutional system and are promising heads. He sees this as at odds with their claim to be defending democracy.",
+        "source": "The Hill",
+        "url": "https://thehill.com/opinion/campaign/6218044-democrats-undermine-democratic-norms/",
+        "author": "Jonathan Turley"
+      },
+      {
+        "headline": "The Huang Scandal Stirs Up the Murk Around Trump and Money",
+        "summary": "O'Brien says the scandal that cost Nvidia CEO Jensen Huang his job has prompted a wider set of conversations. These include national security risks, the price of technological innovation and the resilience of global trade. He ties the episode to broader questions about Trump and money.",
+        "source": "Bloomberg Opinion",
+        "url": "https://www.bloomberg.com/opinion/articles/2026-11-13/nvidia-s-huang-scandal-stirs-up-murk-around-trump-and-money",
+        "author": "Timothy L. O'Brien"
+      },
+      {
+        "headline": "Democrats Won Congress, but Their Trump Obsession Could Give It Right Back",
+        "summary": "Weyeneth argues that the election gave Democrats control of Congress but not a blank check for two years of subpoenas and hearings. He warns that centering opposition to Trump could repeat a mistake that helped Trump in 2024. He says Republicans should call out overreach but also offer their own agenda on costs and the economy.",
+        "source": "Fox News",
+        "url": "https://www.foxnews.com/opinion/democrats-won-congress-trump-obsession-give-back",
+        "author": "Taylor Weyeneth"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Lions Rout Patriots in Munich as Drake Maye Exits With Ankle Injury",
+        "summary": "Detroit won big in Germany, and New England fell to 1-2 for the first time since 2012, according to CBS Sports. Quarterback Drake Maye was ruled out in the first quarter with an ankle injury, and Tommy DeVito finished the game.",
+        "source": "CBS Sports",
+        "url": "https://www.cbssports.com/nfl/news/patriots-vs-lions-final-score-takeaways-detroit-wins-big-new-england-falls-to-1-2-for-first-time-since-2012"
+      },
+      {
+        "headline": "Red Sox Make First Big Offseason Splash, Signing Jake Bauers",
+        "summary": "Boston agreed to a four-year, $58 million deal with the Brewers' World Series champion first baseman. He fits best at designated hitter and adds lefty power to the lineup.",
+        "source": "The Boston Globe",
+        "url": "https://www.bostonglobe.com/2026/11/13/sports/jake-bauers-red-sox/"
+      },
+      {
+        "headline": "Mavericks at Celtics Preview: Cooper Flagg and Dallas Look to End Boston's Winning Streak",
+        "summary": "The Mavericks play the second half of a back-to-back at TD Garden, with Cooper Flagg and Kyrie Irving off Dallas' injury report. The Celtics have listed no injuries.",
+        "source": "The Boston Globe",
+        "url": "https://www.bostonglobe.com/2026/11/15/sports/celtics-mavericks-preview-for-november-15-2026/"
+      }
+    ]
+  }
+}
