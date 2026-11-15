@@ -124,6 +124,23 @@ When you are done, reply with only a JSON object inside <stories></stories> tags
 </stories>`;
 }
 
+// Errors that mean no Claude call can succeed this run (spend limit reached, credits
+// used up, bad key), as opposed to one call failing. On 2026-11-15 the workspace
+// spend limit stopped every call, and the run kept retrying and logging misleading
+// "search tool refused" lines instead of saying so once.
+class AccountError extends Error {
+  constructor(err) {
+    super(err.message);
+    this.status = err.status;
+  }
+}
+
+function accountBlock(err) {
+  if (!(err instanceof Anthropic.APIError)) return false;
+  if (err instanceof Anthropic.AuthenticationError || err instanceof Anthropic.PermissionDeniedError) return true;
+  return /usage limit|spend limit|credit balance|billing|purchase credits/i.test(err.message);
+}
+
 // One Claude call with web search. Returns the parsed {section: stories} object
 // and every URL its searches returned.
 //
@@ -154,6 +171,7 @@ async function research(client, prompt, maxSearches, { basic = false } = {}) {
         })
         .finalMessage();
     } catch (err) {
+      if (accountBlock(err)) throw new AccountError(err);
       // If the plain search tool is refused for this model, use the newer one rather than lose the section.
       if (turn === 0 && searchTool.type === "web_search_20250305" && err instanceof Anthropic.BadRequestError) {
         console.warn(`Plain search tool refused (${err.message}); using web_search_20260209.`);
@@ -425,6 +443,7 @@ async function researchAndClean(client, label, keys, prompt, maxSearches, today,
     console.log(`  (${seenUrls.size} links in search results)`);
     if (keys.some((k) => !(stories[k] || []).length)) console.warn(`  Claude's note: ${note.slice(-600) || "(none)"}`);
   } catch (err) {
+    if (err instanceof AccountError) throw err; // no call can succeed; stop the run
     const msg = err instanceof Anthropic.APIError ? `Claude API error ${err.status}: ${err.message}` : err.message;
     console.warn(`research for ${keys.join(", ")}${label} failed: ${msg}`);
   }
@@ -604,6 +623,13 @@ async function main() {
 }
 
 main().catch((err) => {
+  if (err instanceof AccountError) {
+    console.error(err.status === 401
+      ? "The Anthropic API key was rejected. Create a new key in the Claude Console and replace the ANTHROPIC_API_KEY secret in GitHub (Settings → Secrets and variables → Actions)."
+      : "Claude API spend limit or credits reached, so no edition was printed. Raise the workspace's monthly limit (Claude Console → Settings → Workspaces → Limits) or add credits (Billing), then run the workflow again.");
+    console.error(`API message: ${err.message}`);
+    process.exit(1);
+  }
   // API errors carry the status code and server message; print them plainly so the Actions log shows the cause.
   if (err instanceof Anthropic.APIError) console.error(`Claude API error ${err.status}: ${err.message}`);
   else console.error(err);
