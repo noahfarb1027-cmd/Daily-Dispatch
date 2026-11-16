@@ -1,0 +1,91 @@
+{
+  "date": "2026-11-16",
+  "number": 21,
+  "lead": {
+    "kicker": "World Affairs",
+    "headline": "Israel Kills Senior Hamas Commander in Gaza Strike",
+    "summary": "Israel said an air strike in southern Gaza killed a senior Hamas military commander. The strike came two months after Israel killed his predecessor in the same post.",
+    "source": "CNN",
+    "url": "https://www.cnn.com/2026/11/15/middleeast/israel-kills-hamas-commander-gaza-intl"
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "Anthropic's IPO Makes Dario Amodei the New Face of the AI Boom",
+        "summary": "Anthropic's stock market debut this week will put pressure on CEO Dario Amodei to fill the void left by Jensen Huang as the AI industry's leading pitchman. Bloomberg profiles his new role.",
+        "source": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/features/2026-11-15/anthropic-s-ipo-makes-dario-amodei-the-new-face-of-the-ai-boom"
+      }
+    ],
+    "business": [
+      {
+        "headline": "Stock Futures Slip Ahead of Nvidia Earnings and Anthropic IPO",
+        "summary": "U.S. stock futures edged lower as investors braced for a pivotal week. Nvidia reports earnings Tuesday, and Anthropic's IPO is expected later in the week.",
+        "source": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/us-stock-futures-decline-ahead-095642402.html"
+      },
+      {
+        "headline": "Retail Earnings Week Puts Walmart, Target and Home Depot in Focus",
+        "summary": "Walmart is expected to report adjusted earnings of $0.64 a share on about $186.5 billion in revenue, up 3.2% and 3.9% from a year earlier. Target, Home Depot and Lowe's also report this week, offering a read on the U.S. consumer.",
+        "source": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/walmart-target-amazon-nvidia-micron-072600451.html"
+      }
+    ],
+    "world": [
+      {
+        "headline": "Trump Heads to Asia for Meetings With Xi and Putin",
+        "summary": "President Trump is traveling to Asia for a first-ever trilateral meeting with Xi Jinping and Vladimir Putin on the sidelines of the APEC summit. The talks are set for Nov. 19 in China, and the Nvidia scandal hangs over the trip.",
+        "source": "NPR",
+        "url": "https://www.npr.org/2026/11/16/nx-s1-6041738/trump-xi-and-putin-china-nvidia"
+      },
+      {
+        "headline": "Zelenskyy Says Starshield Restrictions Threaten Ukraine's Energy Defenses",
+        "summary": "Ukrainian President Volodymyr Zelenskyy said restrictions on the Starshield satellite system are hampering Ukraine's ability to shoot down Russian drones. He warned of the risk to energy infrastructure ahead of winter.",
+        "source": "ABC News",
+        "url": "https://abcnews.com/International/wireStory/zelenskyy-warns-starshield-restrictions-threaten-ukraines-energy-defenses-138156524"
+      },
+      {
+        "headline": "Jordan Sentences Three Men to Death Over Church Attack",
+        "summary": "A Jordanian State Security Court sentenced three men to death by hanging over last month's church shooting in the south of the country. The attack killed nine people and wounded 34.",
+        "source": "France 24",
+        "url": "https://www.france24.com/en/live-news/20261115-three-men-sentenced-to-death-over-jordan-church-attack"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "Chuck Schumer Won the Senate. Can He Keep His Job?",
+        "summary": "Lake argues that the challenge to Schumer from Sen. Chris Van Hollen, a progressive, shows how far left the Democratic Party has moved since its midterm victory. He says the fight shows that the party's rift over Israel was more than election-season rhetoric.",
+        "source": "The Free Press",
+        "url": "https://www.thefp.com/p/chuck-schumer-won-the-senate-can-majority-midterms-democrats",
+        "author": "Eli Lake"
+      },
+      {
+        "headline": "Hegseth Survives Impeachment Attempt as Democrats Miss Critical Vote",
+        "summary": "Pollock argues that Democrats had one job, which was to show up for the vote on impeaching Defense Secretary Pete Hegseth, and failed to do so. He says this strengthened Hegseth and let Trump claim exoneration. He adds that a renewed effort in 2027, after Massie leaves Congress, is likely to be seen as purely partisan.",
+        "source": "The Hill",
+        "url": "https://thehill.com/opinion/congress-blog/6220053-hegseth-impeachment-vote-failed/amp/",
+        "author": "Greg Pollock"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "NFL Experts' Week 10 Takeaways: Super Bowl Favorite Emerging, Patriots Still Have Hope",
+        "summary": "NFL.com's analysts review Week 10. One argues it is far too early to call the season lost for the Patriots, who have struggled to build any offensive consistency.",
+        "source": "NFL.com",
+        "url": "https://www.nfl.com/news/nfl-experts-week-10-takeaways-super-bowl-favorite-emerging-patriots-still-have-hope"
+      },
+      {
+        "headline": "NFL Week 10 Instant Reactions: Bengals and Jaguars Dominate, McCaffrey Powers 49ers",
+        "summary": "The Bengals and Jaguars won convincingly. Christian McCaffrey had a historic game as the 49ers won a shootout in Arlington over the Cowboys. Fernando Mendoza made his first start for the Raiders.",
+        "source": "Yahoo Sports",
+        "url": "https://sports.yahoo.com/nfl/article/nfl-week-10-instant-reactions-bengals--jags-dominate-mendozas-first-start-vintage-patrick-mahomes-072242331.html"
+      },
+      {
+        "headline": "2026-27 MLB Free Agency and Trade Grades Include Red Sox Outlook",
+        "summary": "ESPN grades the early offseason moves. It says the Red Sox will likely look to trade Jarren Duran, who has two years of team control left, and that Masataka Yoshida returns as a backup.",
+        "source": "ESPN",
+        "url": "https://www.espn.com/mlb/story/_/id/50473334/2026-27-offseason-free-agency-trade-grades"
+      }
+    ]
+  }
+}
