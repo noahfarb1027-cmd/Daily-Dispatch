@@ -37,7 +37,7 @@ const SECTIONS = {
 const SEARCHES = { news: 40, opinion: 20, retry: 15 };
 const SECTION_KEYS = ["tech", "business", "world", "opinion", "sports"]; // print order
 const NEWS_KEYS = ["world", "business", "tech", "sports"];
-const MIN_SECTION = 2;     // re-research sections that end up with fewer stories than this
+const MIN_SECTION = 3;     // re-research sections left with fewer stories than this once the lead is picked
 const MIN_TO_PRINT = 4;    // section stories needed (besides the lead) to print at all
 
 const FORCE = process.env.FORCE === "true";
@@ -575,17 +575,26 @@ async function main() {
     buildOpinionPrompt(today, [], SEARCHES.opinion), SEARCHES.opinion, today, used, { basic: true }));
   await dropRepeatedEvents(client, sections, null, past);
 
-  // 2. One more pass for any short sections.
+  // 2. The biggest news story becomes the lead. It's picked before the retry so a
+  // section that gives up its story to the front page still gets topped up.
+  const leadKey = NEWS_KEYS.filter((k) => sections[k].length)
+    .sort((a, b) => Math.max(...sections[b].map((s) => s.importance)) - Math.max(...sections[a].map((s) => s.importance)))[0];
+  if (!leadKey) throw new Error("No news story survived the checks; not printing.");
+  sections[leadKey].sort((a, b) => b.importance - a.importance);
+  const { importance: _, ...lead } = sections[leadKey].shift();
+
+  // 3. One more pass for any section left with fewer than MIN_SECTION stories.
   const added = new Set();
   const shortNews = NEWS_KEYS.filter((k) => sections[k].length < MIN_SECTION);
   if (shortNews.length) {
     const more = await researchAndClean(client, " (retry)", shortNews,
-      buildNewsPrompt(today, shortNews, [...yesterday, ...covered()], SEARCHES.retry, { retry: true }), SEARCHES.retry, today, used);
+      buildNewsPrompt(today, shortNews, [...yesterday, lead.headline, ...covered()], SEARCHES.retry, { retry: true }), SEARCHES.retry, today, used);
     for (const key of shortNews) {
       more[key].forEach((s) => added.add(s));
       sections[key].push(...more[key]);
     }
-    if (added.size) await dropRepeatedEvents(client, sections, added, past);
+    // The lead is no longer in a section, so it joins the past stories a retry story mustn't repeat.
+    if (added.size) await dropRepeatedEvents(client, sections, added, [lead, ...past]);
   }
   if (sections.opinion.length < MIN_SECTION) {
     const more = await researchAndClean(client, " (retry)", ["opinion"],
@@ -593,12 +602,7 @@ async function main() {
     sections.opinion.push(...more.opinion);
   }
 
-  // 3. The biggest news story becomes the lead; trim sections to size.
-  const leadKey = NEWS_KEYS.filter((k) => sections[k].length)
-    .sort((a, b) => Math.max(...sections[b].map((s) => s.importance)) - Math.max(...sections[a].map((s) => s.importance)))[0];
-  if (!leadKey) throw new Error("No news story survived the checks; not printing.");
-  sections[leadKey].sort((a, b) => b.importance - a.importance);
-  const { importance: _, ...lead } = sections[leadKey].shift();
+  // 4. Trim sections to size.
   const edition = { date: today, number, lead: { kicker: SECTIONS[leadKey].name, ...lead }, sections: {} };
   for (const key of SECTION_KEYS) {
     const stories = sections[key].slice(0, SECTIONS[key].keep).map(({ importance, ...s }) => s);
