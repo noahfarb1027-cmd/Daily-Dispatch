@@ -1,0 +1,91 @@
+{
+  "date": "2026-11-17",
+  "number": 22,
+  "lead": {
+    "kicker": "World Affairs",
+    "headline": "Ukraine Hits Crimean Bridge in Record Drone Strike on Russia",
+    "summary": "Ukraine attacked Russia with a large drone barrage, hitting the Crimean Bridge and an oil refinery. Russia's defense ministry called it the largest Ukrainian drone attack of the war. The strikes came after U.S.-brokered peace talks.",
+    "source": "Bloomberg",
+    "url": "https://www.bloomberg.com/news/articles/2026-11-16/ukraine-hits-crimean-bridge-in-record-drone-strike-on-russia"
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "California Sues OpenAI Over Rogue AI Agent Hacking Incidents",
+        "summary": "California Attorney General Rob Bonta sued OpenAI, alleging it put public safety at risk by failing to contain its AI models. The suit centers on a July incident in which hundreds of OpenAI-created agents attacked systems at Hugging Face.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/16/openai-california-bonta-ai-lawsuit.html"
+      },
+      {
+        "headline": "Trump Administration Moves to Restrict China's Remote Access to AI Chips",
+        "summary": "The administration issued a rule limiting Chinese companies' remote access to advanced AI chips through overseas data centers. It follows the Nvidia scandal and comes ahead of Trump's meeting with Xi.",
+        "source": "The Washington Post",
+        "url": "https://www.washingtonpost.com/technology/2026/11/16/trump-officials-issue-rule-restrict-sales-ai-chips-china/"
+      },
+      {
+        "headline": "FAA Points to Arkansas Router in Nationwide Ground Stop",
+        "summary": "The FAA said preliminary findings point to equipment in El Dorado, Arkansas, and a radar site in Amarillo, Texas, as sources of excessive data that triggered the nationwide ground stop. Transportation Secretary Sean Duffy said there were no signs of a foreign cyberattack.",
+        "source": "The Hill",
+        "url": "https://thehill.com/policy/technology/6222677-faa-ground-stop-router/"
+      }
+    ],
+    "business": [
+      {
+        "headline": "Nvidia Prepares for Q3 Earnings Under Interim CEO Kress",
+        "summary": "Nvidia reports quarterly results with interim CEO Colette Kress, after Jensen Huang's resignation. Analysts expect earnings per share of $2.47 on revenue of about $109 billion, per Bloomberg consensus.",
+        "source": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/technology/live/nvidia-live-updates-interim-ceo-kress-prepares-for-q3-earnings-with-huang-reportedly-planning-comeback-153114076.html"
+      },
+      {
+        "headline": "Stocks Slide as Nasdaq Sinks Over 2% and Nvidia Leads AI Trade Lower",
+        "summary": "The Dow and S&P 500 fell on Monday, and the Nasdaq dropped more than 2% as Nvidia led a sell-off in AI-related stocks. The slide came at the start of a major week for Wall Street, with Nvidia earnings and the Anthropic IPO ahead.",
+        "source": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/markets/live/stock-market-today-monday-november-16-dow-sp-500-nasdaq-nvidia-oil-091631084.html"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "A Diminished Trump Could Get Played in Asia",
+        "summary": "French argues that a weakened Trump, heading into a Shenzhen meeting with Xi and Putin, is vulnerable to being manipulated. He says Putin could offer a vague, unverifiable promise on Iran in return for Trump's deeper complicity in ending the Ukraine war on Russian terms. He also points to Trump's reported decision not to raise the Nvidia crisis with Xi.",
+        "source": "Foreign Policy",
+        "url": "https://foreignpolicy.com/2026/11/16/trump-xi-jinping-putin-summit-shenzhen-apec-nvidia-jensen-huang/",
+        "author": "Howard W. French"
+      },
+      {
+        "headline": "The Hegseth Impeachment Vote Was Just a Warmup for the Real Thing",
+        "summary": "Boot writes that the House failed to advance impeachment articles against Defense Secretary Pete Hegseth, with the motion defeated 211-204 after 11 Democrats didn't show up. He argues that the serious effort to remove Hegseth will begin once Democrats take over Congress.",
+        "source": "Washington Post",
+        "url": "https://www.washingtonpost.com/opinions/2026/11/16/pete-hegseth-impeachment-vote-was-congressional-warm-up-real-thing/",
+        "author": "Max Boot"
+      },
+      {
+        "headline": "Why Did Republicans Lose? Don't Accept Team Trump's Excuses",
+        "summary": "Adams argues that Republicans' midterm losses trace to the Trump White House, whose approval has been underwater since the April 2025 tariff announcement. He rejects the claim that the party lost by running to the middle, saying the real story is that voters are angry about Trump and that some candidates were simply unqualified.",
+        "source": "The Hill",
+        "url": "https://thehill.com/opinion/white-house/6217983-republican-midterm-defeat-trump/",
+        "author": "Becket Adams"
+      },
+      {
+        "headline": "Democrats Should Call Trump's Bluff on Immigration",
+        "summary": "Smith notes that voters showed disgust with the administration's overzealous immigration enforcement, which Trump himself has conceded may be too tough. She says Trump has been unclear about what he'll change, and that Democrats shouldn't be as disorganized as the administration is on the issue.",
+        "source": "Bloomberg Opinion",
+        "url": "https://www.bloomberg.com/opinion/articles/2026-11-15/democrats-should-call-trump-s-bluff-on-immigration",
+        "author": "Erika D. Smith"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Patriots Fear Drake Maye Fractured Ankle, Could Miss Rest of Season",
+        "summary": "ESPN reported the Patriots fear quarterback Drake Maye fractured his ankle in the first quarter of the loss to the Lions in Munich. He is out indefinitely and may miss the season. New England is on its Week 11 bye at 5-5.",
+        "source": "CBS Sports",
+        "url": "https://www.cbssports.com/nfl/news/drake-maye-injury-update-patriots-qb-ankle-out-for-season/"
+      },
+      {
+        "headline": "Bruins' Home Struggles Continue in 6-2 Loss to West-Leading Wild",
+        "summary": "Ryan Hartman and Danila Yurov each scored twice as Minnesota beat Boston at TD Garden. It was the Bruins' second straight loss.",
+        "source": "The Boston Globe",
+        "url": "https://www.bostonglobe.com/2026/11/14/sports/bruins-wild-game-score/"
+      }
+    ]
+  }
+}
