@@ -1,0 +1,123 @@
+{
+  "date": "2026-11-18",
+  "number": 23,
+  "lead": {
+    "kicker": "Business & Markets",
+    "headline": "Anthropic's IPO Set for Blastoff This Week in Key Test for AI Boom",
+    "summary": "Anthropic is set to begin trading on Nasdaq on Nov. 19 after setting a price range of $70 to $78 a share. The debut is being watched as a test of the AI boom.",
+    "source": "CBS News",
+    "url": "https://www.cbsnews.com/news/anthropic-ipo-ai-boom-nasdaq-debut/"
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "NSA Classified Network Outage Blamed on Maintenance, Not an Attack",
+        "summary": "A highly classified internal NSA communications network went down, CNN reported. The agency attributed the outage to routine maintenance, and NBC News reported sources saw no indication of an attack.",
+        "source": "Al Jazeera",
+        "url": "https://www.aljazeera.com/news/2026/11/17/nsas-classified-internal-communications-network-reportedly-faces-outage"
+      },
+      {
+        "headline": "OpenAI Signs Agreements With Four Independent AI Safety Evaluators",
+        "summary": "OpenAI struck agreements with four independent evaluators to boost its safety work. Some researchers worry the new safety program won't be enough.",
+        "source": "CNBC",
+        "url": "https://cnbc.com/2026/11/16/openai-independent-ai-safety-evaluators.html"
+      },
+      {
+        "headline": "Cyber Giant Infoblox Confirms Security Incident After Hackers Access Company Information",
+        "summary": "Cybersecurity and automation company Infoblox confirmed an incident in which hackers accessed company information. The company disclosed it on Nov. 16.",
+        "source": "TechCrunch",
+        "url": "https://techcrunch.com/2026/11/16/cyber-giant-infoblox-confirms-security-incident-after-hackers-access-company-information/"
+      }
+    ],
+    "business": [
+      {
+        "headline": "Home Depot Reports 4.9% Third-Quarter Sales Growth to $43.4 Billion, Revises 2026 Outlook",
+        "summary": "Home Depot reported third-quarter sales growth of 4.9% to $43.4 billion. The company also updated its fiscal 2026 guidance.",
+        "source": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/home-depot-reports-4-9-133703498.html"
+      },
+      {
+        "headline": "Oil Trades Near $95 a Barrel as Markets Watch Inflation and Fed",
+        "summary": "Brent crude was trading at $94.94 a barrel at 8:15 a.m. Eastern on Nov. 17. Energy prices have fed into inflation worries this year.",
+        "source": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/energy/articles/current-price-oil-november-17-133000868.html"
+      },
+      {
+        "headline": "Traders Position Ahead of Fed Minutes From October Meeting",
+        "summary": "The Federal Open Market Committee releases minutes from its Oct. 27-28 meeting on Nov. 18. The minutes will offer a closer look at the decision to hold interest rates.",
+        "source": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/economy/policy/articles/cautious-trader-dumps-millions-ahead-205000335.html"
+      }
+    ],
+    "world": [
+      {
+        "headline": "Trump Arrives in Philippines to Begin Three-Day Asia Trip",
+        "summary": "President Trump landed in the Philippines to start a three-day Asia trip focused on trade and economic deals and talks with allies. The trip comes as he faces political troubles at home after the midterm elections.",
+        "source": "PBS",
+        "url": "https://www.pbs.org/newshour/amp/world/trump-arrives-in-philippines-to-kick-off-asia-trip-with-economic-deals-and-talks-with-allies"
+      },
+      {
+        "headline": "Is the US-Israel War on Iran Turning Into a 'Frozen Conflict'?",
+        "summary": "Al Jazeera examines the state of the US-Israel war on Iran, noting that Trump has given mixed signals in recent days. Iranian President Pezeshkian said Iran is ready to negotiate but will not yield to coercion.",
+        "source": "Al Jazeera",
+        "url": "https://aljazeera.com/news/2026/11/17/is-the-us-israel-war-on-iran-turning-into-a-frozen-conflict"
+      },
+      {
+        "headline": "EU Accuses Russia of Stalling Ukraine Peace Talks to Target Power Plants as Winter Nears",
+        "summary": "European Union countries on Monday accused Russia of trying to drag out talks on ending the war in Ukraine while it bombs power plants. The accusation came as winter approaches.",
+        "source": "PBS NewsHour",
+        "url": "https://www.pbs.org/newshour/world/eu-accuses-russia-of-stalling-ukraine-peace-talks-to-target-power-plants-as-winter-nears"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "Trump Is Walking Into Putin and Xi's Trap",
+        "summary": "Kluth argues that the Shenzhen meeting of Trump, Putin and Xi will evoke the 1945 Yalta Conference, but that today's geopolitical realities and the leaders' own dynamics won't let them carve up the world that way. He warns the summit could still be a disaster for the United States and its allies in other ways.",
+        "source": "Bloomberg Opinion",
+        "url": "https://www.bloomberg.com/opinion/articles/2026-11-17/trump-is-walking-into-putin-and-xi-s-summit-trap",
+        "author": "Andreas Kluth"
+      },
+      {
+        "headline": "Republicans Should Ask Whether the 2026 Election Was a Replay of Trump's 2016 Victory",
+        "summary": "Carter argues that working Americans want many of the same things in 2026 that they wanted when Trump rose in 2016. She notes that exit polls showed broad opposition to his tariffs, immigration enforcement and military action against Iran, and that many voters wanted Congress to check presidential power. She says Republicans would be foolish to dismiss those concerns as a messaging problem.",
+        "source": "Fox News Opinion",
+        "url": "https://www.foxnews.com/opinion/republicans-ask-whether-2026-election-replay-trumps-2016-victory",
+        "author": "Lee Hartley Carter"
+      },
+      {
+        "headline": "Friday's Ground Stop Should Be a Wakeup Call for Congress",
+        "summary": "Sununu argues that last week's nationwide FAA ground stop showed that air traffic control infrastructure is decades overdue for modernization. He calls on Congress to fund a $30 billion investment, which he says is less than one percent of a typical year's federal spending. He adds that the effort cannot stop there.",
+        "source": "The Hill",
+        "url": "https://thehill.com/opinion/congress-blog/6223592-faa-ground-stop-modernization/",
+        "author": "Chris Sununu"
+      },
+      {
+        "headline": "The Resignation of Jensen Huang Marks the End of an Era. Just Not the One You Think",
+        "summary": "Whitehead and Nash argue that Nvidia's board investigating and pushing out Jensen Huang may mark the end of a governance era, especially for frontier AI firms. They note that Nvidia has a single-class share structure, so a CEO holding under 4% of the votes stays accountable to an independent board.",
+        "source": "Fortune",
+        "url": "https://fortune.com/2026/11/16/the-resignation-of-jensen-huang-marks-the-end-of-an-era-and-not-the-one-you-think/",
+        "author": "Gill Whitehead and Vicki Nash"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Bruins, Slumping Royally, Lose to Kings by Shutout for Third Straight Home Setback",
+        "summary": "The Bruins lost 3-0 to the Kings, their third straight loss, all at home. The offense stayed cold, with Kings goalie Kuemper posting the shutout.",
+        "source": "Boston Globe",
+        "url": "https://www.bostonglobe.com/2026/11/17/sports/bruins-kings-game-score/"
+      },
+      {
+        "headline": "Red Sox Trade Raymond Burgos to Athletics for Kenya Huggins",
+        "summary": "The Red Sox sent reliever Raymond Burgos to the Athletics for Kenya Huggins, an Arizona Fall League standout. The small deal clears 40-man roster space.",
+        "source": "MLB.com",
+        "url": "https://www.mlb.com/news/red-sox-athletics-kenya-huggins-trade"
+      },
+      {
+        "headline": "Jayson Tatum, Jaylen Brown's Ex-Teammate Gives Inside Scoop on Alleged Beef",
+        "summary": "A former teammate of both players spoke about the reported tension between Tatum and Brown. The topic has followed the Celtics since their first showdown against each other this season.",
+        "source": "Yahoo Sports",
+        "url": "https://sports.yahoo.com/articles/jayson-tatum-jaylen-brown-ex-183522618.html"
+      }
+    ]
+  }
+}
