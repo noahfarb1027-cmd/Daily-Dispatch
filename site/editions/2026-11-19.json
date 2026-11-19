@@ -1,0 +1,116 @@
+{
+  "date": "2026-11-19",
+  "number": 24,
+  "lead": {
+    "kicker": "World Affairs",
+    "headline": "Trump, Xi and Putin Hold Rare Three-Way Meeting in China",
+    "summary": "Trump met Chinese President Xi Jinping and Russian President Vladimir Putin in China for a first-of-its-kind trilateral summit. The talks took place during Trump's Asia trip and amid the Iran war.",
+    "source": "CBS News",
+    "url": "https://www.cbsnews.com/news/trump-xi-putin-china-apec-summit/"
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "Nadella Says Lots of Critical Infrastructure Is 'Unpatchable' Amid AI Cyberattack Fears",
+        "summary": "Microsoft CEO Satya Nadella warned that much critical infrastructure can't be patched as fears of AI-driven cyberattacks grow.",
+        "source": "TechCrunch",
+        "url": "https://techcrunch.com/2026/11/18/amidst-fears-of-ai-cyberattacks-satya-nadella-says-lots-of-critical-infrastructure-is-unpatchable/"
+      },
+      {
+        "headline": "Sam Altman Warns Against a Future Where AI, Not Humans, Calls the Shots",
+        "summary": "OpenAI CEO Sam Altman spoke about the risk of AI making decisions in place of humans.",
+        "source": "TechCrunch",
+        "url": "https://techcrunch.com/2026/11/18/sam-altman-warns-against-a-future-where-ai-not-humans-calls-the-shots/"
+      },
+      {
+        "headline": "Nadella Explains Why He Asked 60,000 Microsoft Employees to Quit",
+        "summary": "Microsoft's CEO explained his reasoning for asking 60,000 employees to leave.",
+        "source": "TechCrunch",
+        "url": "https://techcrunch.com/2026/11/18/microsoft-ceo-satya-nadella-explains-why-he-asked-60k-employees-to-quit/"
+      }
+    ],
+    "business": [
+      {
+        "headline": "Fed Minutes Show Officials Expect More Rate Hikes, Worry About AI's Inflation Impact",
+        "summary": "Minutes of the October 27-28 meeting show most officials expect further rate hikes. They also flagged the AI buildout as an inflation risk.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/18/fed-minutes-october-2026.html"
+      },
+      {
+        "headline": "Nvidia Posts Strong Quarter in First Earnings Report Without Jensen Huang",
+        "summary": "Nvidia reported record quarterly revenue of $115.8 billion and beat expectations under interim CEO Colette Kress. The stock still closed down about 3%.",
+        "source": "CBS News",
+        "url": "https://www.cbsnews.com/news/nvidia-earnings-jensen-huang-colette-kress/"
+      },
+      {
+        "headline": "Palo Alto Networks Buys AI Startup Applied Compute for $4.5 Billion",
+        "summary": "Palo Alto announced the $4.5 billion deal alongside quarterly earnings. Shares rose about 7%.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/18/palo-alto-networks-panw-q1-2027-earnings-.html"
+      }
+    ],
+    "world": [
+      {
+        "headline": "Israel Launches First Ground Push in Gaza Since Ceasefire Began",
+        "summary": "Israeli forces began a new military operation in central Gaza, and Palestinians fled a refugee camp. At least three people were reported killed.",
+        "source": "Al Jazeera",
+        "url": "https://aljazeera.com/news/2026/11/18/palestinians-flee-refugee-camp-as-israel-begins-operation-in-central-gaza"
+      },
+      {
+        "headline": "Russian Attacks on Ukraine Kill at Least Five",
+        "summary": "Russian strikes across Ukraine killed at least five people on Wednesday.",
+        "source": "Al Jazeera",
+        "url": "https://www.aljazeera.com/news/2026/11/18/russian-attacks-on-ukraine-kill-at-least-five-people"
+      },
+      {
+        "headline": "Europe Faces Pressure as US Floats Ukraine Deal Involving Russia and NATO Rules",
+        "summary": "US envoys are pressing Russian and Ukrainian officials to consider new proposals on NATO rules, military assets and troop placements across Europe. The push leaves European governments walking a diplomatic tightrope.",
+        "source": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-17/trump-s-sudden-ukraine-push-leaves-europe-walking-a-tightrope"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "Trump, Nvidia and the Emergence of the Democratic China Hawk",
+        "summary": "Ponnuru argues that the Nvidia scandal broke at a bad time for Trump. It raises questions about why his administration loosened chip-export restrictions and tightened them only after the controversy. He suggests this could produce a considerable turnaround in U.S. politics toward Beijing over the next two years, as Democrats become China hawks.",
+        "source": "Washington Post",
+        "url": "https://www.washingtonpost.com/opinions/2026/11/18/democratic-china-hawks-trump-record-is-their-sights/",
+        "author": "Ramesh Ponnuru"
+      },
+      {
+        "headline": "Why Are Gasoline Prices Falling? Thank the Diesel Shortage",
+        "summary": "Blas argues that the oil market has a half-full side even though diesel supply is tight and prices are at record highs. The U.S. average gasoline price has fallen to an eight-month low, and last week saw the largest one-day drop in 18 years. He says further declines are likely before Thanksgiving.",
+        "source": "Bloomberg Opinion",
+        "url": "https://www.bloomberg.com/opinion/articles/2026-11-19/gas-prices-are-falling-as-a-side-effect-of-the-diesel-shortage",
+        "author": "Javier Blas"
+      },
+      {
+        "headline": "Democrats' Majority Is Bigger — and Far More Fragile — Than It Looks",
+        "summary": "Schoen and Cooperman argue that the midterm results repudiated Trump and Republicans but did not amount to an embrace of Democrats. They cite an exit poll in which 52 percent of voters held an unfavorable view of the Democratic Party. They say voters mainly punished Trump over costs and want oversight from the new majority.",
+        "source": "The Hill",
+        "url": "https://thehill.com/opinion/campaign/6219512-democrats-narrower-mandate/",
+        "author": "Douglas E. Schoen and Carly Cooperman"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Patriots Can Still Make Playoffs Without Drake Maye, Gasper Argues",
+        "summary": "Columnist Christopher Gasper argues New England shouldn't be written off after QB Drake Maye's ankle injury.",
+        "source": "Boston Globe",
+        "url": "https://www.bostonglobe.com/2026/11/18/sports/christopher-l-gasper-patriots-drake-maye/"
+      },
+      {
+        "headline": "Pastrnak Scores, Bruins Beat Red Wings 4-1 to End Three-Game Skid",
+        "summary": "David Pastrnak had a goal and an assist as Boston beat Detroit 4-1 on Nov. 18, ending a three-game losing streak.",
+        "source": "ESPN",
+        "url": "https://www.espn.com/nhl/recap/_/gameId/401892739"
+      },
+      {
+        "headline": "NBA Power Rankings: Spurs, Rockets and Celtics Take Top Three Spots",
+        "summary": "The week 5 NBA power rankings put San Antonio first, followed by Houston and Boston.",
+        "source": "NBA.com",
+        "url": "https://www.nba.com/news/power-rankings-2026-27-week-5"
+      }
+    ]
+  }
+}
