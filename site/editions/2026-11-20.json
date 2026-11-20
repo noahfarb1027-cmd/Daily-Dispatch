@@ -1,0 +1,111 @@
+{
+  "date": "2026-11-20",
+  "number": 25,
+  "lead": {
+    "kicker": "Technology & A.I.",
+    "headline": "Anthropic Shares Leap in Record IPO Debut on Nasdaq",
+    "summary": "Anthropic's stock debuted on the Nasdaq under the ticker ANT after the company raised more than $81 billion, the largest IPO on record. Shares jumped in first-day trading.",
+    "source": "NPR",
+    "url": "https://www.npr.org/2026/11/19/nx-s1-6042558/anthropic-ipo-breaks-records-100-billion"
+  },
+  "sections": {
+    "tech": [
+      {
+        "headline": "Google Gives Gemini the Ability to Use Your Mac for You",
+        "summary": "Google added agentic features to Gemini on the Mac desktop, letting it take actions on a user's computer. TechCrunch notes Google is late, since OpenAI, Anthropic and Meta already offer similar desktop agent features.",
+        "source": "TechCrunch",
+        "url": "https://techcrunch.com/2026/11/19/google-gives-gemini-the-ability-to-use-your-mac-for-you/"
+      }
+    ],
+    "business": [
+      {
+        "headline": "Walmart Raises Outlook Again After Solid Quarter",
+        "summary": "Walmart reported adjusted earnings of 65 cents a share against 64 cents expected, with revenue of $188.8 billion. It raised its full-year adjusted EPS outlook to $2.84 to $2.89.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/19/walmart-wmt-q3-2026-earnings.html"
+      },
+      {
+        "headline": "Dow Sinks More Than 1,100 Points as Nasdaq and S&P 500 Fall 2%",
+        "summary": "All three major indexes fell more than 2% on Thursday. The Dow dropped 1,101 points to close at 49,097. Stocks slid after Anthropic began trading.",
+        "source": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-19-dow-sp-500-nasdaq-anthropic-ipo-live-141306032.html"
+      },
+      {
+        "headline": "Weekly Jobless Claims Unexpectedly Edge Up to 203,000",
+        "summary": "First-time claims for unemployment benefits rose slightly in the week ended Nov. 14, to a seasonally adjusted 203,000. That was above the 197,000 economists expected.",
+        "source": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/economy/articles/us-weekly-jobless-claims-unexpectedly-154844872.html"
+      }
+    ],
+    "world": [
+      {
+        "headline": "Iran Widens Gulf Attacks, Targeting US Air Base in Kuwait and Sites in Bahrain",
+        "summary": "Iran fired on a US air base in Kuwait and on targets in Bahrain after US strikes on a missile launch site. Iran has also kept attacking tankers in the Strait of Hormuz, even though US military protection has restored oil shipments to roughly prewar levels.",
+        "source": "CNN",
+        "url": "https://www.cnn.com/2026/11/17/politics/us-iran-self-defense-strikes"
+      },
+      {
+        "headline": "Denmark's Parliament Approves Security Deal With Greenland and the US",
+        "summary": "Denmark's parliament unanimously approved an agreement with Greenland and the United States to strengthen security in the Arctic and North Atlantic. Greenland's parliament approved the deal earlier this month, also with no opposition.",
+        "source": "CBS News",
+        "url": "https://www.cbsnews.com/news/greenland-security-deal-us-denmark-danish-lawmakers/"
+      },
+      {
+        "headline": "Trump Says Iran May Be Developing Chemical or Biological Weapons",
+        "summary": "President Trump told Fox News on Wednesday there are indications Iran may be working to develop biological or chemical weapons because of damage inflicted on its programs. Iran's Foreign Ministry spokesman has called the allegations fraudulent.",
+        "source": "CBS News",
+        "url": "https://www.cbsnews.com/live-updates/iran-war-us-gulf-retaliation-strikes-strait-of-hormuz/"
+      }
+    ],
+    "opinion": [
+      {
+        "headline": "Anthropic Says AI Should Slow Down. Washington Should Make It.",
+        "summary": "Wright argues that Anthropic keeps warning about the dangers of fast-advancing AI while boasting about how fast its own AI is advancing. He contends that the fear of losing to China is overblown and is keeping the U.S. from doing the safe thing, which is to slow AI development.",
+        "source": "Washington Post",
+        "url": "https://washingtonpost.com/opinions/2026/11/19/anthropic-wants-slow-ai-washington-should-make-it-happen",
+        "author": "Robert Wright"
+      },
+      {
+        "headline": "I Used to Be a Doomsday Prepper. I Regret All of It.",
+        "summary": "Stokes, a former deputy editor of a prepping website, argues that the recent run of tech outages should not push people into doomsday prepping. He says prepping is a losing bet financially and costs time that can't be recovered, and he regrets the money and time he spent on it.",
+        "source": "The Free Press",
+        "url": "https://www.thefp.com/p/confessions-doomsday-prepper-tech-outages",
+        "author": "Jon Stokes"
+      },
+      {
+        "headline": "US Chip Curbs Fuel Jensen Huang's China Nightmare",
+        "summary": "Thorbecke argues that Huang's ouster from Nvidia has made him a compromised messenger for keeping Nvidia chips flowing to China. She says closing the loopholes in chip sales could end up producing the outcome Huang spent years warning America against, with Chinese developers pushed away from Nvidia's CUDA software.",
+        "source": "Bloomberg Opinion",
+        "url": "https://www.bloomberg.com/opinion/articles/2026-11-17/us-chip-crackdown-could-turn-jensen-huang-s-china-nightmare-into-reality",
+        "author": "Catherine Thorbecke"
+      },
+      {
+        "headline": "Trump Holds the Nuclear Cards to Play Against China and Russia on Arms Control",
+        "summary": "Grant argues that no U.S. president has tried to coax China into nuclear arms control, a monumental task, but that the moment may be right. She says New START has expired, China's arsenal has topped 600 warheads, and a modernized American nuclear triad is the strongest bargaining chip for any future deal.",
+        "source": "Fox News Opinion",
+        "url": "https://www.foxnews.com/opinion/trump-holds-nuclear-cards-play-against-china-russia-arms-control",
+        "author": "Rebecca Grant"
+      }
+    ],
+    "sports": [
+      {
+        "headline": "Red Sox Acquire Catcher Nick Fortes From Rays",
+        "summary": "The Red Sox acquired catcher Nick Fortes from the AL East rival Tampa Bay Rays for minor league pitcher Angel Roa. It is the team's second offseason addition after signing Jake Bauers.",
+        "source": "ESPN",
+        "url": "https://www.espn.com/mlb/story/_/id/50523687/red-sox-acquire-catcher-nick-fortes-trade-rays"
+      },
+      {
+        "headline": "Paul George Embracing Second-Option Role Next to Tatum on Celtics",
+        "summary": "George says he is comfortable as the second option behind Jayson Tatum. The Celtics' partnership has been harmonious, and CBS Sports argues George is outplaying Jaylen Brown so far this season.",
+        "source": "CBS Sports",
+        "url": "https://www.cbssports.com/nba/news/paul-george-embracing-celtics-role-jayson-tatum-jaylen-brown/"
+      },
+      {
+        "headline": "NFL Suspends Rams WR Puka Nacua Three Games",
+        "summary": "The NFL suspended Rams receiver Puka Nacua three games for violating its personal conduct policy. He will serve the ban while on injured reserve.",
+        "source": "ESPN",
+        "url": "https://www.espn.com/nfl/story/_/id/50533560/rams-wr-puka-nacua-serve-3-game-suspension-ir"
+      }
+    ]
+  }
+}
